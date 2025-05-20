@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background: #bf93ee;
+    background: linear-gradient(0deg, #bf93ee -30%, rgba(73, 77, 95, 1) 47%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+    align-items: center;
+    gap: 3vh;
+}
+
+top-bar{
+    width: 100%;
+    font-size: 2em;
+    background: linear-gradient(180deg, #bf93ee 2%, #494d5f 162%);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    justify-content: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+aboutme{
+    width: 90%;
+    height: 86vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+aboutme::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff7d;
+    filter: blur(170px);
+    z-index: 0;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+#profilCard{
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #494d5fd9;
+    margin: 3%;
+    border-radius: 28px;
+    gap: 3%;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+.picture{
+    border-radius: 100%;
+    width: 55%;
+    margin-top: 10%;
+}
+
+#name{
+    font-size: 2.3em;
+    color: white;
+}
+
+#age{
+    color: white;
+    font-size: 1.3em;
+}
+
+#contact{
+    display: flex;
+    flex-direction: row;
+    gap: 17%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#contact a{
+    width: 8vh;
+    height: 8vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#github{
+    background-image: url('images/github.svg');
+}
+#mail{
+    background-image: url('images/Mail.svg');
+}
+#linkedin{
+    background-image: url('images/LinkedIn.svg');
+}
+
+#resume{
+    width: 70%;
+    position: relative;
+    z-index: 1;
+    margin: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10%;
+}
+
+#resume #text{
+    color:white;
+    font-size:1.5em;
+    background-color: #494d5fd9;
+    border-radius: 28px;
+    box-shadow: 5px 3px 20px 0px #000;
+    padding: 3%;
+}
+#resume #titleSkills{
+    color:white;
+    font-size:2em;
+}
+
+#skillsIco{
+    width: 100%;
+    height: 55%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6%;
+}
+
+#skillsIco div{
+    width: 9vh;
+    height: 9vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#skills{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
