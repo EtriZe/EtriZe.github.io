@@ -11,7 +11,7 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-
+    margin-bottom: 2%;
     align-items: center;
     gap: 3vh;
 
@@ -19,6 +19,7 @@ body{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    
 }
 
 top-bar{
@@ -33,6 +34,8 @@ top-bar{
     padding-top: 1vh;
     padding-bottom: 1vh;
     box-shadow: 5px 3px 20px 0px #000;
+    position:fixed;
+    z-index: 10;
 }
 
 aboutme{
@@ -44,6 +47,7 @@ aboutme{
     display: flex;
     flex-direction: row;
     box-shadow: 5px 3px 20px 0px #000;
+    margin-top: 11vh;
 }
 
 aboutme::before {
@@ -80,13 +84,13 @@ aboutme::before {
 }
 
 #name{
-    font-size: 2.3em;
+    font-size: clamp(1rem, 3vw + 0rem, 2.5rem);
     color: white;
 }
 
 #age{
     color: white;
-    font-size: 1.3em;
+    font-size: clamp(1rem, 2vw + 0rem, 1.5rem);
 }
 
 #contact{
@@ -130,7 +134,7 @@ aboutme::before {
 
 #resume #text{
     color:white;
-    font-size:1.5em;
+    font-size:clamp(1rem, 2vw + -1rem, 1.5rem);
     background-color: #494d5fd9;
     border-radius: 28px;
     box-shadow: 5px 3px 20px 0px #000;
@@ -197,4 +201,92 @@ aboutme::before {
 }
 #svn{
     background-image: url('images/svn.svg');
+}
+
+title-bar{
+    font-size:clamp(1rem, 3vw + 0rem, 2.5rem);
+    color: white;
+    font-weight: bold;
+    padding-top: 8vh;
+    border-bottom: 2px solid white;
+    width: 80%;
+    text-align: center;
+    z-index: 5;
+}
+
+projects{
+    width: 90%;
+    height: 74vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 5px 3px 20px 0px #000;
+    margin-top: 11vh;
+}
+
+projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff7d;
+    filter: blur(170px);
+    z-index: 0;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+.presentationPic{
+    border-radius: 28px;
+    margin-top: 0%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: -2;
+    pointer-events: none; 
+}
+
+.projectCard {
+    position: relative;
+    z-index: 1;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #494d5fd9;
+    margin: 3%;
+    border-radius: 28px;
+    gap: 3%;
+    box-shadow: 5px 3px 20px 0px #000;
+}
+
+.projectTitle{
+    font-size: clamp(1rem, 1.5vw + 0rem, 2.5rem);
+    color: white;
+    text-decoration: underline;
+    font-style: italic;
+}
+
+.projectResume{
+    color: white;
+    font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem);
+    text-align: center;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 4%;
+}
+
+.presentationPicContainer{
+    box-shadow: inset 5px 3px 20px 0px #000;
+    border-radius: 28px;
+    margin-top: 6%;
+    object-fit: cover;
+    height: 39%;
+    width: 84%;
+    pointer-events: none; 
 }
