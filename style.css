@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 body{
     width: 100%;
     height: 100%;
@@ -12,11 +11,14 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    font-family: "Libre Baskerville", serif;
-    font-weight: 400;
-    font-style: normal;
+
     align-items: center;
     gap: 3vh;
+
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 top-bar{
@@ -123,7 +125,7 @@ aboutme::before {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 10%;
+    gap: 7%;
 }
 
 #resume #text{
@@ -141,7 +143,7 @@ aboutme::before {
 
 #skillsIco{
     width: 100%;
-    height: 55%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -163,4 +165,36 @@ aboutme::before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+
+#cmake{
+    background-image: url('images/Cmake.svg');
+}
+#cpp{
+    background-image: url('images/cpp.svg');
+    height: 10.3vh !important;
+}
+#csharp{
+    background-image: url('images/csharp.svg');
+    height: 10.3vh !important;
+}
+#sfml{
+    background-image: url('images/sfml.svg');
+}
+#unity{
+    background-image: url('images/unity.svg');
+}
+#ue5{
+    background-image: url('images/UE5.svg');
+}
+#opengl{
+    background-image: url('images/opengl.svg');
+    width: 20vh !important;
+}
+#git{
+    background-image: url('images/git.svg');
+}
+#svn{
+    background-image: url('images/svn.svg');
 }
