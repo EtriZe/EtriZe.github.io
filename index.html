@@ -1,52 +1,133 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <title>Portfolio</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="lite-yt-embed.css">
+  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="lite-yt-embed.js"></script>
 </head>
+
 <body>
-<top-bar>
-    <a>À propos</a>
-    <a>Projets</a>
-</top-bar>
-<aboutme>
+  <top-bar>
+    <div id="menuApropos">À propos</div>
+    <div id="menuProjets">Projets</div>
+  </top-bar>
+  <aboutme>
     <div id="profilCard">
-        <img class="picture" src="./images/Gragas_39.jpg" alt="Barrère Valentin" />
-        <span id="name">Valentin Barrère</span>
-        <span id="age">25 ans</span>
-        <div id="contact">
-          <a id="github" href="https://github.com/EtriZe"></a>
-          <a id="linkedin" href="www.linkedin.com/in/valentin-barrère-1784021a1"></a>
-          <a id="mail" href="mailto:valentin.barrerepro@gmail.com"></a>
-        </div>
+      <img class="picture" src="./images/Gragas_39.jpg" alt="Barrère Valentin" />
+      <span id="name">Valentin Barrère</span>
+      <span id="age">25 ans</span>
+      <div id="contact">
+        <a id="github" href="https://github.com/EtriZe"></a>
+        <a id="linkedin" href="www.linkedin.com/in/valentin-barrère-1784021a1"></a>
+        <a id="mail" href="mailto:valentin.barrerepro@gmail.com"></a>
+      </div>
     </div>
     <div id="resume">
-      <span id="text">Dans mon parcours, j’ai eu l’opportunité de travailler sur plusieurs projets utilisant Unreal Engine, Unity et le langage C++ pur.<br> 
-        Ces expériences, tant académiques que personnelles, m’ont permis de renforcer mes compétences techniques 
-        tout en découvrant différents aspects du développement de jeux vidéo. 
+      <span id="text">Durant mon parcours Académique et personnel, j’ai eu l’opportunité de travailler sur plusieurs
+        projets utilisant Unreal Engine, Unity et sans frameworks en c++.<br>
+        Ces expériences m’ont permis de permis de constituer une base technique solide
+        tout en découvrant différents aspects du développement de jeux vidéo.
         <br><br>
-        En parallèle, j'ai participé à des game jams et réalisé des projets personnels, 
-        ce qui me pousse à apprendre de nouveaux outils, essayer des nouveaux concepts et devenir plus polyvalent. 
+        En parallèle, j'ai participé à des game jams et réalisé des projets personnels,
+        ce qui me pousse à apprendre de nouveaux outils, essayer des nouveaux concepts et devenir plus polyvalent.
         <br><br>
-        Curieux, autonome et investi, je sais également m’intégrer efficacement au sein d’une équipe. 
-        Je m’efforce de comprendre en profondeur les technologies que j’utilise afin de proposer des solutions pertinentes et créatives.</span>
+        Curieux, autonome et investi, je sais également m’intégrer efficacement au sein d’une équipe. <br>
+        J'ai une grande capacité d'apprentissage ce qui me permet de progresser rapidement.
+        Je m’efforce de comprendre en profondeur les technologies que j’utilise afin de proposer des solutions
+        pertinentes et créatives.</span>
       <div id="skills">
         <span id="titleSkills">Skills</span>
         <div id="skillsIco">
-          <div id="cpp"></div>
-          <div id="csharp"></div>
-          <div id="ue5"></div>
-          <div id="unity"></div>
-          <div id="svn"></div>
-          <div id="opengl"></div>
-          <div id="cmake"></div>
+          <div id="cpp" title="C++"></div>
+          <div id="csharp" title="C#"></div>
+          <div id="ue5" title="Unreal Engine"></div>
+          <div id="unity" title="Unity"></div>
+          <div id="svn" title="SVN"></div>
+          <div id="opengl" title="OpenGL"></div>
+          <div id="cmake" title="CMake"></div>
         </div>
       </div>
     </div>
-</aboutme>
+  </aboutme>
+  <title-bar>
+    <span>Projets</span>
+  </title-bar>
 
+  <projects>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <img class="presentationPic" src="./images/lasthope.png" alt="Barrère Valentin" />
+      </div>
+      <span class="projectTitle">Global Game Jam : Last Hope</span>
+      <span class="projectResume">
+        Une Game Jam réalisé pendant 48H sous le thème "Root". Ce jeu à été réalisé avec 6 personnes sous Unity.
+        En tant que programmer j'ai touché à tout les aspects du jeu (Gameplay, Intégration d'animation et d'assets, ... )
+      </span>
+    </div>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <img class="presentationPic" src="./images/explosiveday.png" alt="Barrère Valentin" />
+      </div>
+      <span class="projectTitle">Game Jam Ynov : An Explosive Day</span>
+      <span class="projectResume">
+        Une Game Jam réalisé dans le cadre académique pendant 48H sous le thème "Root". Ce jeu à été réalisé avec 6 personnes sous Unity.
+        J'étais parmis les deux programmeurs et j'ai fait le UI, la gestion de l'explosion, de la bombe, de la foule, et optimization des entités ...
+      </span>
+    </div>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <div class="presentationPic">
+          <lite-youtube videoid='RY6BBwUHWAg' params='controls=1'></lite-youtube>
+        </div>
+      </div>
+      <span class="projectTitle">Projet Final Ynov: Where are you ?</span>
+      <span class="projectResume">Puzzle game multijoueur réalisé en 1 an comme projet de fin d'année de Mastère 5. 
+        Développé sous UE4 en collaboration avec des artistes et un game designer de la même école. J'étais en charge du développement du multijoueur,
+        d'aspects du gameplay ...
+      </span>
+    </div>
+  </projects>
+
+  <projects>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <img class="presentationPic" src="./images/lasthope.png" alt="Barrère Valentin" />
+      </div>
+      <span class="projectTitle">Global Game Jam : Last Hope</span>
+      <span class="projectResume">
+        Une Game Jam réalisé pendant 48H sous le thème "Root". Ce jeu à été réalisé avec 6 personnes sous Unity.
+        En tant que programmer j'ai touché à tout les aspects du jeu (Gameplay, Intégration d'animation et d'assets, ... )
+      </span>
+    </div>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <img class="presentationPic" src="./images/explosiveday.png" alt="Barrère Valentin" />
+      </div>
+      <span class="projectTitle">Game Jam Ynov : An Explosive Day</span>
+      <span class="projectResume">
+        Une Game Jam réalisé dans le cadre académique pendant 48H sous le thème "Root". Ce jeu à été réalisé avec 6 personnes sous Unity.
+        J'étais parmis les deux programmeurs et j'ai fait le UI, la gestion de l'explosion, de la bombe, de la foule, et optimization des entités...
+      </span>
+    </div>
+    <div class="projectCard">
+      <div class="presentationPicContainer">
+        <div class="presentationPic">
+          <lite-youtube videoid='RY6BBwUHWAg' params='controls=1'></lite-youtube>
+        </div>
+      </div>
+      <span class="projectTitle">Projet Final Ynov: Where are you ?</span>
+      <span class="projectResume">Puzzle game multijoueur réalisé en 1 an comme projet de fin d'année de Mastère 5. 
+        Développé sous UE4 en collaboration avec des artistes et un game designer de la même école. J'étais en charge du développement du multijoueur,
+        d'aspects du gameplay ...
+      </span>
+    </div>
+  </projects>
 
 </body>
+
 </html>
