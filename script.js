@@ -109,7 +109,10 @@ function filtreCategories(button, all){
     let count = 0;
     Array.prototype.forEach.call(newProjectCards, function(newProjectCard) {
         if( ! newProjectCard.classList.contains("hide")) count++;
+        newProjectCard.classList.remove("lastCard");
     });
 
-    console.log(newProjectCards[count]);
+    if((count % 3) == 1){
+        newProjectCards[count].classList.add("lastCard");
+    }
 }
