@@ -204,10 +204,10 @@ aboutme::before {
 }
 
 title-bar{
-    font-size:clamp(1rem, 3vw + 0rem, 2.5rem);
+    font-size: clamp(1rem, 3vw + 0rem, 2.5rem);
     color: white;
     font-weight: bold;
-    padding-top: 8vh;
+    /* padding-top: 8vh; */
     border-bottom: 2px solid white;
     width: 80%;
     text-align: center;
@@ -215,15 +215,20 @@ title-bar{
 }
 
 projects{
-    width: 90%;
-    height: 74vh;
+    width: 85%;
+    /* height: 74vh; */
     position: relative;
     overflow: hidden;
     border-radius: 28px;
-    display: flex;
+    display: flex
+;
     flex-direction: row;
-    box-shadow: 5px 3px 20px 0px #000;
-    margin-top: 11vh;
+    /* box-shadow: 5px 3px 20px 0px #000; */
+    margin-bottom: 11vh;
+    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
+    transition-property: height, margin;
+    transition-duration: 0.7s;
 }
 
 projects::before {
@@ -253,20 +258,25 @@ projects::before {
 
 .projectCard {
     position: relative;
-    z-index: 1;
-    width: 30%;
+    /* width: 30%; */
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #494d5fd9;
-    margin: 3%;
+    margin: 2%;
     border-radius: 28px;
     gap: 3%;
     box-shadow: 5px 3px 20px 0px #000;
+    transition-property: width, margin;
+    transition-duration: 0.7s;
+    cursor: pointer;
+    flex-grow: 1;
+    width: 24%;
+    height: 64vh;
 }
 
 .projectTitle{
-    font-size: clamp(1rem, 1.5vw + 0rem, 2.5rem);
+    font-size: clamp(1rem, 1.3vw + 0rem, 2.5rem);
     color: white;
     text-decoration: underline;
     font-style: italic;
@@ -286,7 +296,53 @@ projects::before {
     border-radius: 28px;
     margin-top: 6%;
     object-fit: cover;
-    height: 39%;
+    height: 44%;
     width: 84%;
     pointer-events: none; 
+    z-index: 1;
+}
+
+.projectCard:hover{
+    width:35%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.more{
+    position: fixed;
+    padding: 6px 10px;
+    background-color: #494d5f;
+    color: white;
+    border-radius: 13px;
+    font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
+    display: none;
+    border: 3px solid white;
+}
+
+filtres{
+    display: flex    ;
+    flex-direction: column;
+    gap: 9px;
+    /* font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem); */
+    position: fixed;
+    z-index: 6;
+    padding-top: 16vh;
+    left: 1%;  
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+filtres > button{
+    font-size: clamp(1rem, 0.3vw + 0rem, 1.3rem);
+    border-radius: 9px;
+    border: none;
+    padding: 5px;
+}
+
+.notSelected{
+    filter: contrast(0.5);
 }
