@@ -1,14 +1,46 @@
 window.onscroll = function(){
     let titleBarProjets = document.getElementsByTagName("title-bar")[0];
-
-    if(window.scrollY >= 700) { // change target to number
-        titleBarProjets.style.position = 'fixed';
+    let filtres = document.getElementsByTagName("filtres")[0];
+    if(window.scrollY >= 750) { // change target to number
+        filtres.style.visibility = 'visible';
+        filtres.style.opacity = 1;
     }else{
-        titleBarProjets.style.position = 'relative';
+        filtres.style.visibility = 'hidden';
+        filtres.style.opacity = 0;
     }
 };
 
 window.addEventListener("load", (event) => {
+    boutonsMenu();
+    hoverProjects();
+    boutonsFiltres();
+});
+
+function hoverProjects(){
+    let projects = document.getElementsByClassName("projectCard");
+
+    Array.prototype.forEach.call(projects, function(project) {
+
+        project.addEventListener("mouseover", (event) => { 
+            project.querySelector(".more").style.display = "block";
+        });
+
+        project.addEventListener("mouseout", (event) => { 
+            project.querySelector(".more").style.display = "none";
+        });
+
+        let tooltip = project.querySelector(".more");
+
+        project.addEventListener("mousemove", (e)=>{
+            tooltip.style.display = 'block';
+            tooltip.style.left = (e.clientX + 10) + 'px'; // décalage en x
+            tooltip.style.top = (e.clientY + 10) + 'px';  // décalage en y
+        });
+    });
+}
+
+function boutonsMenu(){
+    //Boutons du menu -------------------------------
     let menuProjetsBtn = document.getElementById("menuProjets");
     menuProjetsBtn.addEventListener("click", function(){
         window.scroll({
@@ -27,5 +59,30 @@ window.addEventListener("load", (event) => {
             behavior: "smooth",
         });
     })
-});
+}
 
+function boutonsFiltres(){
+    let buttons = document.getElementsByTagName("filtres")[0].children;
+    let all = true;
+    
+    Array.prototype.forEach.call(buttons, function(button) {
+        button.addEventListener("click", function(e){
+            let btns = document.getElementsByTagName("filtres")[0].children;
+
+            if( ! all && ! button.classList.contains("notSelected")){
+                Array.prototype.forEach.call(btns, function(btn) {
+                    btn.classList.remove("notSelected");
+                })
+                all = true;
+                return;
+            }
+
+            Array.prototype.forEach.call(btns, function(btn) {
+                if(btn != button) btn.classList.add("notSelected");
+                else btn.classList.remove("notSelected");
+            })
+
+            all = false;
+        })
+    })
+}
