@@ -66,6 +66,7 @@ function boutonsFiltres(){
     let all = true;
     
     Array.prototype.forEach.call(buttons, function(button) {
+
         button.addEventListener("click", function(e){
             let btns = document.getElementsByTagName("filtres")[0].children;
 
@@ -74,6 +75,7 @@ function boutonsFiltres(){
                     btn.classList.remove("notSelected");
                 })
                 all = true;
+                filtreCategories(button, true);
                 return;
             }
 
@@ -81,8 +83,33 @@ function boutonsFiltres(){
                 if(btn != button) btn.classList.add("notSelected");
                 else btn.classList.remove("notSelected");
             })
-
+            filtreCategories(button, false);
             all = false;
         })
+
     })
+}
+
+function filtreCategories(button, all){
+    let categorieId = button.getAttribute("categorie");
+    let projectCards = document.querySelectorAll(".projectCard");
+
+    if(all){
+        Array.prototype.forEach.call(projectCards, function(projectCard) {
+            projectCard.classList.remove("hide");
+        });
+    }else{
+        Array.prototype.forEach.call(projectCards, function(projectCard) {
+            if( ! projectCard.innerHTML.includes('categorie="'+categorieId+'"')) projectCard.classList.add("hide");
+            else projectCard.classList.remove("hide");
+        });
+    }
+
+    let newProjectCards = document.querySelectorAll(".projectCard");
+    let count = 0;
+    Array.prototype.forEach.call(newProjectCards, function(newProjectCard) {
+        if( ! newProjectCard.classList.contains("hide")) count++;
+    });
+
+    console.log(newProjectCards[count]);
 }
