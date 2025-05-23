@@ -468,7 +468,9 @@ and (max-device-width : 480px) {
 
     #resume{}
 
-    #resume #text{}
+    #resume #text{
+    font-size: 1.2vh;
+}
     
     #resume #titleSkills{}
     
