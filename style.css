@@ -88,19 +88,19 @@ aboutme::before {
 }
 
 #name{
-    font-size: clamp(1rem, 3vw + 0rem, 2.5rem);
+    font-size: 5vh;
     color: white;
 }
 
 #age{
     color: white;
-    font-size: clamp(1rem, 2vw + 0rem, 1.5rem);
+    font-size: 4vh;
 }
 
 #contact{
     display: flex;
     flex-direction: row;
-    gap: 17%;
+    gap: 14%;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -108,8 +108,8 @@ aboutme::before {
 }
 
 #contact a{
-    width: 8vh;
-    height: 8vh;
+    width: 15%;
+    height: 35%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -138,7 +138,7 @@ aboutme::before {
 
 #resume #text{
     color:white;
-    font-size:clamp(1rem, 2vw + -1rem, 1.5rem);
+    font-size:2.5vh;
     background-color: #494d5fd9;
     border-radius: 28px;
     box-shadow: 5px 3px 20px 0px #000;
@@ -161,8 +161,8 @@ aboutme::before {
 }
 
 #skillsIco div{
-    width: 9vh;
-    height: 9vh;
+    width: 8%;
+    height: 66%;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -182,11 +182,13 @@ aboutme::before {
 }
 #cpp{
     background-image: url('images/cpp.svg');
-    height: 10.3vh !important;
+    height: 67% !important;
+    width: 7% !important;!i;!;
 }
 #csharp{
     background-image: url('images/csharp.svg');
-    height: 10.3vh !important;
+    height: 67% !important;
+    width: 7% !important;!i;!;
 }
 #sfml{
     background-image: url('images/sfml.svg');
@@ -430,4 +432,155 @@ leave{
     /* box-shadow: inset 5px 3px 20px 0px #000; */
     box-shadow: 5px 3px 20px 0px #000;
     border: 2px solid black;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    /* Styles */
+    body{}
+        
+    top-bar{}
+    
+    aboutme{}
+    
+    aboutme::before {}
+
+    #profilCard{}
+    
+    .picture{}
+    
+    #name{}
+
+    #age{}
+    
+    #contact{}
+
+    #contact a{}
+    
+    #github{}
+        
+    #mail{}
+        
+    #linkedin{}
+    
+
+    #resume{}
+
+    #resume #text{}
+    
+    #resume #titleSkills{}
+    
+    #skillsIco{}
+
+    #skillsIco div{}
+        
+    #skills{}
+    
+    #cmake{}
+        
+    #cpp{}
+    
+    #csharp{}
+        
+    #sfml{}
+        
+    #unity{}
+        
+    #ue5{}
+        
+    #opengl{}
+        
+    #git{}
+        
+    #svn{}
+        
+    title-bar{}
+    
+    projects{}
+    
+    projects:has(.projectCard:nth-child(3n + 1):last-child) {}
+    
+    projects::before {}
+    
+    .presentationPic{}
+    
+    .projectCard {}
+        
+    .projectTitle{}
+    
+    .projectResume{}
+        
+    .presentationPicContainer{}
+    
+    .projectCard:hover{}
+        
+    .more{}
+    
+    filtres{}
+    
+    filtres > button{}
+    
+    .notSelected{}
+        
+    .categories{}
+    
+    .categories > div {}
+    
+    .hide{}
+        
+    project-page{}
+        
+    project-page > overlay{}
+    
+    leave{}
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+    /* Styles */
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+    /* Styles */
+
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+    /* Styles */
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+    /* Styles */
+
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+    /* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+    /* Styles */
+
 }
