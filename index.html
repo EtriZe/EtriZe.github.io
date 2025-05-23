@@ -16,6 +16,7 @@
     <div id="menuApropos">À propos</div>
     <div id="menuProjets">Projets</div>
   </top-bar>
+
   <aboutme>
     <div id="profilCard">
       <img class="picture" src="./images/Gragas_39.jpg" alt="Barrère Valentin" />
@@ -54,6 +55,7 @@
       </div>
     </div>
   </aboutme>
+
   <title-bar>
     <span>Projets</span>
   </title-bar>
@@ -68,23 +70,14 @@
     <button categorie="7" style="background-color:#E2CBF7;">OpenGL</button>
     <button categorie="8" style="background-color:#D1BDFF;">CMake</button>
   </filtres>
-  <projects style="margin-top:1vh">
-    <div class="projectCard">
+
+  <projects style="margin-top:1vh; padding-top: 5vh;">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
-        <div categorie="1" style="background-color:#FA9189;" title="Unreal Engine"></div>
         <div categorie="2" style="background-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="3" style="background-color:#FFE699;" title="C++"></div>
         <div categorie="4" style="background-color:#F9FFB5;" title="C#"></div>
         <div categorie="5" style="background-color:#B3F5BC;" title="Git"></div>
-        <div categorie="6" style="background-color:#D6F6FF;" title="SVN"></div>
-        <div categorie="7" style="background-color:#E2CBF7;" title="OpenGL"></div>
-        <div categorie="8" style="background-color:#D1BDFF;" title="CMake"></div>
       </div>
-      <!-- <div class="categories">
-        <div categorie="2" style="background-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="4" style="background-color:#F9FFB5;" title="C#"></div>
-        <div categorie="5" style="background-color:#B3F5BC;" title="Git"></div>
-      </div> -->
       <div class="presentationPicContainer">
         <img class="presentationPic" src="./images/lasthope.png" alt="Barrère Valentin" />
       </div>
@@ -95,7 +88,7 @@
       </span>
       <div class="more">En savoir plus ...</div>
     </div>
-    <div class="projectCard">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
         <div categorie="2" style="background-color:#FCAE7C;" title="Unity"></div>
         <div categorie="4" style="background-color:#F9FFB5;" title="C#"></div>
@@ -111,7 +104,7 @@
       </span>
       <div class="more">En savoir plus ...</div>
     </div>
-    <div class="projectCard">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
         <div categorie="1" style="background-color:#FA9189;" title="Unreal Engine"></div>
         <div categorie="3" style="background-color:#FFE699;" title="C++"></div>
@@ -129,7 +122,7 @@
       </span>
       <div class="more">En savoir plus ...</div>
     </div>
-    <div class="projectCard">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
         <div categorie="2" style="background-color:#FCAE7C;" title="Unity"></div>
         <div categorie="4" style="background-color:#F9FFB5;" title="C#"></div>
@@ -145,7 +138,7 @@
       </span>
       <div class="more">En savoir plus ...</div>
     </div>
-    <div class="projectCard">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
         <div categorie="2" style="background-color:#FCAE7C;" title="Unity"></div>
         <div categorie="4" style="background-color:#F9FFB5;" title="C#"></div>
@@ -161,7 +154,7 @@
       </span>
       <div class="more">En savoir plus ...</div>
     </div>
-    <div class="projectCard">
+    <div class="projectCard" file="./projets/lasthope.html">
       <div class="categories">
         <div categorie="1" style="background-color:#FA9189;" title="Unreal Engine"></div>
         <div categorie="3" style="background-color:#FFE699;" title="C++"></div>
@@ -180,6 +173,12 @@
       <div class="more">En savoir plus ...</div>
     </div>
   </projects>
+
+  <project-page class="hide">
+    <leave>x</leave>
+    <overlay>
+      <content></overlay>
+  </project-page>
 
 </body>
 

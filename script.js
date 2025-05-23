@@ -1,7 +1,7 @@
 window.onscroll = function(){
     let titleBarProjets = document.getElementsByTagName("title-bar")[0];
     let filtres = document.getElementsByTagName("filtres")[0];
-    if(window.scrollY >= 750) { // change target to number
+    if(window.scrollY >= 700) { // change target to number
         filtres.style.visibility = 'visible';
         filtres.style.opacity = 1;
     }else{
@@ -14,6 +14,7 @@ window.addEventListener("load", (event) => {
     boutonsMenu();
     hoverProjects();
     boutonsFiltres();
+    projectPage();
 });
 
 function hoverProjects(){
@@ -35,6 +36,10 @@ function hoverProjects(){
             tooltip.style.display = 'block';
             tooltip.style.left = (e.clientX + 10) + 'px'; // décalage en x
             tooltip.style.top = (e.clientY + 10) + 'px';  // décalage en y
+        });
+
+        project.addEventListener("click", (e) => {
+            openProjects(project.getAttribute('file'));
         });
     });
 }
@@ -105,14 +110,59 @@ function filtreCategories(button, all){
         });
     }
 
-    let newProjectCards = document.querySelectorAll(".projectCard");
-    let count = 0;
-    Array.prototype.forEach.call(newProjectCards, function(newProjectCard) {
-        if( ! newProjectCard.classList.contains("hide")) count++;
-        newProjectCard.classList.remove("lastCard");
-    });
+    // let newProjectCards = document.querySelectorAll(".projectCard");
+    // let count = 0;
+    // Array.prototype.forEach.call(newProjectCards, function(newProjectCard) {
+    //     if( ! newProjectCard.classList.contains("hide")) count++;
+    //     newProjectCard.classList.remove("lastCard");
+    // });
 
-    if((count % 3) == 1){
-        newProjectCards[count].classList.add("lastCard");
+    // if((count % 3) == 1){
+    //     newProjectCards[count].classList.add("lastCard");
+    // }
+
+    //Mettre dans l'ordre, les "hide" à la fin
+    const myDiv = document.getElementsByTagName("projects")[0];
+    reorderDivChildren(myDiv);
+}
+
+function reorderDivChildren(div) {
+    const children = Array.from(div.children);
+    const visible = [];
+    const hidden = [];
+  
+    for (const child of children) {
+      (child.classList.contains('hide') ? hidden : visible).push(child);
     }
+  
+    for (const child of [...visible, ...hidden]) {
+      div.appendChild(child); // appendChild déplace l'élément s'il est déjà dans le DOM
+    }
+};
+
+
+async function openProjects(file){
+    try {
+        const res = await fetch(file);          // GET ./projects/whereareyou.html
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    
+        const html = await res.text();         // Contenu brut du fichier
+        console.log(html);                     // → chaîne de caractères
+    
+        // Exemple : l’injecter dans le DOM
+        document.querySelector("project-page content").innerHTML = html;
+        document.querySelector("project-page").classList.remove("hide");
+        // Exemple : le transformer en DOM complet
+        // const doc = new DOMParser().parseFromString(html, "text/html");
+    } catch (err) {
+            console.error("Impossible de charger le fichier :", err);
+    }
+}
+
+function projectPage() {
+    let leave = document.querySelector("leave");
+    leave.addEventListener("click", (e) => {
+        let projectPage = leave.closest("project-page");
+        projectPage.classList.add("hide");
+    });
 }
