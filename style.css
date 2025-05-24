@@ -632,6 +632,7 @@ leave {
     align-items: center;
     width: 100%;
     gap: 1vh;
+    transition: none;
 }
 
     filtres>button {
