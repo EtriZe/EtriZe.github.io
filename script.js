@@ -1,7 +1,7 @@
 window.onscroll = function(){
     let titleBarProjets = document.getElementsByTagName("title-bar")[0];
     let filtres = document.getElementsByTagName("filtres")[0];
-    if(window.scrollY >= 700) { // change target to number
+    if(window.scrollY >= window.innerHeight * 0.7) { // change target to number
         filtres.style.visibility = 'visible';
         filtres.style.opacity = 1;
     }else{
@@ -49,7 +49,7 @@ function boutonsMenu(){
     let menuProjetsBtn = document.getElementById("menuProjets");
     menuProjetsBtn.addEventListener("click", function(){
         window.scroll({
-            top: 820,
+            top: window.innerHeight * 0.93,
             left: 0,
             behavior: "smooth",
         });
