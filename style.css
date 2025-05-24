@@ -519,6 +519,7 @@ leave {
 
     #resume #text {
         font-size: 1.4vh;
+        text-align: center;
     }
 
     #resume #titleSkills {
@@ -630,7 +631,7 @@ leave {
 }
 
     filtres>button {
-    font-size: 1.8vh;
+    font-size: 1.4vh;
     font-weight: bold;
 }
 
