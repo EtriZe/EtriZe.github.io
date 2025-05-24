@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
-body{
+
+body {
     width: 100%;
     height: 100%;
     display: flex;
@@ -19,10 +20,10 @@ body{
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    
+
 }
 
-top-bar{
+top-bar {
     width: 100%;
     font-size: 2em;
     background: linear-gradient(0deg, #BF93EE 83%, rgba(73, 77, 95, 1) 106%);
@@ -37,11 +38,11 @@ top-bar{
     padding-top: 1vh;
     padding-bottom: 1vh;
     box-shadow: 5px 3px 20px 0px #000;
-    position:fixed;
+    position: fixed;
     z-index: 10;
 }
 
-aboutme{
+aboutme {
     width: 90%;
     height: 86vh;
     position: relative;
@@ -66,7 +67,7 @@ aboutme::before {
     box-shadow: 5px 3px 20px 0px #000;
 }
 
-#profilCard{
+#profilCard {
     position: relative;
     z-index: 1;
     width: 30%;
@@ -81,23 +82,23 @@ aboutme::before {
     border: 2px solid black;
 }
 
-.picture{
+.picture {
     border-radius: 100%;
     width: 55%;
     margin-top: 10%;
 }
 
-#name{
+#name {
     font-size: 5vh;
     color: white;
 }
 
-#age{
+#age {
     color: white;
     font-size: 4vh;
 }
 
-#contact{
+#contact {
     display: flex;
     flex-direction: row;
     gap: 14%;
@@ -107,24 +108,26 @@ aboutme::before {
     height: 100%;
 }
 
-#contact a{
+#contact a {
     width: 15%;
     height: 35%;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#github{
+#github {
     background-image: url('images/github.svg');
 }
-#mail{
+
+#mail {
     background-image: url('images/Mail.svg');
 }
-#linkedin{
+
+#linkedin {
     background-image: url('images/LinkedIn.svg');
 }
 
-#resume{
+#resume {
     width: 70%;
     position: relative;
     z-index: 1;
@@ -136,21 +139,22 @@ aboutme::before {
     gap: 7%;
 }
 
-#resume #text{
-    color:white;
-    font-size:2.5vh;
+#resume #text {
+    color: white;
+    font-size: 2.5vh;
     background-color: #494d5fd9;
     border-radius: 28px;
     box-shadow: 5px 3px 20px 0px #000;
     padding: 3%;
     border: 2px solid black;
 }
-#resume #titleSkills{
-    color:white;
-    font-size:2em;
+
+#resume #titleSkills {
+    color: white;
+    font-size: 2em;
 }
 
-#skillsIco{
+#skillsIco {
     width: 100%;
     height: 100%;
     display: flex;
@@ -160,14 +164,14 @@ aboutme::before {
     gap: 6%;
 }
 
-#skillsIco div{
+#skillsIco div {
     width: 8%;
     height: 66%;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#skills{
+#skills {
     width: 100%;
     height: 40%;
     display: flex;
@@ -177,40 +181,53 @@ aboutme::before {
 }
 
 
-#cmake{
+#cmake {
     background-image: url('images/Cmake.svg');
+    margin-left: 11vh;
 }
-#cpp{
+
+#cpp {
     background-image: url('images/cpp.svg');
     height: 67% !important;
-    width: 7% !important;!i;!;
+    width: 7% !important;
+    !i;
+    !;
 }
-#csharp{
+
+#csharp {
     background-image: url('images/csharp.svg');
     height: 67% !important;
-    width: 7% !important;!i;!;
+    width: 7% !important;
+    !i;
+    !;
 }
-#sfml{
+
+#sfml {
     background-image: url('images/sfml.svg');
 }
-#unity{
+
+#unity {
     background-image: url('images/unity.svg');
 }
-#ue5{
+
+#ue5 {
     background-image: url('images/UE5.svg');
 }
-#opengl{
+
+#opengl {
     background-image: url('images/opengl.svg');
     width: 20vh !important;
 }
-#git{
+
+#git {
     background-image: url('images/git.svg');
 }
-#svn{
+
+#svn {
     background-image: url('images/svn.svg');
 }
 
-title-bar{
+title-bar {
     font-size: clamp(1rem, 3vw + 0rem, 2.5rem);
     color: white;
     font-weight: bold;
@@ -221,7 +238,7 @@ title-bar{
     z-index: 5;
 }
 
-projects{
+projects {
     width: 85%;
     /* height: 74vh; */
     position: relative;
@@ -257,7 +274,7 @@ projects::before {
     box-shadow: 5px 3px 20px 0px #000;
 }
 
-.presentationPic{
+.presentationPic {
     border-radius: 28px;
     margin-top: 0%;
     object-fit: cover;
@@ -266,7 +283,7 @@ projects::before {
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: -2;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .projectCard {
@@ -289,14 +306,14 @@ projects::before {
     border: 2px solid black;
 }
 
-.projectTitle{
+.projectTitle {
     font-size: clamp(1rem, 1.3vw + 0rem, 2.5rem);
     color: white;
     text-decoration: underline;
     font-style: italic;
 }
 
-.projectResume{
+.projectResume {
     color: white;
     font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem);
     text-align: center;
@@ -305,24 +322,24 @@ projects::before {
     margin-top: 4%;
 }
 
-.presentationPicContainer{
+.presentationPicContainer {
     box-shadow: inset 5px 3px 20px 0px #000;
     border-radius: 28px;
     margin-top: 6%;
     object-fit: cover;
     height: 44%;
     width: 84%;
-    pointer-events: none; 
+    pointer-events: none;
     z-index: 1;
 }
 
-.projectCard:hover{
-    width:35%;
+.projectCard:hover {
+    width: 35%;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
 }
 
-.more{
+.more {
     position: fixed;
     padding: 6px 10px;
     background-color: #494d5f;
@@ -336,21 +353,21 @@ projects::before {
     border: 3px solid white;
 }
 
-filtres{
-    display: flex    ;
+filtres {
+    display: flex;
     flex-direction: column;
     gap: 9px;
     /* font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem); */
     position: fixed;
     z-index: 6;
     padding-top: 16vh;
-    left: 1%;  
+    left: 1%;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.3s linear;
 }
 
-filtres > button{
+filtres>button {
     font-size: clamp(1rem, 0.3vw + 0rem, 1.3rem);
     border-radius: 9px;
     border: none;
@@ -358,11 +375,11 @@ filtres > button{
     border: 2px solid black;
 }
 
-.notSelected{
+.notSelected {
     filter: contrast(0.5);
 }
 
-.categories{
+.categories {
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -374,7 +391,7 @@ filtres > button{
     justify-content: center;
 }
 
-.categories > div {
+.categories>div {
     height: 100%;
     width: 36px;
     border-top-right-radius: 17px;
@@ -384,13 +401,13 @@ filtres > button{
     border-bottom: 2px solid #484c5b;
 }
 
-.hide{
+.hide {
     visibility: hidden;
     opacity: 0;
     height: 0 !important;
 }
 
-project-page{
+project-page {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -402,7 +419,7 @@ project-page{
     align-items: center;
 }
 
-project-page > overlay{
+project-page>overlay {
     color: white;
     font-size: clamp(1rem, 2vw + -1rem, 1.5rem);
     background-color: #494d5f;
@@ -417,7 +434,7 @@ project-page > overlay{
     overflow: overlay;
 }
 
-leave{
+leave {
     position: absolute;
     width: 3%;
     height: 6%;
@@ -435,153 +452,239 @@ leave{
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 700px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 700px) {
+
     /* Styles */
-    body{}
-        
-    top-bar{}
-    
-    aboutme{}
-    
+    body {}
+
+    top-bar {
+        font-size: 3vh;
+        gap: 26%;
+    }
+
+    aboutme {
+        height: 91vh;
+        flex-direction: column;
+        width: 94%;
+        margin-top: 8vh;
+        align-items: center;
+    }
+
     aboutme::before {}
 
-    #profilCard{}
-    
-    .picture{}
-    
-    #name{}
+    #profilCard {
+        width: 93%;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        gap: 1vh;
+        padding-top: 1vh;
+        padding-bottom: 2vh;
+    }
 
-    #age{}
-    
-    #contact{}
+    .picture {
+        width: 25%;
+        margin-top: 1%;
+    }
 
-    #contact a{}
-    
-    #github{}
-        
-    #mail{}
-        
-    #linkedin{}
-    
+    #name {
+        font-size: 3vh;
+    }
 
-    #resume{}
+    #age {
+        font-size: 2vh;
+    }
 
-    #resume #text{
-    font-size: 1.2vh;
+    #contact {
+        height: auto;
+        gap: 9vh;
+    }
+
+    #contact a {
+        width: 5vh;
+        height: 5vh;
+    }
+
+    #github {}
+
+    #mail {}
+
+    #linkedin {}
+
+
+    #resume {
+        width: auto;
+        height: auto;
+    }
+
+    #resume #text {
+        font-size: 1.4vh;
+    }
+
+    #resume #titleSkills {
+        font-size: 2vh;
+    }
+
+    #skillsIco {
+        /* height: auto; */
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        width: 30vh;
+        gap: 3vh;
+        justify-items: center;
+    }
+
+    #skillsIco div {
+        height: 5vh;
+        width: 5vh;
+    }
+
+    #skills {
+        height: 2vh;
+    }
+
+    #cmake {}
+
+    #cpp {
+        height: 5vh !important;
+        width: 4.4vh !important;
+    }
+
+    #csharp {
+        height: 5vh !important;
+        width: 4.4vh !important;
+    }
+
+    #sfml {}
+
+    #unity {}
+
+    #ue5 {
+        /* height: 5vh !important; */
+        /* width: 4.4vh !important; */
+    }
+
+    #opengl {
+        width: 11vh !important;
+        margin-left: 12vh;
+    }
+
+    #git {}
+
+    #svn {
+        margin-left: 10vh;
+    }
+
+    title-bar {}
+
+    projects {
+    display: flex;
+    grid-template-columns: auto;
+    width: 94%;
+    flex-direction: row;
+    justify-items: center;
+    padding-top: 3vh !important;
+    gap: 5vh;
+    min-height: 61vh;
 }
-    
-    #resume #titleSkills{}
-    
-    #skillsIco{}
 
-    #skillsIco div{}
-        
-    #skills{}
-    
-    #cmake{}
-        
-    #cpp{}
-    
-    #csharp{}
-        
-    #sfml{}
-        
-    #unity{}
-        
-    #ue5{}
-        
-    #opengl{}
-        
-    #git{}
-        
-    #svn{}
-        
-    title-bar{}
-    
-    projects{}
-    
     projects:has(.projectCard:nth-child(3n + 1):last-child) {}
-    
+
     projects::before {}
-    
-    .presentationPic{}
-    
-    .projectCard {}
-        
-    .projectTitle{}
-    
-    .projectResume{}
-        
-    .presentationPicContainer{}
-    
-    .projectCard:hover{}
-        
-    .more{}
-    
-    filtres{}
-    
-    filtres > button{}
-    
-    .notSelected{}
-        
-    .categories{}
-    
-    .categories > div {}
-    
-    .hide{}
-        
-    project-page{}
-        
-    project-page > overlay{}
-    
-    leave{}
+
+    .presentationPic {}
+
+    .projectCard {
+    width: 85%;
+    height: 63vh;
+    /* gap: 1vh; */
+    margin: 3vh;
+}
+
+    .projectTitle {
+    font-size: 2.5vh;
+}
+
+    .projectResume {
+    font-size: 2vh;
+}
+
+    .presentationPicContainer {}
+
+    .projectCard:hover {
+    width: 85%;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+    .more {}
+
+    filtres {
+    flex-direction: row;
+    /* position: absolute; */
+    bottom: 2vh;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1vh;
+}
+
+    filtres>button {
+    font-size: 1.8vh;
+    font-weight: bold;
+}
+
+    .notSelected {}
+
+    .categories {/* width: 53%; *//* height: 3vh; */}
+
+    .categories>div {
+    width: 3vh;
+}
+
+    .hide {
+    display: none;
+}
+
+    project-page {}
+
+    project-page>overlay {}
+
+    leave {}
 }
 
 
 /* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
     /* Styles */
 
 }
 
 /* iPads (landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : landscape) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
     /* Styles */
 
 }
 
 /* iPads (portrait) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : portrait) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
     /* Styles */
 
 }
 
 /* Desktops and laptops ----------- */
-@media only screen 
-and (min-width : 1224px) {
+@media only screen and (min-width : 1224px) {
     /* Styles */
 
 }
 
 /* Large screens ----------- */
-@media only screen 
-and (min-width : 1824px) {
+@media only screen and (min-width : 1824px) {
     /* Styles */
 }
 
 /* iPhone 4 ----------- */
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5),
 only screen and (min-device-pixel-ratio : 1.5) {
     /* Styles */
 
