@@ -386,7 +386,7 @@ filtres>button {
     width: 78%;
     height: 3vh;
     z-index: 0;
-    top: -5.4%;
+    top: -3vh;
     gap: 3%;
     justify-content: center;
 }
@@ -576,7 +576,9 @@ leave {
         margin-left: 10vh;
     }
 
-    title-bar {}
+    title-bar {
+    font-size: 3vh;
+}
 
     projects {
     display: flex;
@@ -618,7 +620,9 @@ leave {
     margin-bottom: 3vh;
 }
 
-    .more {}
+    .more {
+    display: none;
+}
 
     filtres {
     flex-direction: row;
@@ -651,7 +655,13 @@ leave {
 
     project-page>overlay {}
 
-    leave {}
+    leave {
+    width: 5vh;
+    height: 5vh;
+    font-size: 3vh;
+    top: 8vh;
+    border-radius: 3vh;
+}
 }
 
 
