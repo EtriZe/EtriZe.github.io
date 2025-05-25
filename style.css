@@ -304,6 +304,7 @@ projects::before {
     width: 24%;
     height: 64vh;
     border: 2px solid black;
+    container-type: size;
 }
 
 .projectTitle {
@@ -315,11 +316,13 @@ projects::before {
 
 .projectResume {
     color: white;
-    font-size: clamp(1rem, 1.2vw + 0rem, 1.3rem);
+    font-size: 3.8cqw;
     text-align: center;
     margin-left: 4%;
     margin-right: 4%;
     margin-top: 4%;
+    transition-property: font-size;
+    /* transition-duration: 0.1s; */
 }
 
 .presentationPicContainer {
