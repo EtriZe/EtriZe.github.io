@@ -161,7 +161,7 @@ aboutme::before {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 6%;
+    gap: 4vh;
 }
 
 #skillsIco div {
@@ -183,7 +183,7 @@ aboutme::before {
 
 #cmake {
     background-image: url('images/Cmake.svg');
-    margin-left: 11vh;
+    margin-left: 0vh;
 }
 
 #cpp {
