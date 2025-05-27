@@ -42,6 +42,15 @@ top-bar {
     z-index: 10;
 }
 
+top-bar > a{
+    text-decoration: none;
+    color:white;
+}
+
+top-bar > *{
+    cursor:pointer;
+}
+
 aboutme {
     width: 90%;
     height: 86vh;
