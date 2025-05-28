@@ -45,6 +45,7 @@ top-bar {
 top-bar > a{
     text-decoration: none;
     color:white;
+    width: 7vh;
 }
 
 top-bar > *{
@@ -472,7 +473,7 @@ leave {
 
     top-bar {
         font-size: 3vh;
-        /* gap: 5vh; */
+        gap: 5vh;
         justify-content: ;
     }
 
