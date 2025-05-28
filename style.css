@@ -258,11 +258,12 @@ projects {
     box-shadow: 5px 3px 20px 0px #000;
     margin-bottom: 11vh;
     /* flex-wrap: wrap; */
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     transition-property: height, margin;
     transition-duration: 0.7s;
     padding-top: 1%;
     min-height: 68vh;
+    flex-wrap: wrap;
 }
 
 projects:has(.projectCard:nth-child(3n + 1):last-child) {
@@ -347,8 +348,8 @@ projects::before {
 
 .projectCard:hover {
     width: 35%;
-    margin-top: 1.5%;
-    margin-bottom: 1.5%;
+    /* margin-top: 1.5%; */
+    /* margin-bottom: 1.5%; */
 }
 
 .more {
@@ -471,7 +472,8 @@ leave {
 
     top-bar {
         font-size: 3vh;
-        gap: 26%;
+        /* gap: 5vh; */
+        justify-content: ;
     }
 
     aboutme {
@@ -712,4 +714,20 @@ leave {
 only screen and (min-device-pixel-ratio : 1.5) {
     /* Styles */
 
+}
+
+overlay > content {
+    display: flex;
+    flex-direction: column;
+}
+
+title{
+    display: block;
+    font-size: 4vh;
+    text-align: center;
+}
+
+projects > .projectCard:last-of-type {
+    margin-right: 63vh;
+    margin-left: 63vh;
 }
