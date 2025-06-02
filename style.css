@@ -426,11 +426,13 @@ project-page {
     width: 100%;
     height: 100%;
     background: rgb(0 0 0 / 59%);
-    z-index: 20;
+    z-index: 27;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    top: 0;
+    left: 0;
 }
 
 project-page>overlay {
