@@ -147,7 +147,7 @@ async function openProjects(file){
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
     
         const html = await res.text();         // Contenu brut du fichier
-        console.log(html);                     // → chaîne de caractères
+        // console.log(html);                     // → chaîne de caractères
     
         // Exemple : l’injecter dans le DOM
         document.querySelector("project-page content").innerHTML = html;
