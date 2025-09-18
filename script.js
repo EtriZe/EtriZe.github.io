@@ -152,6 +152,7 @@ async function openProjects(file){
         // Exemple : l’injecter dans le DOM
         document.querySelector("project-page content").innerHTML = html;
         document.querySelector("project-page").classList.remove("hide");
+        document.body.classList.add("no-scroll");
         // Exemple : le transformer en DOM complet
         // const doc = new DOMParser().parseFromString(html, "text/html");
     } catch (err) {
@@ -164,5 +165,6 @@ function projectPage() {
     leave.addEventListener("click", (e) => {
         let projectPage = leave.closest("project-page");
         projectPage.classList.add("hide");
+        document.body.classList.remove("no-scroll");
     });
 }

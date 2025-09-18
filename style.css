@@ -122,11 +122,15 @@ aboutme::before {
     width: 15%;
     height: 35%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 #github {
     background-image: url('images/github.svg');
+}
+
+#itchio {
+    background-image: url('images/itch_icon_146025.png');
 }
 
 #mail {
@@ -178,7 +182,7 @@ aboutme::before {
     width: 8%;
     height: 66%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 #skills {
@@ -733,4 +737,27 @@ title{
 projects > .projectCard:last-of-type {
     margin-right: 63vh;
     margin-left: 63vh;
+}
+
+info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4vh;
+}
+
+title {
+    font-size: 3em;
+}
+
+info a {
+    width: 100px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
