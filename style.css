@@ -138,7 +138,7 @@ aboutme::before {
 }
 
 #linkedin {
-    background-image: url('images/LinkedIn.svg');
+    background-image: url('images/LinkedIn.png');
 }
 
 #resume {
@@ -196,24 +196,20 @@ aboutme::before {
 
 
 #cmake {
-    background-image: url('images/Cmake.svg');
+    background-image: url('images/CMake.png');
     margin-left: 0vh;
 }
 
 #cpp {
-    background-image: url('images/cpp.svg');
-    height: 67% !important;
-    width: 7% !important;
-    !i;
-    !;
+    background-image: url('images/c++.png');
+    /* height: 67% !important;
+    width: 7% !important; */
 }
 
 #csharp {
-    background-image: url('images/csharp.svg');
-    height: 67% !important;
-    width: 7% !important;
-    !i;
-    !;
+    background-image: url('images/csharp.png');
+    /* height: 67% !important;
+    width: 7% !important; */
 }
 
 #sfml {
@@ -221,11 +217,11 @@ aboutme::before {
 }
 
 #unity {
-    background-image: url('images/unity.svg');
+    background-image: url('images/Unity.png');
 }
 
 #ue5 {
-    background-image: url('images/UE5.svg');
+    background-image: url('images/ue5.png');
 }
 
 #opengl {
@@ -421,7 +417,7 @@ filtres>button {
     border-bottom: 2px solid #484c5b;
 }
 
-.hide {
+.hide, .force-hide {
     visibility: hidden;
     opacity: 0;
     height: 0 !important;
@@ -570,13 +566,13 @@ leave {
     #cmake {}
 
     #cpp {
-        height: 5vh !important;
-        width: 4.4vh !important;
+        /* height: 5vh !important;
+        width: 4.4vh !important; */
     }
 
     #csharp {
-        height: 5vh !important;
-        width: 4.4vh !important;
+        /* height: 5vh !important;
+        width: 4.4vh !important; */
     }
 
     #sfml {}
@@ -736,10 +732,10 @@ title{
     text-align: center;
 }
 
-projects > .projectCard:last-of-type {
+/* projects > .projectCard:last-of-type {
     margin-right: 63vh;
     margin-left: 63vh;
-}
+} */
 
 info {
     display: flex;
