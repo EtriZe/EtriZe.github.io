@@ -1,12 +1,9 @@
 window.onscroll = function(){
-    let titleBarProjets = document.getElementsByTagName("title-bar")[0];
     let filtres = document.getElementsByTagName("filtres")[0];
-    if(window.scrollY >= window.innerHeight * 0.7) { // change target to number
-        filtres.style.visibility = 'visible';
-        filtres.style.opacity = 1;
-    }else{
-        filtres.style.visibility = 'hidden';
-        filtres.style.opacity = 0;
+    if(window.scrollY >= window.innerHeight * 0.7) {
+        filtres.classList.add('is-visible');
+    } else {
+        filtres.classList.remove('is-visible');
     }
 };
 
@@ -168,3 +165,21 @@ function projectPage() {
         document.body.classList.remove("no-scroll");
     });
 }
+
+function openCVModal() {
+  const modal = document.getElementById('cv-modal');
+  modal.style.display = 'flex';
+  // Fermer en cliquant en dehors de la fenêtre
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeCVModal();
+  }, { once: true });
+}
+
+function closeCVModal() {
+  document.getElementById('cv-modal').style.display = 'none';
+}
+
+// Fermer avec Échap
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeCVModal();
+});

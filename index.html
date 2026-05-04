@@ -30,9 +30,12 @@
       <div id="menuProjets" class="nav-item">
         <span class="nav-index">02</span>Projets
       </div>
-      <a href="./images/CV_Barrère_Valentin.pdf" download="CV_Barrère_Valentin" class="nav-item nav-cv">
+      <!-- <a href="./images/CV_Barrère_Valentin.pdf" download="CV_Barrère_Valentin" class="nav-item nav-cv">
         <span class="nav-index">↓</span>CV
-      </a>
+      </a> -->
+      <button onclick="openCVModal()" class="nav-item nav-cv">
+        <span class="nav-index">↓</span>CV
+      </button>
     </nav>
   </top-bar>
 
@@ -47,12 +50,30 @@
       <div class="profile-info">
         <span id="name">Valentin Barrère</span>
         <span class="profile-role">Game Developer</span>
-        <span id="age">25 ans</span>
+        <span id="age">26 ans</span>
       </div>
       <div id="contact">
-        <a id="github" href="https://github.com/EtriZe" title="GitHub" class="contact-link"></a>
-        <a id="linkedin" href="www.linkedin.com/in/valentin-barrère-1784021a1" title="LinkedIn" class="contact-link"></a>
-        <a id="mail" href="mailto:valentin.barrerepro@gmail.com" title="Email" class="contact-link"></a>
+        <a id="github" href="https://github.com/EtriZe" class="contact-link">
+          <span class="contact-icon"></span>
+          <div class="contact-text">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">EtriZe</span>
+          </div>
+        </a>
+        <a id="linkedin" href="https://www.linkedin.com/in/valentin-barrère-1784021a1" class="contact-link">
+          <span class="contact-icon"></span>
+          <div class="contact-text">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">valentin-barrère</span>
+          </div>
+        </a>
+        <a id="mail" href="mailto:valentin.barrerepro@gmail.com" class="contact-link">
+          <span class="contact-icon"></span>
+          <div class="contact-text">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">valentin.barrerepro@gmail.com</span>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -82,7 +103,7 @@
           <div id="csharp" title="C#"></div>
           <div id="ue5" title="Unreal Engine"></div>
           <div id="unity" title="Unity"></div>
-          <div id="cmake" title="CMake"></div>
+          <!-- <div id="cmake" title="CMake"></div> -->
         </div>
       </div>
     </div>
@@ -106,7 +127,7 @@
     <button categorie="5" style="--tag-color:#88D8B0;">Git</button>
     <button categorie="6" style="--tag-color:#88CCF1;">SVN</button>
     <button categorie="7" style="--tag-color:#C9A8F5;">OpenGL</button>
-    <button categorie="8" style="--tag-color:#D1BDFF;">CMake</button>
+    <!-- <button categorie="8" style="--tag-color:#D1BDFF;">CMake</button> -->
   </filtres>
 
   <!-- ── PROJECTS GRID ── -->
@@ -202,7 +223,7 @@
     <div class="projectCard" file="./projets/netpongprojet.html">
       <div class="categories">
         <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div>
+        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
         <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
       </div>
       <div class="card-glow"></div>
@@ -222,7 +243,7 @@
     <div class="projectCard" file="./projets/pathfinder.html">
       <div class="categories">
         <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div>
+        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
         <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
       </div>
       <div class="card-glow"></div>
@@ -242,7 +263,7 @@
     <div class="projectCard" file="./projets/proceduralterrain.html">
       <div class="categories">
         <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div>
+        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
         <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
         <div categorie="7" style="--tag-color:#C9A8F5;" title="OpenGL"></div>
       </div>
@@ -301,7 +322,7 @@
     <div class="projectCard" file="./projets/worms.html">
       <div class="categories">
         <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div>
+        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
         <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
       </div>
       <div class="card-glow"></div>
@@ -354,5 +375,24 @@
   </footer>
 
   <div class="more">En savoir plus →</div>
+
+  <!-- Modal PDF Viewer -->
+  <div id="cv-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="width:90%; max-width:900px; height:90vh; display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <a href="./images/CV_Barrère_Valentin.pdf" download="CV_Barrère_Valentin"
+            style="padding:8px 16px; background:#4a9eff; color:#fff; border:none; border-radius:6px; cursor:pointer; text-decoration:none; font-size:14px;">
+            ⬇ Télécharger
+          </a>
+          <button onclick="closeCVModal()"
+                  style="padding:8px 16px; background:#555; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
+            ✕ Fermer
+          </button>
+      </div>
+    <iframe src="./images/CV_Barrère_Valentin.pdf"
+            style="width:100%; height:100%; border:none; border-radius:8px;">
+    </iframe>
+  </div>
+</div>
 </body>
 </html>
