@@ -18,24 +18,24 @@ window.addEventListener("load", (event) => {
 });
 
 function hoverProjects(){
-    let projects = document.getElementsByClassName("projectCard");
+    let projects = document.querySelectorAll(".projectCard");
 
     Array.prototype.forEach.call(projects, function(project) {
 
         project.addEventListener("mouseover", (event) => { 
-            project.querySelector(".more").style.display = "block";
+            document.querySelector(".more").style.display = "block";
         });
 
         project.addEventListener("mouseout", (event) => { 
-            project.querySelector(".more").style.display = "none";
+            document.querySelector(".more").style.display = "none";
         });
 
-        let tooltip = project.querySelector(".more");
+        let tooltip = document.querySelector(".more");
 
         project.addEventListener("mousemove", (e)=>{
             tooltip.style.display = 'block';
-            tooltip.style.left = (e.clientX + 10) + 'px'; // décalage en x
-            tooltip.style.top = (e.clientY + 10) + 'px';  // décalage en y
+            tooltip.style.left = (e.clientX  + 10) + 'px';
+            tooltip.style.top  = (e.clientY  + 10) + 'px';
         });
 
         project.addEventListener("click", (e) => {
