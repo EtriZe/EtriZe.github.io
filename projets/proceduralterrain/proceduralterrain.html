@@ -4,12 +4,17 @@
         text-decoration: underline;
     }
 
-    .centerme{
+    .centerme {
         text-align: center;
     }
 
-    iframe{
+    iframe {
         border-radius: 15px;
+    }
+
+    #mobile-message {
+        display: none;
+        text-align: center;
     }
 </style>
 
@@ -17,9 +22,13 @@
 
 <p class="centerme">Représentation du projet (La vrai version du projet étant en C++)</p>
 <!-- Version 2D — toujours compatible, aucune dépendance -->
-<iframe src="./projets/proceduralterrain/game/terrain-3d.html" width="900" height="600" frameborder="0" loading="lazy" title="Terrain Procédural">
+<iframe src="./projets/proceduralterrain/game/terrain-3d.html" width="900" height="600" frameborder="0" loading="lazy"
+    title="Terrain Procédural">
 </iframe>
 
+<p id="mobile-message">
+    Version jouable disponible sur la version PC du site.
+</p>
 
 <section>
     <h2>Résumé</h2>
@@ -80,6 +89,17 @@
     <h2>Ce que j’ai appris</h2>
     <p>
         Ce projet m’a permis d’apprendre la génération procédurale et de mieux comprendre le fonctionnement d’OpenGL.
-        Ainsi que l'importance de la gestion mémoire pour éviter les memory leaks ... 
+        Ainsi que l'importance de la gestion mémoire pour éviter les memory leaks ...
     </p>
 </section>
+
+<script>
+    const isMobileLike =
+        window.matchMedia("(max-width: 900px)").matches &&
+        window.matchMedia("(pointer: coarse)").matches;
+
+    if (isMobileLike) {
+        document.getElementById("terrain-container").style.display = "none";
+        document.getElementById("mobile-message").style.display = "block";
+    }
+</script>
