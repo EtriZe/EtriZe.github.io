@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terrain Procédural — 3D WebGL</title>
+<style>:root{--bg:#080b08;--p:rgba(5,8,5,.96);--b:#1a3020;--g:#52e877;--gd:#2a5535;--am:#d4921a;--tx:#7aaa8a;--td:rgba(122,170,138,.4);--f:'Courier New',monospace}*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}#vp{position:absolute;top:0;left:0;width:calc(100% - 260px);height:100%}canvas{display:block;width:100%;height:100%}#panel{position:absolute;top:0;right:0;width:260px;height:100%;background:var(--p);border-left:1px solid var(--b);font-family:var(--f);font-size:11px;color:var(--tx);overflow-y:auto;z-index:10}#panel::-webkit-scrollbar{width:3px}#panel::-webkit-scrollbar-thumb{background:var(--gd)}.sec{padding:12px 14px;border-bottom:1px solid var(--b)}.st{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gd);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b)}.st::before{content:'◆ ';color:var(--g)}.sr{display:flex;justify-content:space-between;margin-bottom:4px;line-height:1.5}.sv{color:var(--am);font-weight:bold;text-align:right}#bio{display:inline-block;padding:2px 7px;font-size:9px;border:1px solid var(--gd);color:var(--g);margin-top:4px}.cr{margin-bottom:10px}.cl{display:flex;justify-content:space-between;margin-bottom:4px;font-size:10px}.cl span:last-child{color:var(--am)}input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--b);cursor:pointer;outline:none}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:8px;height:8px;background:var(--g);cursor:pointer}input[type=number]{width:100%;background:transparent;border:1px solid var(--b);color:var(--g);font-family:var(--f);font-size:11px;padding:4px 6px;outline:none}.tr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.tog{position:relative;width:24px;height:12px;background:var(--b);cursor:pointer;border:1px solid var(--gd);flex-shrink:0;transition:background .15s}.tog.on{background:rgba(82,232,119,.2);border-color:var(--g)}.tog::after{content:'';position:absolute;top:1px;left:1px;width:8px;height:8px;background:var(--td);transition:transform .15s,background .15s}.tog.on::after{transform:translateX(12px);background:var(--g)}.btn{width:100%;padding:6px;cursor:pointer;background:transparent;border:1px solid var(--gd);color:var(--g);font-family:var(--f);font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:all .15s;margin-top:3px}.btn:hover{background:rgba(82,232,119,.08);border-color:var(--g)}#xh{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;pointer-events:none;display:none}#xh::before,#xh::after{content:'';position:absolute;background:rgba(255,255,255,.7)}#xh::before{width:1px;height:100%;left:50%;top:0;transform:translateX(-50%)}#xh::after{width:100%;height:1px;top:50%;left:0;transform:translateY(-50%)}#ov{position:absolute;inset:0;background:rgba(0,0,0,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f);color:var(--g);backdrop-filter:blur(2px)}#ov h1{font-size:clamp(1.2rem,3vw,2rem);letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 30px var(--g);margin-bottom:6px}.sub{color:var(--td);font-size:.65rem;letter-spacing:.1em;margin-bottom:28px}#sb{background:transparent;border:1px solid var(--g);color:var(--g);font-family:var(--f);font-size:.8rem;padding:10px 28px;cursor:pointer;letter-spacing:.15em;text-transform:uppercase;transition:all .2s}#sb:hover{background:var(--g);color:#000;box-shadow:0 0 20px var(--g)}.hint{margin-top:20px;font-size:.56rem;color:var(--td);line-height:2;text-align:center}#err{position:absolute;inset:0;background:rgba(0,0,0,.9);display:none;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f);color:#d44;text-align:center;padding:20px}#err h2{font-size:1rem;margin-bottom:12px;letter-spacing:.1em}#err p{font-size:.7rem;color:var(--td);line-height:1.8;max-width:300px}#err a{color:var(--g);text-decoration:none;display:block;margin-top:16px;font-size:.75rem}#mbadge,#esc{position:absolute;font-family:var(--f);font-size:9px;color:var(--td);pointer-events:none;letter-spacing:.08em}#mbadge{top:8px;left:8px}#esc{bottom:8px;left:50%;transform:translateX(-50%);display:none}</style>
+</head>
+<body>
+<div id="vp">
+<canvas id="cv"></canvas>
+<div id="xh"></div>
+<div id="mbadge">⬡ 3D WebGL — raw</div>
+<div id="esc">[ ESC ] Libérer la souris</div>
+<div id="ov">
+<h1>Terrain Gen 3D</h1>
+<div class="sub">WebGL pur · Sans bibliothèque</div>
+<button id="sb">▶ Lancer</button>
+<div class="hint">ZQSD / WASD · Souris · Espace / Shift<br>ESC pour libérer la souris</div>
+</div>
+<div id="err">
+<h2>⚠ WebGL indisponible</h2>
+<p>WebGL ne peut pas être initialisé sur cette page.<br>Cela arrive souvent quand trop d'extensions consomment les contextes GPU.</p>
+<a href="terrain-2d.html">→ Ouvrir la version 2D (toujours compatible)</a>
+</div>
+</div>
+<div id="panel">
+<div class="sec">
+<div class="st">Métriques</div>
+<div class="sr"><span>FPS</span><span class="sv" id="s-fps">--</span></div>
+<div class="sr"><span>X / Z</span><span class="sv" id="s-pos">--</span></div>
+<div class="sr"><span>Altitude</span><span class="sv" id="s-alt">--</span></div>
+<div class="sr"><span>Chunks</span><span class="sv" id="s-ch">--</span></div>
+<div style="margin-top:6px"><div id="bio">--</div></div>
+</div>
+<div class="sec">
+<div class="st">Génération</div>
+<div class="cr">
+<div class="cl"><span>Graine</span></div>
+<input type="number" id="c-seed" value="42">
+</div>
+<div class="cr">
+<div class="cl"><span>Échelle</span><span id="v-sc">0.003</span></div>
+<input type="range" id="c-sc" min="1" max="10" value="3">
+</div>
+<div class="cr">
+<div class="cl"><span>Octaves</span><span id="v-oc">6</span></div>
+<input type="range" id="c-oc" min="1" max="10" value="6">
+</div>
+<div class="cr">
+<div class="cl"><span>Persistance</span><span id="v-pe">0.50</span></div>
+<input type="range" id="c-pe" min="1" max="10" value="5">
+</div>
+<div class="cr">
+<div class="cl"><span>Lacunarité</span><span id="v-la">2.00</span></div>
+<input type="range" id="c-la" min="10" max="30" value="20">
+</div>
+<div class="cr">
+<div class="cl"><span>Amplitude</span><span id="v-am">80</span></div>
+<input type="range" id="c-am" min="10" max="250" step="5" value="80">
+</div>
+<button class="btn" id="btn-regen">↺ Régénérer</button>
+</div>
+<div class="sec">
+<div class="st">Caméra</div>
+<div class="cr">
+<div class="cl"><span>Vitesse</span><span id="v-sp">20</span></div>
+<input type="range" id="c-sp" min="5" max="200" step="5" value="20">
+</div>
+<div class="cr">
+<div class="cl"><span>Sensibilité</span><span id="v-se">2.0</span></div>
+<input type="range" id="c-se" min="5" max="30" value="10">
+</div>
+<div class="tr"><span>Vol libre</span><div class="tog on" id="t-fly"></div></div>
+<div class="cr">
+<div class="cl"><span>Rayon chunks</span><span id="v-rd">2</span></div>
+<input type="range" id="c-rd" min="1" max="4" value="2">
+</div>
+<button class="btn" id="btn-tp">⌖ Origine</button>
+</div>
+<div class="sec">
+<div class="st">Contrôles</div>
+<div style="line-height:2;font-size:10px;color:var(--td)">
+<div><span style="color:var(--g);min-width:72px;display:inline-block">Z/W Q/A S D</span>Déplacer</div>
+<div><span style="color:var(--g);min-width:72px;display:inline-block">Souris</span>Orienter</div>
+<div><span style="color:var(--g);min-width:72px;display:inline-block">Espace</span>Monter</div>
+<div><span style="color:var(--g);min-width:72px;display:inline-block">Shift</span>Descendre</div>
+<div><span style="color:var(--g);min-width:72px;display:inline-block">ESC</span>Libérer souris</div>
+</div>
+</div>
+<div class="sec">
+<div class="st">À propos</div>
+<div style="font-size:9.5px;color:var(--td);line-height:1.8">
+(WebGL)<br>
+<em style="color:var(--tx)">procedural-terrain-with-opengl</em><br><br>
+Simplex Noise · Chunks dynamiques<br>
+Shaders GLSL personnalisés<br>
+<a href="terrain-2d.html" style="color:var(--gd)">→ Fallback 2D Canvas</a>
+</div>
+</div>
+</div>
+<script>class Noise{constructor(e=0){const t=new Uint8Array(256);for(let e=0;e<256;e++)t[e]=e;let n=(3735928559^e)>>>0;for(let e=255;e>0;e--){n=Math.imul(n^n>>>17,73244475),n=Math.imul(n^n>>>11,2890734675),n^=n>>>15,n>>>=0;const o=n%(e+1);[t[e],t[o]]=[t[o],t[e]]}this.pm=new Uint8Array(512),this.pm12=new Uint8Array(512);for(let e=0;e<512;e++)this.pm[e]=t[255&e],this.pm12[e]=this.pm[e]%12;this.G=[1,1,0,-1,1,0,1,-1,0,-1,-1,0,1,0,1,-1,0,1,1,0,-1,-1,0,-1,0,1,1,0,-1,1,0,1,-1,0,-1,-1]}d(e,t,n){return this.G[3*e]*t+this.G[3*e+1]*n}n(e,t){const n=(3-Math.sqrt(3))/6,o=.3660254037844386*(e+t),l=Math.floor(e+o),s=Math.floor(t+o),a=(l+s)*n,c=e-(l-a),r=t-(s-a),[i,u]=c>r?[1,0]:[0,1],d=c-i+n,g=r-u+n,m=c-1+2*n,f=r-1+2*n,h=255&l,p=255&s,y=this.pm12[h+this.pm[p]],v=this.pm12[h+i+this.pm[p+u]],E=this.pm12[h+1+this.pm[p+1]];let C=.5-c*c-r*r,F=.5-d*d-g*g,A=.5-m*m-f*f;return 70*((C<0?0:(C*=C,C*C*this.d(y,c,r)))+(F<0?0:(F*=F,F*F*this.d(v,d,g)))+(A<0?0:(A*=A,A*A*this.d(E,m,f))))}}const SCALES=[.001,.0015,.003,.004,.005,.007,.009,.011,.013,.016],CFG={seed:42,scale:SCALES[2],octaves:6,persistence:.5,lacunarity:2,amplitude:80,radius:2,speed:20,sens:2,fly:!0};let noise=new Noise(CFG.seed);function getH(e,t){let n=0,o=1,l=CFG.scale,s=0;for(let a=0;a<CFG.octaves;a++)n+=noise.n(e*l,t*l)*o,s+=o,o*=CFG.persistence,l*=CFG.lacunarity;return n/s*CFG.amplitude}function getBiome(e){return e<-.45?"🌊 Océan Profond":e<-.18?"🌊 Côte":e<-.02?"🏖 Plage":e<.18?"🌿 Prairie":e<.38?"🌲 Forêt":e<.62?"⛰ Montagne":e<.78?"🪨 Roche":"❄ Neige"}function mat4(){return new Float32Array(16)}function identity(e){return e.fill(0),e[0]=e[5]=e[10]=e[15]=1,e}function perspective(e,t,n,o,l){const s=1/Math.tan(t/2),a=1/(o-l);return e.fill(0),e[0]=s/n,e[5]=s,e[10]=(o+l)*a,e[11]=-1,e[14]=2*o*l*a,e}function multiply(e,t,n){const o=t[0],l=t[1],s=t[2],a=t[3],c=t[4],r=t[5],i=t[6],u=t[7],d=t[8],g=t[9],m=t[10],f=t[11],h=t[12],p=t[13],y=t[14],v=t[15];let E=n[0],C=n[1],F=n[2],A=n[3];return e[0]=E*o+C*c+F*d+A*h,e[1]=E*l+C*r+F*g+A*p,e[2]=E*s+C*i+F*m+A*y,e[3]=E*a+C*u+F*f+A*v,E=n[4],C=n[5],F=n[6],A=n[7],e[4]=E*o+C*c+F*d+A*h,e[5]=E*l+C*r+F*g+A*p,e[6]=E*s+C*i+F*m+A*y,e[7]=E*a+C*u+F*f+A*v,E=n[8],C=n[9],F=n[10],A=n[11],e[8]=E*o+C*c+F*d+A*h,e[9]=E*l+C*r+F*g+A*p,e[10]=E*s+C*i+F*m+A*y,e[11]=E*a+C*u+F*f+A*v,E=n[12],C=n[13],F=n[14],A=n[15],e[12]=E*o+C*c+F*d+A*h,e[13]=E*l+C*r+F*g+A*p,e[14]=E*s+C*i+F*m+A*y,e[15]=E*a+C*u+F*f+A*v,e}function lookAt(e,t,n,o,l,s,a,c,r,i){let u=t-l,d=n-s,g=o-a,m=1/Math.hypot(u,d,g);u*=m,d*=m,g*=m;let f=r*g-i*d,h=i*u-c*g,p=c*d-r*u;m=1/Math.hypot(f,h,p),f*=m,h*=m,p*=m;const y=d*p-g*h,v=g*f-u*p,E=u*h-d*f;return e[0]=f,e[1]=y,e[2]=u,e[3]=0,e[4]=h,e[5]=v,e[6]=d,e[7]=0,e[8]=p,e[9]=E,e[10]=g,e[11]=0,e[12]=-(f*t+h*n+p*o),e[13]=-(y*t+v*n+E*o),e[14]=-(u*t+d*n+g*o),e[15]=1,e}const VS="\nattribute vec3 aPos;\nattribute vec3 aCol;\nuniform mat4 uMVP;\nvarying vec3 vCol;\nvarying float vFog;\nvoid main(){\n  vec4 p=uMVP*vec4(aPos,1.0);\n  gl_Position=p;\n  vCol=aCol;\n  float d=length(p.xyz);\n  vFog=clamp((d-80.0)/400.0,0.0,1.0);\n}",FS="\nprecision mediump float;\nvarying vec3 vCol;\nvarying float vFog;\nvoid main(){\n  vec3 fogCol=vec3(0.55,0.78,0.91);\n  gl_FragColor=vec4(mix(vCol,fogCol,vFog),1.0);\n}",canvas=document.getElementById("cv"),vp=document.getElementById("vp");let gl;try{gl=canvas.getContext("webgl",{antialias:!1,powerPreference:"low-power"})||canvas.getContext("experimental-webgl",{antialias:!1})}catch(e){gl=null}if(!gl)throw document.getElementById("ov").style.display="none",document.getElementById("err").style.display="flex",Error("WebGL not available");function shader(e,t){const n=gl.createShader(e);return gl.shaderSource(n,t),gl.compileShader(n),n}const prog=gl.createProgram();gl.attachShader(prog,shader(gl.VERTEX_SHADER,VS)),gl.attachShader(prog,shader(gl.FRAGMENT_SHADER,FS)),gl.linkProgram(prog),gl.useProgram(prog);const aPos=gl.getAttribLocation(prog,"aPos"),aCol=gl.getAttribLocation(prog,"aCol"),uMVP=gl.getUniformLocation(prog,"uMVP");gl.enable(gl.DEPTH_TEST),gl.enable(gl.CULL_FACE),gl.cullFace(gl.BACK);const CSIZ=150,CSEG=48,chunks=new Map;function buildMesh(e,t){const n=48,o=150,l=e*o,s=t*o,a=[],c=[];for(let e=0;e<=n;e++)for(let t=0;t<=n;t++){const c=l+t/n*o,r=s+e/n*o,i=getH(c,r),u=i/CFG.amplitude;a.push(c,i,r),u<-.45?a.push(.04,.1,.42):u<-.18?a.push(.07,.22,.62):u<-.02?a.push(.78,.73,.52):u<.18?a.push(.26,.58,.21):u<.38?a.push(.22,.46,.17):u<.62?a.push(.5,.47,.43):u<.78?a.push(.68,.65,.62):a.push(.92,.94,.97)}for(let e=0;e<n;e++)for(let t=0;t<n;t++){const n=49*e+t,o=n+1,l=n+49,s=l+1;c.push(n,l,o,o,l,s)}const r=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,r),gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(a),gl.STATIC_DRAW);const i=gl.createBuffer();return gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,i),gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(c),gl.STATIC_DRAW),{vbuf:r,ibuf:i,count:c.length}}function delChunk(e){gl.deleteBuffer(e.vbuf),gl.deleteBuffer(e.ibuf)}let lcx=null,lcz=null;function updateChunks(e=!1){const t=Math.floor(camPos[0]/150),n=Math.floor(camPos[2]/150);if(!e&&t===lcx&&n===lcz)return;lcx=t,lcz=n;const o=new Set,l=CFG.radius;for(let e=-l;e<=l;e++)for(let s=-l;s<=l;s++){const l=`${t+e}:${n+s}`;o.add(l),chunks.has(l)||chunks.set(l,buildMesh(t+e,n+s))}for(const[e,t]of chunks)o.has(e)||(delChunk(t),chunks.delete(e))}function buildWater(){const e=8e3,t=.12*-CFG.amplitude,n=[-e,t,-e,.1,.2,.5,e,t,-e,.1,.2,.5,-e,t,e,.1,.2,.5,e,t,e,.1,.2,.5],o=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,o),gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(n),gl.STATIC_DRAW);const l=gl.createBuffer();return gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,l),gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array([0,2,1,1,2,3]),gl.STATIC_DRAW),{vbuf:o,ibuf:l,count:6}}let waterMesh=buildWater();const camPos=new Float32Array([0,60,0]);let yaw=0,pitch=-.3,locked=!1;const keys={};function moveCam(e){const t=Math.cos(yaw),n=Math.sin(yaw),o=Math.cos(pitch),l=-n*o,s=Math.sin(pitch),a=-t*o,c=t,r=-n,i=CFG.speed*e;let u=0,d=0,g=0;(keys.KeyW||keys.KeyZ)&&(u+=l*i,d+=s*i,g+=a*i),keys.KeyS&&(u-=l*i,d-=s*i,g-=a*i),keys.KeyD&&(u+=c*i,g+=r*i),(keys.KeyA||keys.KeyQ)&&(u-=c*i,g-=r*i),CFG.fly&&(keys.Space&&(d+=i),(keys.ShiftLeft||keys.ShiftRight)&&(d-=i)),(u||d||g)&&(camPos[0]+=u,camPos[1]+=d,camPos[2]+=g)}function resize(){const e=vp.clientWidth,t=vp.clientHeight;canvas.width=e,canvas.height=t,gl.viewport(0,0,e,t)}document.addEventListener("keydown",e=>{keys[e.code]=!0}),document.addEventListener("keyup",e=>{keys[e.code]=!1}),document.addEventListener("mousemove",e=>{locked&&(yaw-=.001*e.movementX*CFG.sens,pitch-=.001*e.movementY*CFG.sens,pitch=Math.max(-1.55,Math.min(1.55,pitch)))}),canvas.addEventListener("click",()=>{locked||"none"!==document.getElementById("ov").style.display||canvas.requestPointerLock()}),document.addEventListener("pointerlockchange",()=>{locked=document.pointerLockElement===canvas,document.getElementById("xh").style.display=locked?"block":"none",document.getElementById("esc").style.display=locked?"block":"none"}),resize(),window.addEventListener("resize",resize);const proj=mat4(),view=mat4(),mvp=mat4(),STRIDE=24;function drawMesh(e){gl.bindBuffer(gl.ARRAY_BUFFER,e.vbuf),gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,e.ibuf),gl.vertexAttribPointer(aPos,3,gl.FLOAT,!1,24,0),gl.enableVertexAttribArray(aPos),gl.vertexAttribPointer(aCol,3,gl.FLOAT,!1,24,12),gl.enableVertexAttribArray(aCol),gl.drawElements(gl.TRIANGLES,e.count,gl.UNSIGNED_SHORT,0)}let last=performance.now(),fc=0,ft=0,fps=0,lastBio="";function updateStats(e){fc++,ft+=e,ft>=.5&&(fps=Math.round(fc/ft),fc=0,ft=0,document.getElementById("s-fps").textContent=fps),document.getElementById("s-pos").textContent=`${camPos[0].toFixed(0)} / ${camPos[2].toFixed(0)}`,document.getElementById("s-alt").textContent=camPos[1].toFixed(1)+" m",document.getElementById("s-ch").textContent=chunks.size;const t=getBiome(getH(camPos[0],camPos[2])/CFG.amplitude);t!==lastBio&&(lastBio=t,document.getElementById("bio").textContent=t)}const sy=Math.cos(yaw),cy2=Math.sin(yaw);function rebuildWater(){gl.deleteBuffer(waterMesh.vbuf),gl.deleteBuffer(waterMesh.ibuf),waterMesh=buildWater()}function clearChunks(){for(const[,e]of chunks)delChunk(e);chunks.clear(),lcx=null,lcz=null}function track(e){const t=(+e.value-+e.min)/(+e.max-+e.min)*100;e.style.background=`linear-gradient(to right,var(--g) ${t}%,var(--b) ${t}%)`}function sl(e,t,n,o){const l=document.getElementById(e),s=t?document.getElementById(t):null;l.addEventListener("input",()=>{const e=n(+l.value);s&&(s.textContent=e),track(l),o(e)}),track(l)}function tog(e,t,n){const o=document.getElementById(e);t&&o.classList.add("on"),o.addEventListener("click",()=>{o.classList.toggle("on"),n(o.classList.contains("on"))})}!function e(){requestAnimationFrame(e);const t=performance.now(),n=Math.min((t-last)/1e3,.05);last=t,"none"===document.getElementById("ov").style.display&&(moveCam(n),updateChunks()),updateStats(n),gl.clearColor(.55,.78,.91,1),gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT),perspective(proj,1.26,canvas.width/canvas.height,.5,3e3);const o=Math.cos(pitch),l=Math.sin(pitch),s=Math.sin(yaw),a=Math.cos(yaw),c=camPos[0]-s*o,r=camPos[1]+l,i=camPos[2]-a*o;lookAt(view,camPos[0],camPos[1],camPos[2],c,r,i,0,1,0),multiply(mvp,proj,view),gl.uniformMatrix4fv(uMVP,!1,mvp);for(const[,e]of chunks)drawMesh(e);gl.enable(gl.BLEND),gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA),drawMesh(waterMesh),gl.disable(gl.BLEND)}(),sl("c-sc","v-sc",e=>SCALES[e-1].toFixed(4),e=>{CFG.scale=+e,clearChunks()}),sl("c-oc","v-oc",e=>e,e=>{CFG.octaves=+e,clearChunks()}),sl("c-pe","v-pe",e=>(e/10).toFixed(2),e=>{CFG.persistence=+e,clearChunks()}),sl("c-la","v-la",e=>(e/10).toFixed(2),e=>{CFG.lacunarity=+e,clearChunks()}),sl("c-am","v-am",e=>e,e=>{CFG.amplitude=+e,clearChunks(),rebuildWater()}),sl("c-sp","v-sp",e=>e,e=>{CFG.speed=+e}),sl("c-se","v-se",e=>(e/5).toFixed(1),e=>{CFG.sens=+e}),sl("c-rd","v-rd",e=>e,e=>{CFG.radius=+e}),tog("t-fly",!0,e=>{CFG.fly=e}),document.getElementById("btn-regen").addEventListener("click",()=>{CFG.seed=+document.getElementById("c-seed").value,noise=new Noise(CFG.seed),clearChunks();const e=getH(0,0);camPos[0]=0,camPos[1]=e+45,camPos[2]=0,yaw=0,pitch=-.25}),document.getElementById("btn-tp").addEventListener("click",()=>{const e=getH(0,0);camPos[0]=0,camPos[1]=e+45,camPos[2]=0,lcx=null,lcz=null}),document.getElementById("sb").addEventListener("click",()=>{const e=getH(0,0);camPos[1]=e+45,document.getElementById("ov").style.display="none",canvas.requestPointerLock(),updateChunks(!0)});</script>
+</body>
+</html>
