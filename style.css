@@ -1122,3 +1122,32 @@ projects {
   border: none;
   display: block;
 }
+
+overlay {
+  border-radius: 16px;
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #ffffff transparent;
+}
+
+/* Chrome / Edge / Safari */
+overlay::-webkit-scrollbar {
+  width: 6px;
+}
+
+overlay::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 12px; /* ← crée un espace en haut/bas pour simuler l'arrondi */
+  border-radius: 99px;
+}
+
+overlay::-webkit-scrollbar-thumb {
+  background: #ffffff; /* ta couleur cyan */
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
