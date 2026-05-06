@@ -137,16 +137,17 @@ function reorderDivChildren(div) {
 
 async function openProjects(file) {
   try {
+    // Vide le contenu avant de charger le nouveau (stoppe les iframes précédentes)
+    document.querySelector("project-page content").innerHTML = "";
+
     const res = await fetch(file);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const html = await res.text();
-
     document.querySelector("project-page content").innerHTML = html;
     document.querySelector("project-page").classList.remove("hide");
     document.body.classList.add("no-scroll");
 
-    // Vérification mobile après injection du contenu
     const isMobileLike =
       window.matchMedia("(max-width: 900px)").matches &&
       window.matchMedia("(pointer: coarse)").matches;
@@ -154,8 +155,7 @@ async function openProjects(file) {
     if (isMobileLike) {
       const iframe = document.querySelector("project-page content iframe");
       const mobileMsg = document.getElementById("mobile-message");
-
-      if (iframe) iframe.style.display = "none";
+      if (iframe) iframe.removeAttribute("src");
       if (mobileMsg) mobileMsg.style.display = "block";
     }
 
@@ -170,6 +170,10 @@ function projectPage() {
     let projectPage = leave.closest("project-page");
     projectPage.classList.add("hide");
     document.body.classList.remove("no-scroll");
+
+    // Coupe l'iframe pour libérer le contexte WebGL
+    const iframe = document.querySelector("project-page content iframe");
+    if (iframe) iframe.removeAttribute("src");
   });
 }
 
