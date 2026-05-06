@@ -137,18 +137,28 @@ function reorderDivChildren(div) {
 
 async function openProjects(file) {
   try {
-    const res = await fetch(file); // GET ./projects/whereareyou.html
+    const res = await fetch(file);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-    const html = await res.text(); // Contenu brut du fichier
-    // console.log(html);                     // → chaîne de caractères
+    const html = await res.text();
 
-    // Exemple : l’injecter dans le DOM
     document.querySelector("project-page content").innerHTML = html;
     document.querySelector("project-page").classList.remove("hide");
     document.body.classList.add("no-scroll");
-    // Exemple : le transformer en DOM complet
-    // const doc = new DOMParser().parseFromString(html, "text/html");
+
+    // Vérification mobile après injection du contenu
+    const isMobileLike =
+      window.matchMedia("(max-width: 900px)").matches &&
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (isMobileLike) {
+      const iframe = document.querySelector("project-page content iframe");
+      const mobileMsg = document.getElementById("mobile-message");
+
+      if (iframe) iframe.style.display = "none";
+      if (mobileMsg) mobileMsg.style.display = "block";
+    }
+
   } catch (err) {
     console.error("Impossible de charger le fichier :", err);
   }
@@ -184,12 +194,3 @@ function closeCVModal() {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") closeCVModal();
 });
-
-const isMobileLike =
-  window.matchMedia("(max-width: 900px)").matches &&
-  window.matchMedia("(pointer: coarse)").matches;
-
-if (isMobileLike) {
-  document.getElementById("terrain-container").style.display = "none";
-  document.getElementById("mobile-message").style.display = "block";
-}
