@@ -155,10 +155,14 @@ async function openProjects(file) {
     if (isMobileLike) {
       const iframe = document.querySelector("project-page content iframe");
       const mobileMsg = document.getElementById("mobile-message");
-      if (iframe) iframe.removeAttribute("src");
+      
+      if (iframe) {
+        iframe.style.display = "none";
+        iframe.removeAttribute("src");
+      }
+
       if (mobileMsg) mobileMsg.style.display = "block";
     }
-
   } catch (err) {
     console.error("Impossible de charger le fichier :", err);
   }
