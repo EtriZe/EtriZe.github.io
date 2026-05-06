@@ -96,14 +96,3 @@
         Ainsi que l'importance de la gestion mémoire pour éviter les memory leaks ...
     </p>
 </section>
-
-<script>
-    const isMobileLike =
-        window.matchMedia("(max-width: 900px)").matches &&
-        window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobileLike) {
-        document.getElementById("terrain-container").style.display = "none";
-        document.getElementById("mobile-message").style.display = "block";
-    }
-</script>
