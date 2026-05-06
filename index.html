@@ -394,5 +394,14 @@
     </iframe>
   </div>
 </div>
+
+<script src="ball.js"></script>
+<script>
+  const H = window.innerHeight;
+
+  BALL_ADD_SURFACE(300, H,       550, H - 130);  // rampe montante
+  BALL_ADD_SURFACE(550, H - 130, 800, H - 130);  // plateforme
+  BALL_ADD_SURFACE(800, H - 130, 800, H);        // mur qui redescend
+</script>
 </body>
 </html>
