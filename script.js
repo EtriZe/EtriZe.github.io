@@ -152,16 +152,15 @@ async function openProjects(file) {
       window.matchMedia("(max-width: 900px)").matches &&
       window.matchMedia("(pointer: coarse)").matches;
 
-    if (isMobileLike) {
-      const iframe = document.querySelector("project-page content iframe");
-      const mobileMsg = document.getElementById("mobile-message");
       
-      if (iframe) {
-        iframe.style.display = "none";
-        iframe.removeAttribute("src");
+    if (isMobileLike) {
+      const gameWrapper = document.querySelector("project-page content .game-wrapper");
+      const mobileMsg = document.getElementById("mobile-message");
+      if (gameWrapper) {
+        gameWrapper.remove();
+        if (mobileMsg) mobileMsg.style.display = "block";
       }
 
-      if (mobileMsg) mobileMsg.style.display = "block";
     }
   } catch (err) {
     console.error("Impossible de charger le fichier :", err);

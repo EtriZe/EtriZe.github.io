@@ -1151,3 +1151,9 @@ overlay::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+#mobile-message {
+  display: block;
+  text-align: center;
+  color: #a8a8a8;
+}
