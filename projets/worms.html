@@ -1,2 +1,108 @@
 <title>Worms</title>
-<div>Work in progress </div>
+
+<section>
+    <h2>Résumé</h2>
+    <p>
+        Jeu de combat au tour par tour inspiré de Worms, développé en C++ avec SFML. Deux dragons
+        s'affrontent en tirant des boules de feu dans un environnement avec physique, gravité et vent
+        aléatoire. Le projet repose sur un moteur de jeu maison comprenant un ECS, un moteur physique
+        et un système de scènes.
+    </p>
+</section>
+
+<section>
+    <h2>Mon rôle</h2>
+    <p>
+        Conception et développement du moteur et de la logique de jeu complète : architecture ECS,
+        physique et détection de collisions, armes, gestion des tours, UI et système de scènes.
+        La gestion des inputs clavier a été réalisée par un autre membre de l'équipe.
+    </p>
+</section>
+
+<section>
+    <h2>Ce que j'ai développé</h2>
+    <ul>
+        <li>
+            Architecture ECS (Entity Component System) from scratch : système de composants typés
+            via des IDs uniques générés statiquement, stockés dans un <code>ComponentArray</code>
+            et un <code>ComponentBitset</code> pour une récupération O(1) et une vérification
+            de présence rapide.
+        </li>
+        <li>
+            Moteur physique avec gravité, vélocité, et résolution de collisions par impulsion :
+            calcul de la masse inverse, coefficient de restitution et séparation des corps en
+            pénétration.
+        </li>
+        <li>
+            Détection de collisions multi-formes par la méthode SAT (Séparation des Axes) :
+            boîte vs boîte, sphère vs polygone et sphère vs sphère, avec support de tuiles
+            triangulaires pour les pentes de la map.
+        </li>
+        <li>
+            Système d'armes à deux modes : boule de feu normale et boule de feu fragmentée
+            qui se divise en 8 projectiles après un délai de 2 secondes, chacun avec sa propre
+            physique et ses propres collisions.
+        </li>
+        <li>
+            Direction de tir calculée dynamiquement via la position de la souris par rapport
+            au dragon, avec prise en compte d'une force de vent aléatoire appliquée à la
+            vélocité initiale du projectile.
+        </li>
+        <li>
+            Gestionnaire de tours avec minuterie de 20 secondes, alternance des joueurs,
+            régénération aléatoire du vent (–3 à +3) et indicateur visuel de direction de
+            visée affiché uniquement pour le joueur actif.
+        </li>
+        <li>
+            Système de scènes (menu principal, partie en jeu) avec chargement dynamique,
+            menu pause et écran de fin de partie.
+        </li>
+        <li>
+            Système UI et MenuManager : création de textes, zones et boutons cliquables avec
+            callbacks lambdas, support de la remappage des touches et contrôle du volume en
+            jeu.
+        </li>
+        <li>
+            AssetManager singleton gérant le chargement centralisé des textures, polices,
+            musiques et images, avec lecture de la carte depuis un tableau de caractères
+            ASCII pour placer les tuiles de terrain et les murs invisibles.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Défis techniques</h2>
+    <ul>
+        <li>
+            Implémenter le SAT pour des formes hétérogènes (boîte, triangle, sphère) en gérant
+            correctement la normale de collision et le sens de séparation selon quel objet est
+            statique ou non.
+        </li>
+        <li>
+            Orchestrer le cycle de vie des entités (ajout, suppression, explosion, fragmentation)
+            sans invalider les itérateurs lors de l'update, en travaillant sur une copie du
+            vecteur d'entités à chaque frame.
+        </li>
+        <li>
+            Concevoir un ECS générique en C++ sans RTTI ni héritage dynamique lourd, en
+            s'appuyant sur des IDs de composants générés à la compilation via des fonctions
+            template statiques.
+        </li>
+        <li>
+            Synchroniser la fin de tour avec la destruction du projectile : la <code>Fireball</code>
+            déclenche un callback vers <code>Dragon::endTurn()</code> depuis son destructeur,
+            ce qui nécessite de maîtriser précisément le moment de la destruction de l'entité.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Ce que j'ai appris</h2>
+    <p>
+        Ce projet m'a permis de concevoir un moteur de jeu C++ de zéro et de comprendre en
+        profondeur les patterns ECS, la détection de collisions géométriques, et la résolution
+        physique par impulsion. C'est aussi une première expérience concrète de collaboration
+        sur un projet C++ avec une séparation claire des responsabilités entre moteur, logique
+        de jeu et gestion des entrées.
+    </p>
+</section>

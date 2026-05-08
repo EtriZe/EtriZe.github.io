@@ -1,0 +1,106 @@
+<style>
+    h2 {
+        color: var(--text-primary);
+        text-decoration: underline;
+    }
+
+    iframe {
+        border-radius: 15px;
+    }
+
+    #mobile-message {
+        display: none;
+        text-align: center;
+    }
+</style>
+
+<title>Sokoban</title>
+
+
+<div class="game-wrapper">
+  <iframe src="./projets/sokoban/game/index.html" width="960" height="600" frameborder="0" allowfullscreen
+    loading="lazy" title="Sokoban - WebGL">
+  </iframe>
+</div>
+
+<p id="mobile-message">
+    [Projet jouable disponible sur la version PC du site]
+</p>
+
+<section>
+    <h2>Résumé</h2>
+    <p>
+        Jeu de Sokoban 3D développé avec Unity et C# pour continuer l'apprentissage du moteur.
+        Le joueur pousse des blocs sur des cases cibles pour résoudre le puzzle, avec la possibilité
+        d'annuler son dernier coup.
+    </p>
+</section>
+
+<section>
+    <h2>Mon rôle</h2>
+    <p>
+        Conception et développement complet du projet : déplacement du personnage, logique de poussée
+        des blocs, détection de victoire et système d'annulation de coup.
+    </p>
+</section>
+
+<section>
+    <h2>Ce que j'ai développé</h2>
+    <ul>
+        <li>
+            Déplacement du personnage en 3D via <code>CharacterController</code> avec animations
+            idle/marche pilotées par un <code>Animator</code>, et orientation automatique du modèle
+            dans la direction du mouvement.
+        </li>
+        <li>
+            Système de poussée de blocs : détection de collision entre le joueur et un bloc
+            poussable, inférence de la direction de poussée par comparaison de positions,
+            et déplacement animé du bloc par interpolation frame-by-frame avec un cooldown
+            pour éviter les doubles poussées.
+        </li>
+        <li>
+            Détection de collision dans les quatre directions via Raycasts pour bloquer
+            le mouvement d'un bloc lorsqu'un obstacle est présent.
+        </li>
+        <li>
+            Vérification de victoire par Raycast vers le bas depuis chaque bloc pour détecter
+            si celui-ci repose sur une case cible (<code>WinPoint</code>), avec un système
+            de suivi par instance ID pour savoir quels blocs sont bien placés.
+        </li>
+        <li>
+            Fonctionnalité Undo : sauvegarde des positions de tous les blocs et du personnage
+            avant chaque coup, permettant de revenir à l'état précédent en un clic.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Défis techniques</h2>
+    <ul>
+        <li>
+            Gérer la synchronisation entre le déplacement interpolé du bloc et la détection
+            de victoire, en s'assurant que le Raycast n'est lancé qu'une fois le bloc
+            effectivement posé sur sa case (via une Coroutine chronométrée).
+        </li>
+        <li>
+            Suivre l'état de chaque bloc individuellement pour la condition de victoire sans
+            identifiant Unity stable, en s'appuyant sur les <code>GetInstanceID()</code>
+            et une liste de listes gérée manuellement.
+        </li>
+        <li>
+            Téléporter le personnage en arrière sans déclencher les collisions du
+            <code>CharacterController</code>, ce qui nécessite de le désactiver et
+            le réactiver autour du repositionnement.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Ce que j'ai appris</h2>
+    <p>
+        Ce projet m'a permis d'approfondir l'utilisation des Raycasts pour la détection spatiale,
+        de manipuler le <code>CharacterController</code> et les Coroutines pour orchestrer des
+        actions dans le temps. C'est aussi une première approche de la gestion d'état de jeu plus
+        complexe, avec un suivi par instance et une logique de victoire multi-conditions.
+    </p>
+</section>
