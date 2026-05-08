@@ -14,27 +14,34 @@ window.addEventListener("load", (event) => {
   projectPage();
 });
 
+function isMobile() {
+  return (
+    window.matchMedia("(max-width: 900px)").matches &&
+    window.matchMedia("(pointer: coarse)").matches
+  );
+}
 
 function hoverProjects() {
   let projects = document.querySelectorAll(".projectCard");
 
   Array.prototype.forEach.call(projects, function (project) {
-    project.addEventListener("mouseover", (event) => {
-      document.querySelector(".more").style.display = "block";
-    });
+    if (!isMobile()) {
+      project.addEventListener("mouseover", (event) => {
+        document.querySelector(".more").style.display = "block";
+      });
 
-    project.addEventListener("mouseout", (event) => {
-      document.querySelector(".more").style.display = "none";
-    });
+      project.addEventListener("mouseout", (event) => {
+        document.querySelector(".more").style.display = "none";
+      });
 
-    let tooltip = document.querySelector(".more");
+      let tooltip = document.querySelector(".more");
 
-    project.addEventListener("mousemove", (e) => {
-      tooltip.style.display = "block";
-      tooltip.style.left = e.clientX + 10 + "px";
-      tooltip.style.top = e.clientY + 10 + "px";
-    });
-
+      project.addEventListener("mousemove", (e) => {
+        tooltip.style.display = "block";
+        tooltip.style.left = e.clientX + 10 + "px";
+        tooltip.style.top = e.clientY + 10 + "px";
+      });
+    }
     project.addEventListener("click", (e) => {
       openProjects(project.getAttribute("file"));
     });
@@ -149,11 +156,7 @@ async function openProjects(file) {
     document.querySelector("project-page").classList.remove("hide");
     document.body.classList.add("no-scroll");
 
-    const isMobileLike =
-      window.matchMedia("(max-width: 900px)").matches &&
-      window.matchMedia("(pointer: coarse)").matches;
-
-    if (isMobileLike) {
+    if (isMobile()) {
       const gameWrapper = document.querySelector(
         "project-page content .game-wrapper",
       );

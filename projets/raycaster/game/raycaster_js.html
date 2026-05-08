@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raycaster — Rasterize</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #c8c8c8;
+    user-select: none;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  #topbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-bottom: none;
+    display:none;
+  }
+
+  #topbar .title {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  #fps-display {
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 1px;
+  }
+
+  canvas {
+    display: block;
+    border: 1px solid #2a2a2a;
+    image-rendering: pixelated;
+  }
+
+  #controls {
+    width: 100%;
+    background: #0e0e0e;
+    border: 1px solid #2a2a2a;
+    border-top: 1px solid #1a1a1a;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+    display:none;
+  }
+
+  #controls span { color: #666; }
+  #controls kbd {
+    display: inline-block;
+    background: #1c1c1c;
+    border: 1px solid #333;
+    border-bottom: 2px solid #222;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-size: 10px;
+    color: #777;
+    font-family: inherit;
+  }
+
+  #minimap-container {
+    position: relative;
+  }
+
+  #minimap {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0.75;
+    border: 1px solid #333;
+  }
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="topbar">
+    <span class="title">Raycaster</span>
+    <span id="fps-display">-- FPS</span>
+  </div>
+  <div id="minimap-container">
+    <canvas id="canvas"></canvas>
+    <canvas id="minimap" width="96" height="96"></canvas>
+  </div>
+  <div id="controls">
+    <span><kbd>↑</kbd><kbd>↓</kbd> Avancer / Reculer</span>
+    <span><kbd>←</kbd><kbd>→</kbd> Tourner</span>
+    <span>WASD aussi supporté</span>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// RASTERIZE — Raycaster fidèle au projet C++/SFML EtriZe
+// ============================================================
+
+const MAP_W = 24, MAP_H = 24;
+
+// Exactement la même carte que g_worldMap dans Main.cpp
+const worldMap = [
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1],
+  [1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1],
+  [1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+];
+
+// Mêmes couleurs que dans switch(g_worldMap[mapX][mapY]) du Main.cpp
+// side==1 → couleur divisée par 2 (même logique)
+function getWallColor(type, side) {
+  let r, g, b;
+  switch(type) {
+    case 1:  r=255; g=0;   b=0;   break; // Red
+    case 2:  r=0;   g=255; b=0;   break; // Green
+    case 3:  r=0;   g=0;   b=255; break; // Blue
+    case 4:  r=255; g=255; b=255; break; // White
+    case 5:  r=255; g=0;   b=255; break; // Magenta
+    default: r=255; g=255; b=0;   break; // Yellow
+  }
+  if (side === 1) { r >>= 1; g >>= 1; b >>= 1; }
+  return [r, g, b];
+}
+
+// Canvas principal
+const canvas = document.getElementById('canvas');
+const W = 800, H = 480;
+canvas.width  = W;
+canvas.height = H;
+const ctx = canvas.getContext('2d');
+const imgData = ctx.createImageData(W, H);
+const px = imgData.data;
+
+// Minimap
+const mm = document.getElementById('minimap');
+const mctx = mm.getContext('2d');
+const CELL = mm.width / MAP_W; // ~4px per cell
+
+// Camera — position et direction initiales identiques au Main.cpp
+let camX = 22, camY = 12;
+let dirX = -1,  dirY = 0;
+
+// Camera plane (perpendiculaire à dirX/dirY, magnitude 0.66 = ~66° FOV)
+// Perpendicular(dir) = (dir.y, -dir.x) dans le code C++
+let planeX = dirY * 0.66;   // = 0
+let planeY = -dirX * 0.66;  // = 0.66
+
+const ROT_SPEED  = 45 * Math.PI / 180; // degrés/s → rad/s
+const MOVE_SPEED = 2.5;                 // légèrement plus rapide qu'en C++ pour compenser le framerate web
+
+// Inputs
+const keys = {};
+window.addEventListener('keydown', e => { keys[e.code] = true;  e.preventDefault(); });
+window.addEventListener('keyup',   e => { keys[e.code] = false; });
+
+function setPixel(x, y, r, g, b) {
+  const i = (y * W + x) << 2;
+  px[i]   = r;
+  px[i+1] = g;
+  px[i+2] = b;
+  px[i+3] = 255;
+}
+
+function drawVerticalLine(x, y1, y2, r, g, b) {
+  for (let y = y1; y < y2; y++) setPixel(x, y, r, g, b);
+}
+
+function rasterizeScene() {
+  for (let x = 0; x < W; x++) {
+    // cameraX : de -1 (gauche) à 1 (droite)
+    const cameraX = (2 * x / W) - 1;
+
+    // Direction du rayon = dirCamera + plan * cameraX
+    let rayDirX = dirX + planeX * cameraX;
+    let rayDirY = dirY + planeY * cameraX;
+
+    // Cellule de départ
+    let mapX = Math.floor(camX);
+    let mapY = Math.floor(camY);
+
+    // Longueur de rayon pour traverser une case entière en X ou Y
+    const deltaDistX = rayDirX === 0 ? 1e30 : Math.abs(1 / rayDirX);
+    const deltaDistY = rayDirY === 0 ? 1e30 : Math.abs(1 / rayDirY);
+
+    let sideDistX, sideDistY, stepX, stepY;
+
+    if (rayDirX < 0) {
+      stepX = -1;
+      sideDistX = (camX - mapX) * deltaDistX;
+    } else {
+      stepX = 1;
+      sideDistX = (mapX + 1 - camX) * deltaDistX;
+    }
+    if (rayDirY < 0) {
+      stepY = -1;
+      sideDistY = (camY - mapY) * deltaDistY;
+    } else {
+      stepY = 1;
+      sideDistY = (mapY + 1 - camY) * deltaDistY;
+    }
+
+    // DDA — avancer jusqu'au mur
+    let hit = 0, side = 0;
+    while (!hit) {
+      if (sideDistX < sideDistY) {
+        sideDistX += deltaDistX;
+        mapX += stepX;
+        side = 0;
+      } else {
+        sideDistY += deltaDistY;
+        mapY += stepY;
+        side = 1;
+      }
+      if (mapX >= 0 && mapX < MAP_W && mapY >= 0 && mapY < MAP_H && worldMap[mapX][mapY] > 0) {
+        hit = 1;
+      }
+    }
+
+    // Distance perpendiculaire au plan de la caméra (évite le fisheye)
+    const perpWallDist = side === 0 ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);
+
+    // Hauteur de la colonne à dessiner
+    const lineHeight = Math.floor(H / perpWallDist);
+    let drawStart = Math.max(0,   Math.floor(-lineHeight / 2 + H / 2));
+    let drawEnd   = Math.min(H-1, Math.floor( lineHeight / 2 + H / 2));
+
+    const [r, g, b] = getWallColor(worldMap[mapX][mapY], side);
+    drawVerticalLine(x, drawStart, drawEnd + 1, r, g, b);
+  }
+}
+
+function drawMinimap() {
+  mctx.fillStyle = 'rgba(0,0,0,0.85)';
+  mctx.fillRect(0, 0, mm.width, mm.height);
+
+  for (let mx = 0; mx < MAP_W; mx++) {
+    for (let my = 0; my < MAP_H; my++) {
+      const v = worldMap[mx][my];
+      if (v > 0) {
+        switch(v) {
+          case 1: mctx.fillStyle='#662200'; break;
+          case 2: mctx.fillStyle='#006600'; break;
+          case 3: mctx.fillStyle='#000066'; break;
+          case 4: mctx.fillStyle='#555555'; break;
+          case 5: mctx.fillStyle='#660066'; break;
+          default: mctx.fillStyle='#666600';
+        }
+        mctx.fillRect(mx * CELL, my * CELL, CELL, CELL);
+      }
+    }
+  }
+
+  // Joueur
+  mctx.fillStyle = '#fff';
+  mctx.fillRect(camX * CELL - 1, camY * CELL - 1, 2.5, 2.5);
+
+  // Direction
+  mctx.strokeStyle = '#fff';
+  mctx.lineWidth = 0.8;
+  mctx.beginPath();
+  mctx.moveTo(camX * CELL, camY * CELL);
+  mctx.lineTo((camX + dirX * 2) * CELL, (camY + dirY * 2) * CELL);
+  mctx.stroke();
+}
+
+let lastTs = null;
+let frameTimes = [];
+
+function loop(ts) {
+  if (!lastTs) lastTs = ts;
+  const dt = Math.min((ts - lastTs) / 1000, 0.1);
+  lastTs = ts;
+
+  // FPS counter
+  frameTimes.push(dt);
+  if (frameTimes.length > 30) frameTimes.shift();
+  const avgDt = frameTimes.reduce((a,b) => a+b, 0) / frameTimes.length;
+  document.getElementById('fps-display').textContent = Math.round(1 / avgDt) + ' FPS';
+
+  // --- Inputs (mêmes que GetCameraMovementFromInput dans Main.cpp) ---
+  let rotSign = 0;
+  if (keys['ArrowLeft']  || keys['KeyA']) rotSign =  1;
+  if (keys['ArrowRight'] || keys['KeyD']) rotSign = -1;
+
+  let moveSign = 0;
+  if (keys['ArrowUp']   || keys['KeyW']) moveSign =  1;
+  if (keys['ArrowDown'] || keys['KeyS']) moveSign = -1;
+
+  // Rotation (équivalent à SFML RotateVector + Normalize)
+  if (rotSign !== 0) {
+    const angle = rotSign * ROT_SPEED * dt;
+    const cos = Math.cos(angle), sin = Math.sin(angle);
+    const newDirX   = dirX   * cos - dirY   * sin;
+    const newDirY   = dirX   * sin + dirY   * cos;
+    const newPlaneX = planeX * cos - planeY * sin;
+    const newPlaneY = planeX * sin + planeY * cos;
+    dirX   = newDirX;   dirY   = newDirY;
+    planeX = newPlaneX; planeY = newPlaneY;
+  }
+
+  // Mouvement (avec collision simple)
+  if (moveSign !== 0) {
+    const nx = camX + dirX * moveSign * MOVE_SPEED * dt;
+    const ny = camY + dirY * moveSign * MOVE_SPEED * dt;
+    if (worldMap[Math.floor(nx)][Math.floor(camY)] === 0) camX = nx;
+    if (worldMap[Math.floor(camX)][Math.floor(ny)] === 0) camY = ny;
+    camX = Math.max(0.5, Math.min(MAP_W - 0.5, camX));
+    camY = Math.max(0.5, Math.min(MAP_H - 0.5, camY));
+  }
+
+  // --- Rendu ---
+  // Clear noir (drawRect + sf::Color::Black dans le C++)
+  px.fill(0);
+  for (let i = 3; i < px.length; i += 4) px[i] = 255;
+
+  rasterizeScene();
+  ctx.putImageData(imgData, 0, 0);
+
+  drawMinimap();
+
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
