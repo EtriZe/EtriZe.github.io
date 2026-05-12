@@ -20,3 +20,75 @@
 </info> 
 <div>Work in progress </div>
 
+
+<section>
+    <h2>Résumé</h2>
+    <p>
+        Projet de mastère 2 de développement d'un jeu vidéo multijoueur en coopération à 2 joueurs sous Unreal Engine 4 et C++.
+        Le joueur incarne un personnage armé d'un gun aux pouvoirs physiques : rétrécir ou agrandir des objets et
+        des joueurs, et copier-coller des éléments du décor pour résoudre des puzzles en équipe.
+    </p>
+</section>
+
+<section>
+    <h2>Mon rôle</h2>
+    <p>
+        Conception et développement de l'architecture réseau multijoueur, intégration Steam et gestion des sessions en ligne.
+    </p>
+</section>
+
+<section>
+    <h2>Ce que j'ai développé</h2>
+    <ul>
+        <li>
+            Système de gun avec deux modes de pouvoir distincts : manipulation d'échelle (rétrécissement et
+            agrandissement) applicable aux objets du décor comme aux autres joueurs, et duplication d'objets
+            par copier-coller dans l'environnement.
+        </li>
+        <li>
+            Architecture multijoueur reposant sur le modèle client-serveur d'Unreal Engine, avec
+            réplication des états de jeu via le ReplicationGraph pour gérer efficacement un grand nombre
+            d'acteurs en réseau.
+        </li>
+        <li>
+            Intégration de Steam via OnlineSubsystemSteam et les plugins AdvancedSessions pour la création,
+            la recherche et la gestion des sessions multijoueur.
+        </li>
+        <li>
+            Connexion via Epic Online Services (EOS) en complément de Steam pour assurer la compatibilité
+            cross-plateforme des fonctionnalités en ligne.
+        </li>
+        <li>
+            Conception des puzzles exploitant les interactions entre les pouvoirs du gun et la physique des
+            objets, pour créer des situations de coopération nécessitant une coordination entre joueurs.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Défis techniques</h2>
+    <ul>
+        <li>
+            Synchroniser correctement les transformations d'échelle et les duplications d'objets entre les
+            clients sans désynchronisation ni artefacts visuels.
+        </li>
+        <li>
+            Gérer la cohérence physique des objets redimensionnés côté serveur tout en maintenant une
+            expérience fluide côté client.
+        </li>
+        <li>
+            Mettre en place un pipeline de sessions Steam fonctionnel et robuste, de la création d'un lobby
+            jusqu'à la connexion en jeu.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Ce que j'ai appris</h2>
+    <p>
+        Ce projet m'a permis de plonger dans le développement réseau sous Unreal Engine, notamment la
+        réplication d'acteurs, la logique serveur-client et l'intégration de services en ligne comme Steam
+        et EOS. Il m'a aussi confronté aux défis propres à la synchronisation d'interactions physiques dans
+        un contexte multijoueur, et à l'importance d'une architecture réseau pensée dès le début du projet.
+    </p>
+</section>
