@@ -14,4 +14,129 @@
     }
 </style>
 <title>NetPong Projet</title>
-<div>Work in progress </div>
+
+<section>
+    <h2>Résumé</h2>
+    <p>
+        Jeu de Pong en réseau 1v1 développé en C++ avec SFML dans le cadre du cours de
+        Programmation Moteur à Ynov Campus. Deux joueurs s'affrontent en vaisseaux dans
+        une arène : les tirs directs sont inoffensifs, chaque joueur doit faire ricocher
+        ses projectiles sur les murs du terrain polygonal pour activer leur capacité létale
+        et atteindre l'adversaire. Le projet repose sur un moteur maison (<code>PoPossibEngin</code>)
+        comprenant un système réseau client-serveur, un moteur de scènes, et une architecture
+        multi-threadée rendu/logique/réseau.
+    </p>
+</section>
+
+<section>
+    <h2>Mon rôle</h2>
+    <p>
+        Conception et développement intégral du projet : moteur de jeu, architecture réseau
+        client-serveur, physique des projectiles, terrain polygonal procédural, système de
+        synchronisation des objets, logique de jeu et UI.
+    </p>
+</section>
+
+<section>
+    <h2>Ce que j'ai développé</h2>
+    <ul>
+        <li>
+            Moteur de jeu maison (<code>PoPossibEngin</code>) avec architecture multi-threadée :
+            thread de rendu, thread de logique et thread serveur indépendants, synchronisés
+            par mutex, avec boucle de jeu, gestion du deltaTime et système de scènes
+            (<code>MainMenuScene</code>, <code>MainGameScene</code>).
+        </li>
+        <li>
+            Architecture réseau client-serveur via SFML Network (TCP) : le serveur tourne
+            à 10ms/tick dans son propre thread, sérialise l'état de la scène entière en
+            <code>sf::Packet</code> et le diffuse à tous les clients via un système
+            d'événements (<code>SocketEvents</code>) et un <code>EventEmitter</code>
+            à base de lambdas et de callbacks typés.
+        </li>
+        <li>
+            Système de <code>SyncableObject</code> : chaque entité réseau (vaisseau,
+            PongBall) possède un ID, un type et un contrôle (<code>Local</code> ou
+            <code>Remote</code>). Le serveur appelle <code>sync()</code> pour sérialiser
+            et <code>applySync()</code> pour désérialiser les états, permettant une
+            séparation claire entre objets autoritaires et objets interpolés côté client.
+        </li>
+        <li>
+            Physique des projectiles avec détection de collision sous-frameique :
+            <code>linePongBallCollision</code> calcule l'intersection entre le segment
+            parcouru par la balle et chaque arête du terrain, avec un <code>remainingTime</code>
+            pour éviter le tunneling à haute vitesse, puis reflète le vecteur vitesse
+            selon la normale de l'arête.
+        </li>
+        <li>
+            Mécanique de létalité par rebond : chaque balle possède un flag <code>_canKill</code>
+            et un compteur <code>_currentNumBounces</code> ; un tir direct est inoffensif,
+            la balle ne devient létale qu'après avoir ricoché sur un mur — en accord avec
+            le design de jeu. Au-delà d'un seuil de rebonds, un effet visuel
+            <code>PhantomBallEffect</code> (traînée de <code>PhantomBall</code>) s'active
+            pour signaler l'état de la balle.
+        </li>
+        <li>
+            Terrain polygonal procédural (<code>PolygonTerrain</code>) : 10 layouts
+            distincts construits par un système de points orientés (direction + angle en
+            degrés + distance) via un <code>sf::ConvexShape</code>, avec sélection aléatoire
+            à chaque partie. La collision joueur/terrain et balle/terrain est gérée
+            arête par arête.
+        </li>
+        <li>
+            Système de contrôleurs séparé : <code>LocalCharacterController</code> pour
+            le joueur local (inputs clavier/souris, calcul de la direction de tir par
+            rapport à la position de la souris), <code>NetworkCharacterController</code>
+            et <code>NetworkPongBallController</code> pour les entités distantes
+            (application des états reçus du serveur).
+        </li>
+        <li>
+            Gestion de partie complète via <code>GameManager</code> : comptage des scores,
+            logique de rounds avec timer de démarrage (<code>RoundStartCountdown</code>),
+            condition de victoire, reset de partie, et UI en jeu (<code>GameUI</code>).
+        </li>
+        <li>
+            Systèmes support : <code>AudioPlayer</code> pour les sons (rebond, tir,
+            explosion, décompte), <code>AnimatorManager</code> pour les animations de
+            mort, <code>Logger</code> multi-thread avec labels de thread et couleurs
+            console, et gestion des assets SFML centralisée.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Défis techniques</h2>
+    <ul>
+        <li>
+            Orchestrer trois threads concurrents (rendu, logique, serveur) avec des
+            mutex partagés sans provoquer de deadlock, notamment lors des envois réseau
+            asynchrones qui lancent eux-mêmes un <code>sf::Thread</code> par paquet.
+        </li>
+        <li>
+            Implémenter une détection de collision sous-frameique pour les projectiles
+            rapides : sans <code>remainingTime</code> et test segment/arête à chaque
+            frame, les balles traversent les murs à haute vélocité.
+        </li>
+        <li>
+            Concevoir le système de <code>SyncableObject</code> de façon à ce que
+            le serveur soit autoritaire sur la physique tout en laissant chaque client
+            appliquer localement les états reçus, sans désynchronisation visible.
+        </li>
+        <li>
+            Construire un terrain polygonal variable avec des normales d'arêtes correctes
+            pour n'importe quelle orientation (0° à 90°), tout en assurant que la réflexion
+            du vecteur vitesse reste cohérente quel que soit l'angle d'incidence.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Ce que j'ai appris</h2>
+    <p>
+        Ce projet m'a donné une première expérience concrète de la programmation réseau
+        temps réel en C++ : gestion des threads, sérialisation de paquets, synchronisation
+        d'état et séparation Local/Remote. J'ai aussi approfondi la physique de collision
+        sous-frameique et la construction d'un terrain géométrique arbitraire. C'est le
+        projet qui m'a appris à concevoir une architecture où le moteur, la logique de jeu
+        et la couche réseau restent découplés et testables indépendamment.
+    </p>
+</section>
