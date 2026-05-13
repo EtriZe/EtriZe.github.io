@@ -32,7 +32,6 @@
 <title>Last Hope</title>
 
 <info>
-    <a id="github" target="_blank" href="https://github.com/EtriZe"></a>
     <a id="itchio" target="_blank" href="https://krakhazblong.itch.io/last-hope"></a>
 </info>
 
@@ -45,36 +44,115 @@
 <p id="mobile-message">
     [Projet jouable disponible sur la version PC du site]
 </p>
-<lasthope>
+
+<section>
+    <h2>Résumé</h2>
     <p>
-        Ce jeu a été réalisé avec 6 personnes sous Unity dans le contexte d'une Game Jam de 48h avec pour thème "Root".
-        En tant que programmer j'ai touché à tout les aspects du jeu (Gameplay, Intégration d'animation et d'assets, ...
-        ).
+        Jeu de survie de vagues 2D développé en Unity (C#). Le joueur incarne une entité
+        végétale qui défend sa position en lançant des racines souterraines à gauche et à
+        droite, qui surgissent du sol pour détruire les ennemis. Des vagues d'ennemis
+        progressivement plus denses — coureurs au sol, tireurs en fenêtre, hélicoptères
+        dans les airs — culminent avec un boss à trois phases. Le projet repose sur un
+        système de vagues paramétrable, un système audio basé sur des ScriptableObjects,
+        et un boss piloté par une machine à états.
     </p>
+</section>
 
+<section>
+    <h2>Ce que j'ai développé</h2>
+    <ul>
+        <li>
+            Mécanique de racines en deux temps : l'appui sur une touche instancie une
+            <code>RacineHorizontale</code> qui avance sous terre via un masque de sprite
+            en déplacement. Au relâché, elle s'arrête et instancie une
+            <code>RacineVerticale</code> à cet endroit, qui monte jusqu'en haut de l'écran
+            via <code>Lerp</code> puis redescend, avant de déclencher
+            <code>OnRetract</code> pour signaler la fin du sort. Chaque côté dispose de
+            son propre cooldown affiché par une <code>ProgressBarCooldown</code> animée.
+        </li>
+        <li>
+            Système de vagues (<code>WaveSpawner</code>) entièrement configurable en
+            Inspector : chaque <code>Wave</code> définit ses types d'ennemis, leur nombre,
+            le délai entre spawns (min/max aléatoire) et le cap simultané sur le terrain.
+            Les ennemis spawnnent depuis trois catégories de points (sol, fenêtres,
+            ciel), et les points s'écartent automatiquement à chaque nouvelle vague pour
+            compenser le dézoom de la caméra.
+        </li>
+        <li>
+            Boss à trois phases piloté par une machine à états (<code>BossStateMachine</code>)
+            avec interfaces <code>IBossState</code> : Normal (tirs de balles et barils),
+            Tired (spawn d'ennemis à détruire avant de passer à la phase suivante), Angry
+            (cadence de tir doublée). Le boss se téléporte d'un côté à l'autre de l'arène
+            à intervalles aléatoires via des points de déplacement configurés.
+        </li>
+        <li>
+            Ennemi aérien <code>Supercopter</code> : se déplace horizontalement vers le
+            joueur jusqu'à une distance minimale configurable, puis tire un projectile
+            (<code>SupercopterProjectile</code>) avec cooldown. Détecté par un
+            <code>OnTriggerEnter2D</code> sur le tag <code>"Damager"</code> (les racines),
+            il déclenche son explosion et notifie le <code>WaveSpawner</code> via callback
+            lambda.
+        </li>
+        <li>
+            Mécanique de régénération : entre les vagues, des FX spawnnent sur des points
+            de spawn autour du joueur, restent statiques quelques secondes, puis
+            convergent vers lui via <code>MoveTowards</code>. À l'arrivée, 33% de HP
+            maximum sont restaurés et les FX sont détruits.
+        </li>
+        <li>
+            Système audio orienté ScriptableObjects : <code>AudioEvent</code> est une
+            classe abstraite définissant le contrat de lecture, <code>AERandomPitchVolume</code>
+            randomise pitch et volume à chaque appel, et <code>AudioAssets</code> centralise
+            la lecture/arrêt des événements depuis n'importe où via le <code>GameManager</code>
+            singleton. La musique est gérée par <code>GameMusicManager</code> qui enchaîne
+            des boucles de manière dynamique selon la vague en cours.
+        </li>
+        <li>
+            Screen shake par coroutine (<code>ScreenShake</code>) : intensité décroissante
+            linéairement sur la durée via un lerp custom, position rafraîchie à une
+            fréquence configurable, avec callback de fin et interruption propre de la
+            coroutine précédente si un nouveau shake est déclenché.
+        </li>
+        <li>
+            <code>GameManager</code> singleton unifiant l'accès au joueur, aux assets
+            audio et à la logique de scènes (Menu, MainScene, MapWithBOSS, MenuWin,
+            MenuLose, Credits).
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Défis techniques</h2>
+    <ul>
+        <li>
+            Coordonner le cycle de vie de la racine en deux entités distinctes
+            (<code>RacineHorizontale</code> → <code>RacineVerticale</code>) avec des
+            callbacks d'événements (<code>OnRetract</code>, <code>OnEndSpell</code>)
+            pour remonter le signal jusqu'au <code>Player</code> sans couplage direct,
+            tout en gérant les animations simultanées des deux côtés indépendamment.
+        </li>
+        <li>
+            Gérer les points de spawn de fenêtres par vague : le système accumule les
+            slots disponibles selon l'index de vague courant, détecte les positions déjà
+            occupées (liste partagée <code>_allWindowsPointsOccupied</code>) et retente
+            un spawn si aucun slot libre n'est trouvé, sans bloquer la coroutine.
+        </li>
+        <li>
+            Concevoir le boss avec une machine à états découplée de la logique de
+            <code>MonoBehaviour</code> : les états sont des classes C# pures implémentant
+            <code>IBossState</code>, ce qui permet de changer de comportement sans
+            conditionnels imbriqués dans l'<code>Update</code>.
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Ce que j'ai appris</h2>
     <p>
-        Une des fonctionnalités qui a du être implémenté c'est la gestion de la liane qui permet de taper les ennemis.
-        La mécanique veut que lors qu'on appuie sur une touche direction, la liane avance sous terre, dès que l'on lâche
-        la touche, la liane
-        sort de la terre en ligne droite vers le ciel pour taper tout les ennemies sur sa route. Puis elle fait le
-        chemin inverse
-        pour revenir à sa position de base.
+        Ce projet m'a permis d'appréhender la conception d'un jeu Unity complet de A à Z :
+        système de vagues dynamique, machine à états de boss, audio orienté ScriptableObjects
+        et feedback caméra. C'est aussi une première expérience de design de mécanique
+        unique — la racine en deux phases — qui a nécessité de penser les transitions
+        d'états et les callbacks entre composants de façon découplée.
     </p>
-    <container>
-        <!-- Insérer image des lianes plus rapprochés -->
-        <img src="images/placeholderLianes.png" style="width: 40%;" />
-    </container>
-
-    <p>
-        Ensuite une partie j'ai aussi du intégrer les assets des personnage et surtout du personnage principal avec
-        toute ses animations.
-        En gérant la vitesse des animations, la taille des sprites ...
-    </p>
-
-    <container>
-        <!-- Insérer image personnages dans unity -->
-        <!-- <img src="images/placeholderLianes.png" style="width: 40%;"/> -->
-    </container>
-
-    <div>Work in progress</div>
-</lasthope>
+</section>

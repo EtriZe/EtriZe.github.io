@@ -145,7 +145,6 @@ function reorderDivChildren(div) {
 
 async function openProjects(file) {
   try {
-    // Vide le contenu avant de charger le nouveau (stoppe les iframes précédentes)
     document.querySelector("project-page content").innerHTML = "";
 
     const res = await fetch(file);
@@ -156,10 +155,17 @@ async function openProjects(file) {
     document.querySelector("project-page").classList.remove("hide");
     document.body.classList.add("no-scroll");
 
+    // ── Ré-exécute les <script> injectés via innerHTML ──────
+    document.querySelectorAll("project-page content script").forEach(function (oldScript) {
+      const newScript = document.createElement("script");
+      newScript.textContent = oldScript.textContent;
+      document.body.appendChild(newScript);
+      newScript.remove();
+    });
+    // ────────────────────────────────────────────────────────
+
     if (isMobile()) {
-      const gameWrapper = document.querySelector(
-        "project-page content .game-wrapper",
-      );
+      const gameWrapper = document.querySelector("project-page content .game-wrapper");
       const mobileMsg = document.getElementById("mobile-message");
       if (gameWrapper) {
         gameWrapper.remove();
