@@ -176,24 +176,48 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Projet de jeu sous Unreal Engine sur notre temps libre avec une dixaine de camarades sortant de la même école.
-        Le but principal était de monter nos compétences respectives tout en travaillant sur un jeu qui nous plait.
-        Le jeu est
+        Projet de jeu sous Unreal Engine développé sur notre temps libre avec une dizaine de camarades issus de la même école.
+        L'objectif principal était de monter en compétences tout en travaillant sur un jeu qui nous passionne.
+        Le projet a exploré plusieurs directions : d'abord un jeu narratif mêlant exploration et survie, dans lequel le joueur se retrouve
+        enfermé dans un monde mystérieux abandonné par une ancienne civilisation, cerné par des tempêtes de sable infranchissables.
+        Nous avons également expérimenté une direction roguelite, axée sur les déplacements dans un canyon,
+        où l'objectif était d'aller le plus loin possible en survivant à une tempête nous prenant en chasse.
     </p>
 </section>
 
 <section>
     <h2>Mon rôle</h2>
     <p>
-        Développeur gameplay,
+        Conception et développement de différents aspects du gameplay ainsi que d'outils destinés à faciliter la construction du jeu.
     </p>
 </section>
 
 <section>
-    <h2>Ce que j’ai développé</h2>
+    <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-
+            Développement d'un hoverboard reposant sur une physique maison (sans recourir au simulate physics).
+            Il intègre : une gestion des collisions conditionnelles (frontale ou latérale), un effet de flottaison au sol,
+            des tricks, un charge jump, une capacité de drift, une esquive parfaite, de la friction contre les murs,
+            ainsi qu'un mode autonome permettant au joueur d'appeler la planche pour qu'elle le rejoigne seule.
+        </li>
+        <li>
+            Développement d'un outil de génération procédurale de dunes de sable,
+            utilisant un algorithme de bruit de Perlin pour répondre aux besoins de level design de l'équipe.
+        </li>
+        <li>
+            Système de tempête matérialisé par un mur se rapprochant progressivement du joueur.
+            Une fois le joueur rattrapé, le monde bascule en mode « Tempête », activant des mécanismes de gameplay spécifiques.
+        </li>
+        <li>
+            Système d'inventaire et de craft.
+        </li>
+        <li>
+            State machine maison gérant les états du monde ainsi que les différents modes de la planche
+            (portée dans le dos, autonome ou montée).
+        </li>
+        <li>
+            Interface utilisateur liée au gameplay.
         </li>
     </ul>
 </section>
@@ -202,15 +226,26 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-
+            Concevoir une physique maison pour l'hoverboard en trouvant le bon équilibre entre performance, réalisme et satisfaction de gameplay.
+        </li>
+        <li>
+            Optimisation des performances d'un outil de manipulation de dynamic mesh sous UE5.
+            Ce format étant destiné à être converti en static mesh, il était impossible de l'utiliser pour générer de grandes maps
+            (la modification ou la création d'un landscape étant hors de portée de l'outil).
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j’ai appris</h2>
+    <h2>Ce que j'ai appris</h2>
     <p>
-
+        La gestion du travail en équipe dans le cadre d'un projet de jeu vidéo impliquant un grand nombre de personnes.
+    </p>
+    <p>
+        Ce projet m'a permis de gagner en aisance sur Unreal Engine, et plus particulièrement sur son API C++.
+    </p>
+    <p>
+        Une meilleure compréhension des performances et du workflow d'Unreal Engine.
     </p>
 </section>
 
