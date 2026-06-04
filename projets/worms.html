@@ -23,36 +23,29 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Jeu de combat au tour par tour inspiré de Worms, développé en C++ avec SFML. Deux dragons
-        s'affrontent en tirant des boules de feu dans un environnement avec physique, gravité et vent
-        aléatoire. Le projet repose sur un moteur de jeu maison comprenant un ECS, un moteur physique
-        et un système de scènes.
+        Jeu de combat au tour par tour inspiré de Worms, en C++ avec SFML. Deux dragons
+        s'affrontent en tirant des boules de feu sous l'effet de la gravité et d'un vent
+        aléatoire. Moteur maison avec ECS, physique et système de scènes.
     </p>
 </section>
-
 
 <section>
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Architecture ECS (Entity Component System) from scratch : système de composants typés
-            via des IDs uniques générés statiquement, stockés dans un <code>ComponentArray</code>
-            et un <code>ComponentBitset</code> pour une récupération et une vérification
-            de présence rapide.
+            ECS from scratch : composants typés, stockage et vérification de présence rapide.
         </li>
         <li>
-            Moteur physique avec gravité, vélocité, et résolution de collisions par impulsion :
-            calcul de la masse inverse, coefficient de restitution.
+            Moteur physique : gravité, vélocité, résolution de collisions par impulsion
+            (masse inverse, coefficient de restitution).
         </li>
         <li>
-            Détection de collisions multi-formes :
-            boîte vs boîte, sphère vs polygone et sphère vs sphère, avec support de tuiles
-            triangulaires pour les pentes de la map.
+            Détection de collisions multi-formes : boîte/boîte, sphère/polygone,
+            sphère/sphère, avec support de tuiles triangulaires pour les pentes.
         </li>
         <li>
-            Gestionnaire de tours avec minuterie de 20 secondes, alternance des joueurs,
-            régénération aléatoire du vent (–3 à +3) et indicateur visuel de direction de
-            visée affiché uniquement pour le joueur actif.
+            Gestion des tours : minuterie de 20s, alternance des joueurs, vent aléatoire
+            et indicateur de visée pour le joueur actif.
         </li>
     </ul>
 </section>
@@ -61,23 +54,16 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Implémenter les collisions pour des formes hétérogènes (boîte, triangle, sphère) en gérant
-            correctement la normale de collision et le sens de séparation selon quel objet est
-            statique ou non.
+            Gérer les collisions entre formes hétérogènes en calculant correctement
+            la normale et le sens de séparation selon qu'un objet est statique ou non.
         </li>
         <li>
-            Orchestrer le cycle de vie des entités (ajout, suppression, explosion, fragmentation)
-            sans invalider les itérateurs lors de l'update, en travaillant sur une copie du
-            vecteur d'entités à chaque frame.
+            Ajouter et supprimer des entités en cours d'update sans invalider les
+            itérateurs, en travaillant sur une copie du vecteur à chaque frame.
         </li>
         <li>
-            Concevoir un ECS générique en C++ s'appuyant sur des IDs de composants générés 
-            à la compilation via des fonctions template statiques.
-        </li>
-        <li>
-            Synchroniser la fin de tour avec la destruction du projectile : la <code>Fireball</code>
-            déclenche un callback vers <code>Dragon::endTurn()</code> depuis son destructeur,
-            ce qui nécessite de maîtriser précisément le moment de la destruction de l'entité.
+            Synchroniser la fin de tour avec la destruction du projectile via un
+            callback déclenché au bon moment.
         </li>
     </ul>
 </section>
@@ -85,10 +71,8 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis de concevoir un moteur de jeu C++ de zéro et de comprendre en
-        profondeur les patterns ECS, la détection de collisions géométriques, et la résolution
-        physique par impulsion. C'est aussi une première expérience concrète de collaboration
-        sur un projet C++ avec une séparation claire des responsabilités entre moteur, logique
-        de jeu et gestion des entrées.
+        Concevoir un moteur de jeu C++ de zéro : ECS, collisions géométriques et physique
+        par impulsion. Première expérience de collaboration avec une séparation claire
+        entre moteur, logique de jeu et gestion des entrées.
     </p>
 </section>

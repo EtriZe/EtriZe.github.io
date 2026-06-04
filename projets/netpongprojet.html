@@ -23,37 +23,29 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Jeu de Pong en réseau 1v1 développé en C++ avec SFML dans le cadre du cours de
-        Programmation Moteur à Ynov Campus. Deux joueurs s'affrontent en vaisseaux dans
-        une arène : les tirs directs sont inoffensifs, chaque joueur doit faire ricocher
-        ses projectiles sur les murs du terrain pour atteindre l'adversaire.
-        Le projet repose sur un moteur maison comprenant un système réseau client-serveur,
-        un moteur de scènes, et une séparation claire entre rendu, logique et réseau.
+        Pong 1v1 en réseau développé en C++ avec SFML à Ynov Campus. Les tirs directs
+        sont inoffensifs — il faut faire ricocher ses projectiles sur les murs pour
+        toucher l'adversaire. Moteur maison avec système réseau client-serveur.
     </p>
 </section>
-
 
 <section>
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Mécanique de létalité par rebond : un tir direct est inoffensif,
-            la balle ne devient dangereuse qu'après avoir ricoché sur un mur.
-            Passé un certain nombre de rebonds, un effet visuel de traînée s'active
-            pour indiquer l'état de la balle au joueur.
+            Létalité par rebond : la balle ne devient dangereuse qu'après avoir ricoché
+            sur un mur. Un effet de traînée s'active passé un certain nombre de rebonds.
         </li>
         <li>
-            Terrain polygonal procédural : 10 dispositions différentes générées
-            automatiquement, avec sélection aléatoire à chaque partie.
-            Les collisions joueurs et balles sont calculées bord par bord.
+            Terrain polygonal procédural : 10 dispositions tirées aléatoirement,
+            collisions calculées bord par bord.
         </li>
         <li>
             Gestion de partie complète : scores, rounds avec compte à rebours,
-            condition de victoire, reset et interface en jeu.
+            condition de victoire et interface en jeu.
         </li>
         <li>
-            Systèmes support : sons (rebond, tir, explosion, décompte), animations
-            de mort, et gestion centralisée des ressources.
+            Systèmes support : sons, animations de mort et gestion des ressources.
         </li>
     </ul>
 </section>
@@ -62,21 +54,19 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Faire tourner trois fils d'exécution en parallèle (rendu, logique, réseau)
-            sans qu'ils se bloquent mutuellement lors des accès aux données partagées.
+            Faire coexister trois fils d'exécution (rendu, logique, réseau) sans blocage
+            mutuel sur les données partagées.
         </li>
         <li>
-            Détecter correctement les collisions pour des projectiles rapides :
-            sans vérification de la trajectoire complète entre deux images,
-            les balles traversent les murs à haute vitesse.
+            Éviter que les projectiles rapides traversent les murs en vérifiant la
+            trajectoire complète entre deux images.
         </li>
         <li>
-            Garder le serveur autoritaire sur la physique tout en laissant chaque client
-            appliquer localement les états reçus, sans désynchronisation visible.
+            Maintenir le serveur autoritaire sur la physique tout en appliquant les états
+            localement côté client, sans désynchronisation visible.
         </li>
         <li>
-            Assurer que les rebonds restent cohérents sur n'importe quelle surface
-            du terrain, quel que soit l'angle d'incidence du projectile.
+            Garantir des rebonds cohérents sur n'importe quelle surface du terrain.
         </li>
     </ul>
 </section>
@@ -84,11 +74,9 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a donné une première expérience concrète de la programmation réseau
-        temps réel : gestion des fils d'exécution parallèles, envoi et réception d'états
-        de jeu, et séparation entre ce qui est calculé localement et ce qui vient du serveur.
-        J'ai aussi approfondi la physique de collision et la génération de terrains géométriques
-        variés. C'est le projet qui m'a appris à concevoir une architecture où le moteur,
-        la logique de jeu et la couche réseau restent indépendants les uns des autres.
+        Une première expérience concrète de réseau temps réel en C++ : fils d'exécution
+        parallèles, synchronisation d'états et séparation local/serveur. J'ai aussi
+        approfondi la physique de collision et appris à garder moteur, logique et réseau
+        indépendants les uns des autres.
     </p>
 </section>

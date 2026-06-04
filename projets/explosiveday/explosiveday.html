@@ -36,11 +36,8 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Jeu réalisé en 48 heures dans le cadre d'une game jam sur le thème "Don't kill anything", sous Unity, en C#.
-        Le concept repose sur un mécanisme d'explosion : le joueur, porteur d'une bombe à retardement,
-        doit déclencher son explosion au bon moment pour ne toucher aucun PNJ environnant — au risque sinon de perdre la partie.
-        Le jeu intègre un tutoriel dédié, un système de score avec sauvegarde du meilleur score,
-        ainsi qu'une gestion complète des boucles de jeu (victoire, défaite, respawn).
+        Jeu réalisé en 48h en Unity (C#) sur le thème "Don't kill anything". Le joueur,
+        porteur d'une bombe, doit déclencher son explosion sans toucher aucun PNJ environnant.
     </p>
 </section>
 
@@ -48,30 +45,19 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Système d'explosion central au gameplay : détection des collisions dans un rayon paramétrable,
-            application d'une force d'explosion sur les objets environnants, déclenchement des effets de
-            particules et évaluation du résultat (victoire si aucun PNJ touché, défaite sinon).
+            Explosion centrale au gameplay : détection dans un rayon paramétrable, force
+            appliquée aux objets proches, effets de particules et évaluation du résultat.
         </li>
         <li>
-            Gestionnaire de jeu : chronomètre décompté, gestion des états de victoire, défaite et respawn,
-            sélection aléatoire des points de spawn sans répétition consécutive, sauvegarde et affichage
-            du meilleur score.
+            Gestionnaire de jeu : chronomètre, états victoire/défaite/respawn, spawn
+            aléatoire sans répétition et sauvegarde du meilleur score.
         </li>
         <li>
-            Optimisation de l'affichage des PNJ : désactivation automatique des PNJ éloignés et masquage
-            par raycast lorsqu'un mur obstrue la ligne de vue.
+            Optimisation des PNJ : désactivation des entités éloignées et masquage
+            derrière les murs.
         </li>
         <li>
-            Contrôleur joueur : déplacements, rotation dans la direction du mouvement, animations
-            et menu pause.
-        </li>
-        <li>
-            Tutoriel intégré : zone de détection conditionnant le droit d'exploser, séquence de fin
-            automatique avec retour au menu principal.
-        </li>
-        <li>
-            Interface utilisateur : chronomètre, compteur de score, meilleur score, écrans de
-            victoire/défaite et menu pause.
+            Tutoriel intégré, contrôleur joueur, interface et menu pause.
         </li>
     </ul>
 </section>
@@ -80,17 +66,16 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Concevoir une IA de PNJ capable de se déplacer de façon naturelle et d'éviter les obstacles
-            dans un temps de développement très contraint (48 heures), sans s'appuyer sur le système
-            de navigation intégré d'Unity.
+            Concevoir une IA de déplacement naturelle avec évitement d'obstacles en 48h,
+            sans le système de navigation intégré d'Unity.
         </li>
         <li>
-            Maintenir des performances correctes avec un grand nombre de PNJ instanciés simultanément,
-            grâce à une désactivation dynamique des entités éloignées et hors du champ de vision.
+            Maintenir les performances avec de nombreux PNJ simultanés via désactivation
+            dynamique des entités hors champ.
         </li>
         <li>
-            Calibrer le rayon et la puissance de l'explosion pour garantir un gameplay équilibré et lisible
-            malgré le positionnement aléatoire des PNJ à chaque partie.
+            Calibrer le rayon d'explosion pour un gameplay équilibré malgré le positionnement
+            aléatoire des PNJ.
         </li>
     </ul>
 </section>
@@ -98,11 +83,7 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        La gestion de la pression d'une game jam : prioriser les fonctionnalités essentielles,
-        accepter de laisser certains aspects inachevés et livrer un jeu jouable dans les délais impartis.
-    </p>
-    <p>
-        Une meilleure maîtrise des outils Unity tels que les coroutines, le contrôleur de personnage,
-        les corps physiques et le système de particules, ainsi que des techniques d'optimisation basiques.
+        Gérer la pression d'une game jam : prioriser, accepter l'inachevé et livrer dans
+        les temps. Une meilleure maîtrise d'Unity et quelques techniques d'optimisation basiques.
     </p>
 </section>

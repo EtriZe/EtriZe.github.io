@@ -20,13 +20,12 @@
     <a id="github" target="_blank" href="https://github.com/mbocciarelli/Pathfinder"></a>
 </info>
 
-
 <section>
     <h2>Résumé</h2>
     <p>
-        Visualiseur interactif de pathfinding développé en C++ avec SFML. L'utilisateur
-        construit une grille en plaçant des cases (départ, arrivée, murs, portails) puis
-        déclenche l'algorithme A* qui calcule et affiche le chemin optimal en temps réel.
+        Visualiseur interactif de pathfinding en C++ avec SFML. L'utilisateur place des
+        cases (départ, arrivée, murs, portails) et déclenche A* qui affiche le chemin
+        optimal en temps réel.
     </p>
 </section>
 
@@ -34,13 +33,8 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Une grille 2D où chaque case connaît ses voisines et leur type
-            (mur, sol, départ, arrivée), ce qui permet à l'algorithme de naviguer
-            correctement entre elles.
-        </li>
-        <li>
-            Un calcul automatique de la disposition de la grille en fonction
-            de la taille de la fenêtre, pour que l'affichage s'adapte à la résolution.
+            Grille 2D où chaque case connaît ses voisines et leur type,
+            avec disposition calculée automatiquement selon la résolution.
         </li>
     </ul>
 </section>
@@ -49,18 +43,14 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Intégrer les portails sans modifier l'algorithme A* : un portail est
-            simplement traité comme un raccourci dans la carte, avec un coût nul,
-            ce qui pousse naturellement l'algorithme à l'emprunter quand c'est plus court.
+            Intégrer les portails sans toucher à A* : traités comme des raccourcis
+            à coût nul, l'algorithme les emprunte naturellement si c'est plus court.
         </li>
         <li>
-            Garder synchronisés l'affichage visuel et la logique interne : chaque
-            clic de l'utilisateur doit mettre à jour à la fois ce qu'on voit à l'écran
-            et les données utilisées par l'algorithme.
+            Synchroniser affichage et logique interne à chaque clic.
         </li>
         <li>
-            Concevoir un système de cases facilement extensible, sans avoir à réécrire
-            la logique existante à chaque ajout d'un nouveau type de case.
+            Système de cases extensible sans réécrire la logique existante.
         </li>
     </ul>
 </section>
@@ -68,9 +58,7 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis d'implémenter A* from scratch et de comprendre comment
-        modéliser un graphe de pathfinding au-delà de la grille classique, notamment
-        avec les portails. J'ai aussi appris à bien séparer la logique de recherche
-        de chemin de la couche d'affichage.
+        Implémenter A* from scratch et modéliser un graphe au-delà de la grille classique,
+        notamment via les portails. Bonne pratique de séparation entre logique et affichage.
     </p>
 </section>

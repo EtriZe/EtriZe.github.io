@@ -51,11 +51,10 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Jeu de survie de vagues 2D développé en Unity (C#). Le joueur incarne une entité
-        végétale qui défend sa position en lançant des racines souterraines à gauche et à
-        droite, qui surgissent du sol pour détruire les ennemis. Des vagues d'ennemis
-        progressivement plus denses — coureurs au sol, tireurs en fenêtre, hélicoptères
-        dans les airs — culminent avec un boss à trois phases.
+        Jeu de survie de vagues 2D en Unity (C#). Le joueur incarne une entité végétale
+        qui défend sa position en lançant des racines souterraines surgissant du sol pour
+        détruire les ennemis. Vagues progressives (coureurs, tireurs, hélicoptères)
+        culminant avec un boss à trois phases.
     </p>
 </section>
 
@@ -63,22 +62,17 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Mécanique de racines en deux temps : l'appui sur une touche instancie une
-            racine horizontale qui avance sous terre via un masque de sprite
-            en déplacement. Au relâché, elle s'arrête et instancie une
-            racine verticale à cet endroit, qui monte jusqu'en haut de l'écran
-            puis redescend, avant de signaler la fin du sort. Chaque côté dispose de
-            son propre cooldown affiché par une barre de progression animée.
+            Mécanique de racines en deux temps : une racine avance sous terre, puis au relâché
+            une seconde surgit verticalement à cet endroit. Chaque côté a son propre cooldown
+            affiché par une barre de progression animée.
         </li>
         <li>
-            Mécanique de régénération : entre les vagues, des effets visuels spawnnent
-            autour du joueur, restent statiques quelques secondes, puis convergent vers
-            lui. À l'arrivée, 33% des HP maximum sont restaurés et les effets sont détruits.
+            Régénération entre les vagues : des effets visuels convergent vers le joueur
+            et restaurent 33% de ses HP.
         </li>
         <li>
-            Screen shake par coroutine : intensité décroissante linéairement sur la durée,
-            position rafraîchie à une fréquence configurable, avec interruption propre
-            si un nouveau shake est déclenché avant la fin du précédent.
+            Screen shake à intensité décroissante, interrompu proprement si un nouveau
+            shake se déclenche avant la fin du précédent.
         </li>
     </ul>
 </section>
@@ -87,15 +81,12 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Coordonner le cycle de vie de la racine en deux entités distinctes avec des
-            callbacks d'événements pour remonter le signal jusqu'au joueur sans couplage
-            direct, tout en gérant les animations simultanées des deux côtés indépendamment.
+            Coordonner les deux entités de la racine via des événements, tout en gérant
+            les animations des deux côtés indépendamment.
         </li>
         <li>
-            Gérer les points de spawn de fenêtres par vague : le système accumule les
-            slots disponibles selon l'index de vague courant, détecte les positions déjà
-            occupées et retente un spawn si aucun slot libre n'est trouvé, sans bloquer
-            la coroutine.
+            Gérer les slots de spawn de fenêtres par vague en détectant les positions
+            occupées et en retentatant si aucun slot libre n'est disponible.
         </li>
     </ul>
 </section>
@@ -103,8 +94,7 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis d'appréhender la conception d'un jeu Unity complet de A à Z :
-        système de vagues dynamique, et feedback caméra. 
-        C'est surtout une de mes premières expérience de Game Jam en dehors d'un cursus scolaire.
+        Concevoir un jeu Unity complet avec système de vagues et feedback caméra.
+        C'est surtout une de mes premières expériences de Game Jam en dehors d'un cursus scolaire.
     </p>
 </section>
