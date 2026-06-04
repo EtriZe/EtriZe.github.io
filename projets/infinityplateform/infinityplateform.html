@@ -31,20 +31,12 @@
     <a id="github" target="_blank" href="https://github.com/EtriZe/InfinityPlatform"></a>
 </info>
 
+
 <section>
     <h2>Résumé</h2>
     <p>
         Jeu de plateforme 2D infini développé avec Unity et C# pour apprendre les bases du moteur.
-        Le joueur doit survivre le plus longtemps possible en sautant de plateforme en plateforme qui défilent
-        automatiquement vers la gauche.
-    </p>
-</section>
-
-<section>
-    <h2>Mon rôle</h2>
-    <p>
-        Conception et développement complet du projet : génération dynamique des plateformes, mécanique de saut,
-        gestion du score et navigation entre les scènes.
+        Le joueur survit le plus longtemps possible en sautant sur des plateformes qui défilent vers la gauche.
     </p>
 </section>
 
@@ -52,44 +44,19 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Système de génération procédurale de plateformes : spawn aléatoire en position X et Y,
-            déplacement automatique vers la gauche à vitesse constante et destruction hors champ.
+            Génération procédurale de plateformes : spawn aléatoire, défilement automatique
+            et destruction hors champ, avec un nombre constant de plateformes à l'écran.
         </li>
         <li>
-            Mécanique de double saut avec détection de collision directionnelle pour distinguer
-            l'atterrissage sur une plateforme d'un contact latéral.
+            Double saut avec détection directionnelle pour distinguer un atterrissage
+            d'un simple contact latéral.
         </li>
         <li>
-            Gestion du pool de plateformes vivantes avec un compteur partagé entre
-            <code>SpawningPlatform</code> et <code>DestroyingPlatform</code> pour maintenir un nombre
-            constant de plateformes à l'écran.
+            Score incrémenté à chaque atterrissage, avec sauvegarde du meilleur score
+            entre les parties.
         </li>
         <li>
-            Système de score en temps réel incrémenté à chaque atterrissage, avec sauvegarde
-            du meilleur score en variable statique entre les parties.
-        </li>
-        <li>
-            Navigation entre scènes (Menu principal → Jeu → Game Over) via
-            <code>SceneManager</code>, avec détection de chute du personnage comme condition de défaite.
-        </li>
-    </ul>
-</section>
-
-<section>
-    <h2>Défis techniques</h2>
-    <ul>
-        <li>
-            Coordonner la création et la destruction des plateformes entre plusieurs scripts
-            (<code>MovingPlatform</code>, <code>DestroyingPlatform</code>, <code>SpawningPlatform</code>)
-            sans désynchroniser le compteur de plateformes vivantes.
-        </li>
-        <li>
-            Distinguer fiablement un atterrissage d'un simple contact latéral pour ne recharger
-            les sauts et incrémenter le score qu'au bon moment.
-        </li>
-        <li>
-            Persister le meilleur score entre deux parties sans système de sauvegarde sur disque,
-            en s'appuyant sur des variables statiques partagées entre scènes.
+            Navigation entre scènes : menu principal, jeu et écran de game over.
         </li>
     </ul>
 </section>
@@ -97,10 +64,7 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis de prendre en main Unity et son cycle de vie (<code>Start</code>,
-        <code>Update</code>, <code>Awake</code>), d'appréhender la communication entre scripts via
-        <code>GetComponent</code> et <code>GameObject.Find</code>, et de comprendre les bases de la
-        physique 2D avec les <code>Rigidbody2D</code> et les collisions. C'est également un premier
-        contact avec l'architecture multi-scènes d'un jeu complet, du menu jusqu'à l'écran de game over.
+        Une première prise en main d'Unity : cycle de vie des objets, communication entre scripts,
+        physique 2D et architecture multi-scènes.
     </p>
 </section>

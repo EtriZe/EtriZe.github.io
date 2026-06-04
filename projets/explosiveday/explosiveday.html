@@ -37,17 +37,10 @@
     <h2>Résumé</h2>
     <p>
         Jeu réalisé en 48 heures dans le cadre d'une game jam sur le thème "Don't kill anything", sous Unity, en C#.
-        Le concept repose sur un mécanisme d'explosion : le joueur, porteur d'une bombe à retardement, 
+        Le concept repose sur un mécanisme d'explosion : le joueur, porteur d'une bombe à retardement,
         doit déclencher son explosion au bon moment pour ne toucher aucun PNJ environnant — au risque sinon de perdre la partie.
-        Le jeu intègre un tutoriel dédié, un système de score avec sauvegarde du meilleur score, 
+        Le jeu intègre un tutoriel dédié, un système de score avec sauvegarde du meilleur score,
         ainsi qu'une gestion complète des boucles de jeu (victoire, défaite, respawn).
-    </p>
-</section>
-
-<section>
-    <h2>Mon rôle</h2>
-    <p>
-        Développement intégral du jeu : gameplay, intelligence artificielle des PNJ, interface utilisateur et gestion des états de jeu.
     </p>
 </section>
 
@@ -55,46 +48,30 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Système d'explosion central au gameplay : détection des collisions dans un rayon paramétrable via 
-            <code>Physics.OverlapSphere</code>, application d'une force d'explosion sur les Rigidbody environnants 
-            (<code>AddExplosionForce</code>), déclenchement des effets de particules et évaluation du résultat 
-            (victoire si aucun PNJ touché, défaite sinon).
+            Système d'explosion central au gameplay : détection des collisions dans un rayon paramétrable,
+            application d'une force d'explosion sur les objets environnants, déclenchement des effets de
+            particules et évaluation du résultat (victoire si aucun PNJ touché, défaite sinon).
         </li>
         <li>
-            Intelligence artificielle des PNJ : déplacement autonome avec changement de direction aléatoire 
-            à intervalles variables, système de raycasting multidirectionnel (avant, droite, gauche, diagonales) 
-            pour la détection et l'évitement d'obstacles, vitesse individuelle randomisée à l'instanciation 
-            et gestion des animations (marche/course/idle).
+            Gestionnaire de jeu : chronomètre décompté, gestion des états de victoire, défaite et respawn,
+            sélection aléatoire des points de spawn sans répétition consécutive, sauvegarde et affichage
+            du meilleur score.
         </li>
         <li>
-            Système de spawn des PNJ : instanciation dans des zones de spawn catégorisées par taille 
-            (grandes, moyennes, intermédiaires, petites) avec un nombre de PNJ configurable par catégorie, 
-            positionnement aléatoire dans les bornes de chaque zone et visualisation des zones via Gizmos dans l'éditeur.
+            Optimisation de l'affichage des PNJ : désactivation automatique des PNJ éloignés et masquage
+            par raycast lorsqu'un mur obstrue la ligne de vue.
         </li>
         <li>
-            Game Manager : chronomètre décompté via coroutines, gestion des états de victoire, défaite et respawn, 
-            sélection aléatoire des points de spawn (sans répétition consécutive du même point), 
-            sauvegarde et affichage du meilleur score via <code>PlayerPrefs</code>.
+            Contrôleur joueur : déplacements, rotation dans la direction du mouvement, animations
+            et menu pause.
         </li>
         <li>
-            Contrôleur joueur : déplacements avec <code>CharacterController</code>, rotation du personnage 
-            dans la direction du mouvement, intégration des animations et gestion du menu pause.
+            Tutoriel intégré : zone de détection conditionnant le droit d'exploser, séquence de fin
+            automatique avec retour au menu principal.
         </li>
         <li>
-            Tutoriel intégré : zone de détection par trigger conditionnant le droit d'exploser, 
-            séquence de fin automatique avec retour au menu principal.
-        </li>
-        <li>
-            Caméra de suivi : interpolation douce de la position (<code>Vector3.Lerp</code>) avec 
-            un offset différent selon le mode tutoriel ou partie normale.
-        </li>
-        <li>
-            Optimisation de l'affichage des PNJ : désactivation automatique des PNJ hors d'un 
-            certain rayon autour du joueur et masquage par raycast lorsqu'un mur obstrue la ligne de vue.
-        </li>
-        <li>
-            Interface utilisateur : chronomètre, compteur de score, affichage du meilleur score, 
-            écrans de victoire/défaite et menu pause.
+            Interface utilisateur : chronomètre, compteur de score, meilleur score, écrans de
+            victoire/défaite et menu pause.
         </li>
     </ul>
 </section>
@@ -103,16 +80,16 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Concevoir une IA de PNJ capable de se déplacer de façon naturelle et d'éviter les obstacles 
-            dans un temps de développement très contraint (48 heures), en s'appuyant sur un système 
-            de raycasting maison plutôt que sur un NavMesh.
+            Concevoir une IA de PNJ capable de se déplacer de façon naturelle et d'éviter les obstacles
+            dans un temps de développement très contraint (48 heures), sans s'appuyer sur le système
+            de navigation intégré d'Unity.
         </li>
         <li>
-            Maintenir des performances correctes avec un grand nombre de PNJ instanciés simultanément, 
+            Maintenir des performances correctes avec un grand nombre de PNJ instanciés simultanément,
             grâce à une désactivation dynamique des entités éloignées et hors du champ de vision.
         </li>
         <li>
-            Calibrer le rayon et la puissance de l'explosion pour garantir un gameplay équilibré et lisible 
+            Calibrer le rayon et la puissance de l'explosion pour garantir un gameplay équilibré et lisible
             malgré le positionnement aléatoire des PNJ à chaque partie.
         </li>
     </ul>
@@ -121,12 +98,11 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        La gestion de la pression d'une game jam : prioriser les fonctionnalités essentielles, 
+        La gestion de la pression d'une game jam : prioriser les fonctionnalités essentielles,
         accepter de laisser certains aspects inachevés et livrer un jeu jouable dans les délais impartis.
     </p>
     <p>
-        Une meilleure maîtrise des outils Unity tels que les coroutines, le <code>CharacterController</code>, 
-        les Rigidbody et le système de particules, ainsi que des techniques d'optimisation basiques 
-        (culling manuel, raycasting conditionnel).
+        Une meilleure maîtrise des outils Unity tels que les coroutines, le contrôleur de personnage,
+        les corps physiques et le système de particules, ainsi que des techniques d'optimisation basiques.
     </p>
 </section>

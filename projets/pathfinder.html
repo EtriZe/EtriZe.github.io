@@ -25,11 +25,8 @@
     <h2>Résumé</h2>
     <p>
         Visualiseur interactif de pathfinding développé en C++ avec SFML. L'utilisateur
-        construit une grille en plaçant des tuiles (départ, arrivée, murs, portails) puis
+        construit une grille en plaçant des cases (départ, arrivée, murs, portails) puis
         déclenche l'algorithme A* qui calcule et affiche le chemin optimal en temps réel.
-        Le projet met l'accent sur une architecture propre avec pattern State pour la
-        gestion des inputs, système de tuiles extensible par héritage et template, et un
-        nœud de portail polymorphe qui étend A* au-delà de la topologie classique.
     </p>
 </section>
 
@@ -37,49 +34,13 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Implémentation de l'algorithme A* (<code>AstarExe</code>) avec une
-            <code>PriorityQueue</code> min-heap sur <code>std::priority_queue</code>,
-            heuristique de Manhattan, et deux <code>std::unordered_map</code>
-            (<code>came_from</code>, <code>cost_so_far</code>) pour la reconstruction
-            du chemin via <code>reconstruct_path()</code>.
+            Une grille 2D où chaque case connaît ses voisines et leur type
+            (mur, sol, départ, arrivée), ce qui permet à l'algorithme de naviguer
+            correctement entre elles.
         </li>
         <li>
-            Classe <code>Grid</code> gérant la grille 2D de <code>Node*</code> :
-            initialisation des voisins en 4-directions avec filtrage des obstacles,
-            gestion du nœud de départ/arrivée, et enregistrement dynamique des types
-            de tuiles (mur, sol, start, goal).
-        </li>
-        <li>
-            <code>PortalNode</code> : sous-classe de <code>Node</code> qui surcharge
-            <code>GetNeighbours()</code> pour retourner les voisins de la tuile de
-            destination, permettant à A* de traverser un portail sans modification
-            de l'algorithme. Le coût du portail est 0, ce qui le rend naturellement
-            attractif dans le calcul de chemin.
-        </li>
-        <li>
-            Machine à états pour les inputs clavier (<code>IState</code>,
-            <code>DefaultState</code>, <code>StartState</code>, <code>EndState</code>,
-            <code>WallState</code>, <code>PortalState</code>) : chaque état sait vers
-            quel état transitionner selon la touche pressée (S/E/W/P/G), et expose
-            le <code>TileType</code> courant utilisé lors du clic gauche.
-        </li>
-        <li>
-            Système de tuiles avec <code>Tile</code> et <code>SquareTile</code> :
-            méthode template <code>SetTileType&lt;TileType&gt;()</code> pour un
-            dispatch de texture à la compilation, singleton <code>Instanciator</code>
-            pour le chargement centralisé des textures, et détection de clic par
-            AABB sur le sprite de chaque tuile.
-        </li>
-        <li>
-            Gestion des portails en deux temps dans la <code>Scene</code> : le
-            premier clic sur une tuile portail stocke <code>portal1</code>, le second
-            stocke <code>portal2</code>, puis appelle <code>SetPortalInGrid()</code>
-            qui crée deux <code>PortalNode</code> liés bidirectionnellement.
-        </li>
-        <li>
-            Initialisation de la grille calculée dynamiquement depuis la taille de la
-            fenêtre et des sprites, avec marges et gouttières configurables, pour que
-            le nombre de tuiles s'adapte à la résolution.
+            Un calcul automatique de la disposition de la grille en fonction
+            de la taille de la fenêtre, pour que l'affichage s'adapte à la résolution.
         </li>
     </ul>
 </section>
@@ -88,23 +49,18 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Étendre A* aux portails sans toucher à l'algorithme : surcharger uniquement
-            <code>GetNeighbours()</code> dans <code>PortalNode</code> permet de traiter
-            la téléportation comme un simple arc du graphe, avec un coût nul qui incite
-            naturellement A* à l'emprunter si c'est optimal.
+            Intégrer les portails sans modifier l'algorithme A* : un portail est
+            simplement traité comme un raccourci dans la carte, avec un coût nul,
+            ce qui pousse naturellement l'algorithme à l'emprunter quand c'est plus court.
         </li>
         <li>
-            Synchroniser la grille de nœuds logique (<code>Grid</code>) avec la grille
-            de tuiles visuelles (<code>Scene</code>) : tout changement de type via clic
-            doit se répercuter simultanément sur la tuile SFML et sur le nœud A*
-            correspondant, y compris pour les cas particuliers (portail en deux clics,
-            redéfinition du start/goal).
+            Garder synchronisés l'affichage visuel et la logique interne : chaque
+            clic de l'utilisateur doit mettre à jour à la fois ce qu'on voit à l'écran
+            et les données utilisées par l'algorithme.
         </li>
         <li>
-            Concevoir le système de tuiles pour qu'il soit extensible par template
-            sans RTTI : <code>SetTileType&lt;TileType&gt;()</code> résout la texture
-            à la compilation via le singleton <code>Instanciator</code>, évitant
-            tout cast dynamique au moment du rendu.
+            Concevoir un système de cases facilement extensible, sans avoir à réécrire
+            la logique existante à chaque ajout d'un nouveau type de case.
         </li>
     </ul>
 </section>
@@ -113,10 +69,8 @@
     <h2>Ce que j'ai appris</h2>
     <p>
         Ce projet m'a permis d'implémenter A* from scratch et de comprendre comment
-        modéliser un graphe de pathfinding au-delà de la grille classique — notamment
-        via le polymorphisme de <code>GetNeighbours()</code> pour les portails. J'ai
-        aussi pratiqué le pattern State pour des machines d'état clavier claires et
-        extensibles, et appris à séparer proprement la logique de pathfinding de la
-        couche de rendu SFML.
+        modéliser un graphe de pathfinding au-delà de la grille classique, notamment
+        avec les portails. J'ai aussi appris à bien séparer la logique de recherche
+        de chemin de la couche d'affichage.
     </p>
 </section>

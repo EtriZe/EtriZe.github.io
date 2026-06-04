@@ -30,14 +30,6 @@
     </p>
 </section>
 
-<section>
-    <h2>Mon rôle</h2>
-    <p>
-        Conception et développement du moteur et de la logique de jeu complète : architecture ECS,
-        physique et détection de collisions, armes, gestion des tours, UI et système de scènes.
-        La gestion des inputs clavier a été réalisée par un autre membre de l'équipe.
-    </p>
-</section>
 
 <section>
     <h2>Ce que j'ai développé</h2>
@@ -45,47 +37,22 @@
         <li>
             Architecture ECS (Entity Component System) from scratch : système de composants typés
             via des IDs uniques générés statiquement, stockés dans un <code>ComponentArray</code>
-            et un <code>ComponentBitset</code> pour une récupération O(1) et une vérification
+            et un <code>ComponentBitset</code> pour une récupération et une vérification
             de présence rapide.
         </li>
         <li>
             Moteur physique avec gravité, vélocité, et résolution de collisions par impulsion :
-            calcul de la masse inverse, coefficient de restitution et séparation des corps en
-            pénétration.
+            calcul de la masse inverse, coefficient de restitution.
         </li>
         <li>
-            Détection de collisions multi-formes par la méthode SAT (Séparation des Axes) :
+            Détection de collisions multi-formes :
             boîte vs boîte, sphère vs polygone et sphère vs sphère, avec support de tuiles
             triangulaires pour les pentes de la map.
-        </li>
-        <li>
-            Système d'armes à deux modes : boule de feu normale et boule de feu fragmentée
-            qui se divise en 8 projectiles après un délai de 2 secondes, chacun avec sa propre
-            physique et ses propres collisions.
-        </li>
-        <li>
-            Direction de tir calculée dynamiquement via la position de la souris par rapport
-            au dragon, avec prise en compte d'une force de vent aléatoire appliquée à la
-            vélocité initiale du projectile.
         </li>
         <li>
             Gestionnaire de tours avec minuterie de 20 secondes, alternance des joueurs,
             régénération aléatoire du vent (–3 à +3) et indicateur visuel de direction de
             visée affiché uniquement pour le joueur actif.
-        </li>
-        <li>
-            Système de scènes (menu principal, partie en jeu) avec chargement dynamique,
-            menu pause et écran de fin de partie.
-        </li>
-        <li>
-            Système UI et MenuManager : création de textes, zones et boutons cliquables avec
-            callbacks lambdas, support de la remappage des touches et contrôle du volume en
-            jeu.
-        </li>
-        <li>
-            AssetManager singleton gérant le chargement centralisé des textures, polices,
-            musiques et images, avec lecture de la carte depuis un tableau de caractères
-            ASCII pour placer les tuiles de terrain et les murs invisibles.
         </li>
     </ul>
 </section>
@@ -94,7 +61,7 @@
     <h2>Défis techniques</h2>
     <ul>
         <li>
-            Implémenter le SAT pour des formes hétérogènes (boîte, triangle, sphère) en gérant
+            Implémenter les collisions pour des formes hétérogènes (boîte, triangle, sphère) en gérant
             correctement la normale de collision et le sens de séparation selon quel objet est
             statique ou non.
         </li>
@@ -104,9 +71,8 @@
             vecteur d'entités à chaque frame.
         </li>
         <li>
-            Concevoir un ECS générique en C++ sans RTTI ni héritage dynamique lourd, en
-            s'appuyant sur des IDs de composants générés à la compilation via des fonctions
-            template statiques.
+            Concevoir un ECS générique en C++ s'appuyant sur des IDs de composants générés 
+            à la compilation via des fonctions template statiques.
         </li>
         <li>
             Synchroniser la fin de tour avec la destruction du projectile : la <code>Fireball</code>

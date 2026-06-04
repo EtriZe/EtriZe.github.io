@@ -36,14 +36,9 @@
 <section>
     <h2>Résumé</h2>
     <p>
-        Projet de mastère 1 de rendu 3D par raycasting en temps réel en C++ et SFML, réalisé dans le cadre d'un devoir de Game Programming à Ynov.
-    </p>
-</section>
-
-<section>
-    <h2>Mon rôle</h2>
-    <p>
-        Conception et développement complet du projet : implémentation de l'algorithme de raycasting, rendu pixel par pixel sur une image SFML et gestion des entrées clavier pour la caméra.
+        Moteur de rendu 3D par raycasting en temps réel, développé en C++ et SFML
+        dans le cadre d'un devoir de Game Programming à Ynov. Le principe est le même
+        que celui de Wolfenstein 3D : simuler une vue 3D depuis une carte 2D.
     </p>
 </section>
 
@@ -51,34 +46,15 @@
     <h2>Ce que j'ai développé</h2>
     <ul>
         <li>
-            Implémentation de <code>drawVerticalLine()</code> pour le tracé colonne par colonne de la scène directement dans un buffer image.
+            Rendu de la scène colonne par colonne, en calculant pour chaque pixel
+            la distance au mur en face et la hauteur à afficher en conséquence.
         </li>
         <li>
-            Algorithme DDA (Digital Differential Analysis) pour calculer efficacement l'intersection des rayons avec la grille de la carte.
+            Différenciation visuelle des murs par couleur, avec assombrissement
+            des faces latérales pour simuler un éclairage directionnel.
         </li>
         <li>
-            Calcul de la distance perpendiculaire au plan caméra pour restituer une perspective correcte sans effet fish-eye.
-        </li>
-        <li>
-            Différenciation visuelle des murs par type via un code couleur, et assombrissement des faces latérales pour simuler un éclairage directionnel.
-        </li>
-        <li>
-            Gestion de la caméra en temps réel : déplacement et rotation à vitesse fixée, avec mise à jour à pas de temps fixe.
-        </li>
-    </ul>
-</section>
-
-<section>
-    <h2>Défis techniques</h2>
-    <ul>
-        <li>
-            Comprendre et implémenter l'algorithme DDA à partir de zéro, en particulier la gestion correcte des distances <code>sideDist</code> et <code>deltaDist</code> pour chaque axe.
-        </li>
-        <li>
-            Éviter l'effet fish-eye en utilisant la distance perpendiculaire au plan caméra plutôt que la distance euclidienne directe.
-        </li>
-        <li>
-            Maintenir des performances suffisantes en travaillant directement sur les pixels d'une <code>sf::Image</code> rechargée en texture à chaque frame.
+            Déplacement et rotation de la caméra en temps réel au clavier.
         </li>
     </ul>
 </section>
@@ -86,6 +62,7 @@
 <section>
     <h2>Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis de comprendre les fondements du rendu 3D pseudo-volumétrique, en particulier la technique de raycasting popularisée par Wolfenstein 3D. Il m'a également familiarisé avec la manipulation directe de buffers pixels et les contraintes de performance liées au rendu logiciel.
+        Les fondements du rendu 3D pseudo-volumétrique et la manipulation directe
+        de pixels pour produire une image en temps réel.
     </p>
 </section>
