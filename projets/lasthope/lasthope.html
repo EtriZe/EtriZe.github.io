@@ -31,8 +31,6 @@
 </style>
 <title>Last Hope</title>
 
-
-
 <div class="game-wrapper">
     <iframe src="./projets/lasthope/game/index.html" width="960" height="600" frameborder="0" allowfullscreen
         loading="lazy" title="Last Hope - WebGL">
@@ -40,7 +38,8 @@
 </div>
 
 <p id="mobile-message">
-    [Projet jouable disponible sur la version PC du site]
+    <span class="lang-fr">[Projet jouable disponible sur la version PC du site]</span>
+    <span class="lang-en">[Playable project available on the PC version of the site]</span>
 </p>
 
 <info>
@@ -49,51 +48,67 @@
 </info>
 
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Jeu de survie de vagues 2D en Unity (C#). Le joueur incarne une entité végétale
+        <span class="lang-fr">Jeu de survie de vagues 2D en Unity (C#). Le joueur incarne une entité végétale
         qui défend sa position en lançant des racines souterraines surgissant du sol pour
-        détruire les ennemis. Vagues progressives (coureurs, tireurs, hélicoptères).
+        détruire les ennemis. Vagues progressives (coureurs, tireurs, hélicoptères).</span>
+        <span class="lang-en">2D wave survival game in Unity (C#). The player controls a plant entity
+        that defends its position by launching underground roots that burst from the ground to
+        destroy enemies. Progressive waves (runners, shooters, helicopters).</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Mécanique de racines en deux temps : une racine avance sous terre, puis au relâché
+            <span class="lang-fr">Mécanique de racines en deux temps : une racine avance sous terre, puis au relâché
             une seconde surgit verticalement à cet endroit. Chaque côté a son propre cooldown
-            affiché par une barre de progression animée.
+            affiché par une barre de progression animée.</span>
+            <span class="lang-en">Two-phase root mechanic: one root travels underground, then on release
+            a second one bursts vertically at that location. Each side has its own cooldown
+            displayed by an animated progress bar.</span>
         </li>
         <li>
-            Régénération entre les vagues : des effets visuels convergent vers le joueur
-            et restaurent 33% de ses HP.
+            <span class="lang-fr">Régénération entre les vagues : des effets visuels convergent vers le joueur
+            et restaurent 33% de ses HP.</span>
+            <span class="lang-en">Between-wave regeneration: visual effects converge toward the player
+            and restore 33% of their HP.</span>
         </li>
         <li>
-            Screen shake à intensité décroissante, interrompu proprement si un nouveau
-            shake se déclenche avant la fin du précédent.
+            <span class="lang-fr">Screen shake à intensité décroissante, interrompu proprement si un nouveau
+            shake se déclenche avant la fin du précédent.</span>
+            <span class="lang-en">Decreasing-intensity screen shake, cleanly interrupted if a new
+            shake triggers before the previous one ends.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Coordonner les deux entités de la racine via des événements, tout en gérant
-            les animations des deux côtés indépendamment.
+            <span class="lang-fr">Coordonner les deux entités de la racine via des événements, tout en gérant
+            les animations des deux côtés indépendamment.</span>
+            <span class="lang-en">Coordinating the two root entities via events while managing
+            animations on both sides independently.</span>
         </li>
         <li>
-            Gérer les slots de spawn de fenêtres par vague en détectant les positions
-            occupées et en retentatant si aucun slot libre n'est disponible.
+            <span class="lang-fr">Gérer les slots de spawn de fenêtres par vague en détectant les positions
+            occupées et en retentatant si aucun slot libre n'est disponible.</span>
+            <span class="lang-en">Managing window spawn slots per wave by detecting occupied positions
+            and retrying when no free slot is available.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Concevoir un jeu Unity complet avec système de vagues et feedback caméra.
-        C'est surtout une de mes premières expériences de Game Jam en dehors d'un cursus scolaire.
+        <span class="lang-fr">Concevoir un jeu Unity complet avec système de vagues et feedback caméra.
+        C'est surtout une de mes premières expériences de Game Jam en dehors d'un cursus scolaire.</span>
+        <span class="lang-en">Designing a complete Unity game with a wave system and camera feedback.
+        Most importantly, it was one of my first Game Jam experiences outside of school.</span>
     </p>
 </section>

@@ -21,44 +21,55 @@
 </info>
 
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Visualiseur interactif de pathfinding en C++ avec SFML. L'utilisateur place des
+        <span class="lang-fr">Visualiseur interactif de pathfinding en C++ avec SFML. L'utilisateur place des
         cases (départ, arrivée, murs, portails) et déclenche A* qui affiche le chemin
-        optimal en temps réel.
+        optimal en temps réel.</span>
+        <span class="lang-en">Interactive pathfinding visualizer in C++ with SFML. The user places
+        tiles (start, end, walls, portals) and triggers A* which displays the
+        optimal path in real time.</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Grille 2D où chaque case connaît ses voisines et leur type,
-            avec disposition calculée automatiquement selon la résolution.
+            <span class="lang-fr">Grille 2D où chaque case connaît ses voisines et leur type,
+            avec disposition calculée automatiquement selon la résolution.</span>
+            <span class="lang-en">2D grid where each cell knows its neighbors and their type,
+            with layout automatically calculated based on the resolution.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Intégrer les portails sans toucher à A* : traités comme des raccourcis
-            à coût nul, l'algorithme les emprunte naturellement si c'est plus court.
+            <span class="lang-fr">Intégrer les portails sans toucher à A* : traités comme des raccourcis
+            à coût nul, l'algorithme les emprunte naturellement si c'est plus court.</span>
+            <span class="lang-en">Integrating portals without modifying A*: treated as zero-cost shortcuts,
+            the algorithm uses them naturally when they offer a shorter path.</span>
         </li>
         <li>
-            Synchroniser affichage et logique interne à chaque clic.
+            <span class="lang-fr">Synchroniser affichage et logique interne à chaque clic.</span>
+            <span class="lang-en">Synchronizing the display and internal logic on every click.</span>
         </li>
         <li>
-            Système de cases extensible sans réécrire la logique existante.
+            <span class="lang-fr">Système de cases extensible sans réécrire la logique existante.</span>
+            <span class="lang-en">Extensible tile system without rewriting existing logic.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Implémenter A* from scratch et modéliser un graphe au-delà de la grille classique,
-        notamment via les portails. Bonne pratique de séparation entre logique et affichage.
+        <span class="lang-fr">Implémenter A* from scratch et modéliser un graphe au-delà de la grille classique,
+        notamment via les portails. Bonne pratique de séparation entre logique et affichage.</span>
+        <span class="lang-en">Implementing A* from scratch and modeling a graph beyond the classic grid,
+        notably through portals. Good practice separating logic from display.</span>
     </p>
 </section>

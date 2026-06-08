@@ -113,18 +113,6 @@ function filtreCategories(button, all) {
     });
   }
 
-  // let newProjectCards = document.querySelectorAll(".projectCard");
-  // let count = 0;
-  // Array.prototype.forEach.call(newProjectCards, function(newProjectCard) {
-  //     if( ! newProjectCard.classList.contains("hide")) count++;
-  //     newProjectCard.classList.remove("lastCard");
-  // });
-
-  // if((count % 3) == 1){
-  //     newProjectCards[count].classList.add("lastCard");
-  // }
-
-  //Mettre dans l'ordre, les "hide" à la fin
   const myDiv = document.getElementsByTagName("projects")[0];
   reorderDivChildren(myDiv);
 }
@@ -139,7 +127,7 @@ function reorderDivChildren(div) {
   }
 
   for (const child of [...visible, ...hidden]) {
-    div.appendChild(child); // appendChild déplace l'élément s'il est déjà dans le DOM
+    div.appendChild(child);
   }
 }
 
@@ -162,6 +150,10 @@ async function openProjects(file) {
       document.body.appendChild(newScript);
       newScript.remove();
     });
+    // ────────────────────────────────────────────────────────
+
+    // ── Applique la langue courante au contenu du projet ────
+    window.applyCurrentLangToModal && window.applyCurrentLangToModal();
     // ────────────────────────────────────────────────────────
 
     if (isMobile()) {
@@ -191,9 +183,18 @@ function projectPage() {
 }
 
 function openCVModal() {
+  const lang = localStorage.getItem("vb_lang") || "fr";
+  const cvFiles = {
+    fr: "./images/cv_barrere_valentin_game_dev.pdf",
+    en: "./images/cv_barrere_valentin_game_dev_en.pdf",
+  };
+  const cvFile = cvFiles[lang] || cvFiles.fr;
+
+  document.getElementById("cv-iframe").src = cvFile;
+  document.getElementById("cv-download-link").href = cvFile;
+
   const modal = document.getElementById("cv-modal");
   modal.style.display = "flex";
-  // Fermer en cliquant en dehors de la fenêtre
   modal.addEventListener(
     "click",
     function (e) {

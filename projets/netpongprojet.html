@@ -15,68 +15,87 @@
 </style>
 <title>NetPong Projet</title>
 
-
 <info>
     <a id="github" target="_blank" href="https://github.com/P0ulpy/NetPong-Project"></a>
 </info>
 
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Pong 1v1 en réseau développé en C++ avec SFML à Ynov Campus. Les tirs directs
+        <span class="lang-fr">Pong 1v1 en réseau développé en C++ avec SFML à Ynov Campus. Les tirs directs
         sont inoffensifs — il faut faire ricocher ses projectiles sur les murs pour
-        toucher l'adversaire. Moteur maison avec système réseau client-serveur.
+        toucher l'adversaire. Moteur maison avec système réseau client-serveur.</span>
+        <span class="lang-en">1v1 networked Pong developed in C++ with SFML at Ynov Campus. Direct shots
+        are harmless — you must bounce projectiles off the walls to
+        hit the opponent. Custom engine with a client-server network system.</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Létalité par rebond : la balle ne devient dangereuse qu'après avoir ricoché
-            sur un mur. Un effet de traînée s'active passé un certain nombre de rebonds.
+            <span class="lang-fr">Létalité par rebond : la balle ne devient dangereuse qu'après avoir ricoché
+            sur un mur. Un effet de traînée s'active passé un certain nombre de rebonds.</span>
+            <span class="lang-en">Bounce lethality: the ball only becomes dangerous after bouncing
+            off a wall. A trail effect activates after a certain number of bounces.</span>
         </li>
         <li>
-            Terrain polygonal procédural : 10 dispositions tirées aléatoirement,
-            collisions calculées bord par bord.
+            <span class="lang-fr">Terrain polygonal procédural : 10 dispositions tirées aléatoirement,
+            collisions calculées bord par bord.</span>
+            <span class="lang-en">Procedural polygonal arena: 10 randomly drawn layouts,
+            collisions computed edge by edge.</span>
         </li>
         <li>
-            Gestion de partie complète : scores, rounds avec compte à rebours,
-            condition de victoire et interface en jeu.
+            <span class="lang-fr">Gestion de partie complète : scores, rounds avec compte à rebours,
+            condition de victoire et interface en jeu.</span>
+            <span class="lang-en">Full match management: scores, rounds with countdown,
+            win condition and in-game UI.</span>
         </li>
         <li>
-            Systèmes support : sons, animations de mort et gestion des ressources.
+            <span class="lang-fr">Systèmes support : sons, animations de mort et gestion des ressources.</span>
+            <span class="lang-en">Support systems: sounds, death animations and resource management.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Faire coexister trois fils d'exécution (rendu, logique, réseau) sans blocage
-            mutuel sur les données partagées.
+            <span class="lang-fr">Faire coexister trois fils d'exécution (rendu, logique, réseau) sans blocage
+            mutuel sur les données partagées.</span>
+            <span class="lang-en">Making three threads (rendering, logic, network) coexist without
+            deadlocks on shared data.</span>
         </li>
         <li>
-            Éviter que les projectiles rapides traversent les murs en vérifiant la
-            trajectoire complète entre deux images.
+            <span class="lang-fr">Éviter que les projectiles rapides traversent les murs en vérifiant la
+            trajectoire complète entre deux images.</span>
+            <span class="lang-en">Preventing fast projectiles from tunneling through walls by checking the
+            full trajectory between two frames.</span>
         </li>
         <li>
-            Maintenir le serveur autoritaire sur la physique tout en appliquant les états
-            localement côté client, sans désynchronisation visible.
+            <span class="lang-fr">Maintenir le serveur autoritaire sur la physique tout en appliquant les états
+            localement côté client, sans désynchronisation visible.</span>
+            <span class="lang-en">Keeping the server authoritative over physics while applying states
+            locally on the client side, without visible desynchronization.</span>
         </li>
         <li>
-            Garantir des rebonds cohérents sur n'importe quelle surface du terrain.
+            <span class="lang-fr">Garantir des rebonds cohérents sur n'importe quelle surface du terrain.</span>
+            <span class="lang-en">Guaranteeing consistent bounces on any surface of the arena.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Une première expérience concrète de réseau temps réel en C++ : fils d'exécution
+        <span class="lang-fr">Une première expérience concrète de réseau temps réel en C++ : fils d'exécution
         parallèles, synchronisation d'états et séparation local/serveur. J'ai aussi
         approfondi la physique de collision et appris à garder moteur, logique et réseau
-        indépendants les uns des autres.
+        indépendants les uns des autres.</span>
+        <span class="lang-en">A first hands-on experience with real-time networking in C++: parallel threads,
+        state synchronization and local/server separation. I also deepened my understanding of collision
+        physics and learned to keep the engine, logic and network independent from one another.</span>
     </p>
 </section>

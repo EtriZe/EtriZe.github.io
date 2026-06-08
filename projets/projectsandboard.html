@@ -17,7 +17,6 @@
         --yt-bg: #0b0b0b;
         --yt-border: #1e1e1e;
         --yt-accent: var(--text-primary);
-        /* vert citron — modifie selon ta couleur accent */
         --yt-muted: #e0e0e0;
         --yt-text: #e0e0e0;
         --yt-radius: 30px;
@@ -29,7 +28,6 @@
         font-family: 'Courier New', Courier, monospace;
     }
 
-    /* Label style // comment */
     .yt-label {
         font-size: 0.78rem;
         color: var(--yt-muted);
@@ -38,7 +36,6 @@
         text-transform: lowercase;
     }
 
-    /* Wrapper principal */
     .yt-carousel {
         position: relative;
         display: flex;
@@ -46,25 +43,21 @@
         gap: 12px;
     }
 
-    /* Viewport masquant l'overflow */
     .yt-viewport {
         flex: 1;
         overflow: hidden;
         border-radius: var(--yt-radius);
         border: 1px solid var(--yt-border);
         background: var(--yt-bg);
-        /* Même ombre que tes iframes de jeux */
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 32px rgba(0, 0, 0, 0.6);
     }
 
-    /* Track glissant */
     .yt-track {
         display: flex;
         transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
     }
 
-    /* Chaque slide = une iframe 16:9 */
     .yt-slide {
         flex: 0 0 100%;
         position: relative;
@@ -81,7 +74,6 @@
         display: block;
     }
 
-    /* Flèches de navigation */
     .yt-arrow {
         flex-shrink: 0;
         width: var(--yt-arrow-sz);
@@ -109,7 +101,6 @@
         pointer-events: none;
     }
 
-    /* Dots */
     .yt-dots {
         display: flex;
         justify-content: center;
@@ -133,7 +124,6 @@
         transform: scale(1.4);
     }
 
-    /* Compteur */
     .yt-counter {
         text-align: center;
         font-size: 0.72rem;
@@ -155,9 +145,7 @@
         </button>
 
         <div class="yt-viewport">
-            <div class="yt-track" id="ytTrack">
-                <!-- Les iframes sont injectées par JS -->
-            </div>
+            <div class="yt-track" id="ytTrack"></div>
         </div>
 
         <button class="yt-arrow yt-arrow--next" id="ytNext" aria-label="Vidéo suivante">
@@ -172,86 +160,108 @@
     <p class="yt-counter" id="ytCounter">01 / 01</p>
 </section>
 
-
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Projet de jeu sous Unreal Engine développé sur notre temps libre avec une dizaine de camarades issus de la même école.
+        <span class="lang-fr">Projet de jeu sous Unreal Engine développé sur notre temps libre avec une dizaine de camarades issus de la même école.
         L'objectif principal était de monter en compétences tout en travaillant sur un jeu qui nous passionne.
         Le projet a exploré plusieurs directions : d'abord un jeu narratif mêlant exploration et survie, dans lequel le joueur se retrouve
         enfermé dans un monde mystérieux abandonné par une ancienne civilisation, cerné par des tempêtes de sable infranchissables.
         Nous avons également expérimenté une direction roguelite, axée sur les déplacements dans un canyon,
-        où l'objectif était d'aller le plus loin possible en survivant à une tempête nous prenant en chasse.
+        où l'objectif était d'aller le plus loin possible en survivant à une tempête nous prenant en chasse.</span>
+        <span class="lang-en">Unreal Engine game project developed in our free time with about ten classmates from the same school.
+        The main goal was to level up our skills while working on a game we were passionate about.
+        The project explored several directions: first a narrative game blending exploration and survival, where the player finds themselves
+        trapped in a mysterious world abandoned by an ancient civilization, surrounded by impassable sandstorms.
+        We also experimented with a roguelite direction, focused on movement through a canyon,
+        where the goal was to go as far as possible while surviving a storm chasing you down.</span>
     </p>
 </section>
 
-
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Développement d'un hoverboard reposant sur une physique maison (sans recourir au simulate physics).
+            <span class="lang-fr">Développement d'un hoverboard reposant sur une physique maison (sans recourir au simulate physics).
             Il intègre : une gestion des collisions conditionnelles (frontale ou latérale), un effet de flottaison au sol,
             des tricks, un charge jump, une capacité de drift, une esquive parfaite, de la friction contre les murs,
-            ainsi qu'un mode autonome permettant au joueur d'appeler la planche pour qu'elle le rejoigne seule.
+            ainsi qu'un mode autonome permettant au joueur d'appeler la planche pour qu'elle le rejoigne seule.</span>
+            <span class="lang-en">Development of a hoverboard using custom physics (without relying on simulate physics).
+            It includes: conditional collision handling (frontal or lateral), a ground hover effect,
+            tricks, a charge jump, drift capability, a perfect dodge, wall friction,
+            and an autonomous mode allowing the player to call the board to come to them on its own.</span>
         </li>
         <li>
-            Développement d'un outil de génération procédurale de dunes de sable,
-            utilisant un algorithme de bruit de Perlin pour répondre aux besoins de level design de l'équipe.
+            <span class="lang-fr">Développement d'un outil de génération procédurale de dunes de sable,
+            utilisant un algorithme de bruit de Perlin pour répondre aux besoins de level design de l'équipe.</span>
+            <span class="lang-en">Development of a procedural sand dune generation tool,
+            using a Perlin noise algorithm to meet the team's level design needs.</span>
         </li>
         <li>
-            Système de tempête matérialisé par un mur se rapprochant progressivement du joueur.
-            Une fois le joueur rattrapé, le monde bascule en mode « Tempête », activant des mécanismes de gameplay spécifiques.
+            <span class="lang-fr">Système de tempête matérialisé par un mur se rapprochant progressivement du joueur.
+            Une fois le joueur rattrapé, le monde bascule en mode « Tempête », activant des mécanismes de gameplay spécifiques.</span>
+            <span class="lang-en">Storm system represented by a wall gradually closing in on the player.
+            Once the player is caught, the world switches to "Storm" mode, activating specific gameplay mechanics.</span>
         </li>
         <li>
-            Système d'inventaire et de craft.
+            <span class="lang-fr">Système d'inventaire et de craft.</span>
+            <span class="lang-en">Inventory and crafting system.</span>
         </li>
         <li>
-            State machine maison gérant les états du monde ainsi que les différents modes de la planche
-            (portée dans le dos, autonome ou montée).
+            <span class="lang-fr">State machine maison gérant les états du monde ainsi que les différents modes de la planche
+            (portée dans le dos, autonome ou montée).</span>
+            <span class="lang-en">Custom state machine managing world states as well as the different board modes
+            (carried on the back, autonomous, or ridden).</span>
         </li>
         <li>
-            Interface utilisateur liée au gameplay.
+            <span class="lang-fr">Interface utilisateur liée au gameplay.</span>
+            <span class="lang-en">Gameplay-linked user interface.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Concevoir une physique maison pour l'hoverboard en trouvant le bon équilibre entre performance, réalisme et satisfaction de gameplay.
+            <span class="lang-fr">Concevoir une physique maison pour l'hoverboard en trouvant le bon équilibre entre performance, réalisme et satisfaction de gameplay.</span>
+            <span class="lang-en">Designing custom physics for the hoverboard while finding the right balance between performance, realism and gameplay feel.</span>
         </li>
         <li>
-            Optimisation des performances d'un outil de manipulation de dynamic mesh sous UE5.
+            <span class="lang-fr">Optimisation des performances d'un outil de manipulation de dynamic mesh sous UE5.
             Ce format étant destiné à être converti en static mesh, il était impossible de l'utiliser pour générer de grandes maps
-            (la modification ou la création d'un landscape étant hors de portée de l'outil).
+            (la modification ou la création d'un landscape étant hors de portée de l'outil).</span>
+            <span class="lang-en">Performance optimization of a dynamic mesh manipulation tool in UE5.
+            Since this format is meant to be converted to static mesh, it was impossible to use it to generate large maps
+            (modifying or creating a landscape being outside the tool's scope).</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        La gestion du travail en équipe dans le cadre d'un projet de jeu vidéo impliquant un grand nombre de personnes.
+        <span class="lang-fr">La gestion du travail en équipe dans le cadre d'un projet de jeu vidéo impliquant un grand nombre de personnes.</span>
+        <span class="lang-en">Managing teamwork in the context of a video game project involving a large number of people.</span>
     </p>
     <p>
-        Ce projet m'a permis de gagner en aisance sur Unreal Engine, et plus particulièrement sur son API C++.
+        <span class="lang-fr">Ce projet m'a permis de gagner en aisance sur Unreal Engine, et plus particulièrement sur son API C++.</span>
+        <span class="lang-en">This project allowed me to become more comfortable with Unreal Engine, and more specifically its C++ API.</span>
     </p>
     <p>
-        Une meilleure compréhension des performances et du workflow d'Unreal Engine.
+        <span class="lang-fr">Une meilleure compréhension des performances et du workflow d'Unreal Engine.</span>
+        <span class="lang-en">A better understanding of Unreal Engine's performance and workflow.</span>
     </p>
 </section>
 
 <script>
 (function () {
   const videos = [
-    { id: 'M_gcg2cNF28', title: 'Présentation de la board' },
-    { id: 'L1UJy4ROuEo', title: 'Evanouissement dans une tempête et board qui nous ramène' },
-    { id: 'ww686d2FJUI', title: 'Générateur de dunes' },
-    { id: 'CNjywrsTvtU', title: 'Système de craft et d\'inventaire' },
+    { id: 'M_gcg2cNF28', titleFr: 'Présentation de la board', titleEn: 'Board showcase' },
+    { id: 'L1UJy4ROuEo', titleFr: 'Evanouissement dans une tempête et board qui nous ramène', titleEn: 'Fainting in a storm and the board bringing us back' },
+    { id: 'ww686d2FJUI', titleFr: 'Générateur de dunes', titleEn: 'Dune generator' },
+    { id: 'CNjywrsTvtU', titleFr: "Système de craft et d'inventaire", titleEn: 'Inventory and crafting system' },
   ];
-  /* ──────────────────────────────────────────────────────── */
 
   const track   = document.getElementById('ytTrack');
   const dotsEl  = document.getElementById('ytDots');
@@ -262,16 +272,13 @@
 
   function pad(n) { return String(n + 1).padStart(2, '0'); }
 
-  /* Construction des slides */
   videos.forEach(function (v, i) {
     const slide = document.createElement('div');
     slide.className = 'yt-slide';
     slide.setAttribute('role', 'tabpanel');
-    slide.setAttribute('aria-label', v.title);
 
     const iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube.com/embed/' + v.id + '?rel=0&modestbranding=1';
-    iframe.title = v.title;
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
     iframe.loading = 'lazy';
@@ -279,11 +286,9 @@
     slide.appendChild(iframe);
     track.appendChild(slide);
 
-    /* Dot */
     const dot = document.createElement('button');
     dot.className = 'yt-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', 'Vidéo ' + (i + 1) + ' : ' + v.title);
     dot.addEventListener('click', function () { goTo(i); });
     dotsEl.appendChild(dot);
   });
@@ -291,16 +296,10 @@
   function goTo(index) {
     current = Math.max(0, Math.min(index, videos.length - 1));
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
-
-    /* Dots */
     dotsEl.querySelectorAll('.yt-dot').forEach(function (d, i) {
       d.classList.toggle('active', i === current);
     });
-
-    /* Compteur */
     counter.textContent = pad(current) + ' / ' + pad(videos.length - 1);
-
-    /* Flèches */
     btnPrev.disabled = current === 0;
     btnNext.disabled = current === videos.length - 1;
   }
@@ -308,7 +307,6 @@
   btnPrev.addEventListener('click', function () { goTo(current - 1); });
   btnNext.addEventListener('click', function () { goTo(current + 1); });
 
-  /* Swipe tactile */
   var startX = 0;
   track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', function (e) {
@@ -318,6 +316,4 @@
 
   goTo(0);
 })();
-
-
 </script>

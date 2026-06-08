@@ -1,96 +1,127 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="responsive.css">
-  <title>Valentin Barrère — Game Developer</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="lite-yt-embed.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;1,400&family=Share+Tech+Mono&display=optional" rel="stylesheet">
-  <script defer type="text/javascript" src="script.js"></script>
-  <script defer type="text/javascript" src="lite-yt-embed.js"></script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5WBF8Z0C53"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="responsive.css">
+<title>Valentin Barrère — Game Developer</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="lite-yt-embed.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;1,400&family=Share+Tech+Mono&display=optional" rel="stylesheet">
+<script defer type="text/javascript" src="script.js"></script>
+<script defer type="text/javascript" src="lite-yt-embed.js"></script>
+<script defer src="i18n.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5WBF8Z0C53"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-5WBF8Z0C53');
+</script>
 
-    gtag('config', 'G-5WBF8Z0C53');
-  </script>
+<style>
+/* ── LANGUAGE SWITCHER ── */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+}
+.lang-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+}
+.lang-btn:hover {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.4);
+}
+.lang-btn.active {
+  color: #fff;
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.08);
+}
+</style>
 </head>
-
 <body>
-
-  <!-- ── NAVIGATION ── -->
-  <top-bar>
-    <div class="nav-brand">
-      <span class="nav-bracket">[</span>VB<span class="nav-bracket">]</span>
+<!-- ── NAVIGATION ── -->
+<top-bar>
+  <div class="nav-brand">
+    <span class="nav-bracket">[</span>VB<span class="nav-bracket">]</span>
+  </div>
+  <nav class="nav-links">
+    <div id="menuApropos" class="nav-item">
+      <span class="nav-index">01</span><span data-fr="À propos" data-en="About">À propos</span>
     </div>
-    <nav class="nav-links">
-      <div id="menuApropos" class="nav-item">
-        <span class="nav-index">01</span>À propos
-      </div>
-      <div id="menuProjets" class="nav-item">
-        <span class="nav-index">02</span>Projets
-      </div>
-      <!-- <a href="./images/cv_barrere_valentin_game_dev.pdf" download="cv_barrere_valentin_game_dev" class="nav-item nav-cv">
-        <span class="nav-index">↓</span>CV
-      </a> -->
-      <button onclick="openCVModal()" class="nav-item nav-cv">
-        <span class="nav-index">↓</span>CV
-      </button>
-    </nav>
-  </top-bar>
-
-  <!-- ── HERO / ABOUT ── -->
-  <aboutme>
-    <div class="noise-overlay"></div>
-
-    <div id="profilCard">
-      <div class="avatar-ring">
-        <img class="picture" src="./images/pp_profil.webp" alt="Valentin Barrère" />
-      </div>
-      <div class="profile-info">
-        <span id="name">Valentin Barrère</span>
-        <span class="profile-role">Game Developer</span>
-        <span id="age">26 ans</span>
-      </div>
-      <div id="contact">
-        <a id="github" href="https://github.com/EtriZe" class="contact-link">
-          <span class="contact-icon"></span>
-          <div class="contact-text">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">EtriZe</span>
-          </div>
-        </a>
-        <a id="linkedin" href="https://www.linkedin.com/in/valentin-barrère-1784021a1" class="contact-link">
-          <span class="contact-icon"></span>
-          <div class="contact-text">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">valentin-barrère</span>
-          </div>
-        </a>
-        <a id="mail" href="mailto:valentin.barrerepro@gmail.com" class="contact-link">
-          <span class="contact-icon"></span>
-          <div class="contact-text">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">valentin.barrerepro@gmail.com</span>
-          </div>
-        </a>
-      </div>
+    <div id="menuProjets" class="nav-item">
+      <span class="nav-index">02</span><span data-fr="Projets" data-en="Projects">Projets</span>
     </div>
+    <button onclick="openCVModal()" class="nav-item nav-cv">
+      <span class="nav-index">↓</span>CV
+    </button>
 
-    <div id="resume">
-      <div class="resume-header">
-        <span class="resume-label">// about_me.txt</span>
-      </div>
-      <span id="text">
+    <!-- LANGUAGE SWITCHER -->
+    <div class="lang-switcher">
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </nav>
+</top-bar>
+
+<!-- ── HERO / ABOUT ── -->
+<aboutme>
+  <div class="noise-overlay"></div>
+  <div id="profilCard">
+    <div class="avatar-ring">
+      <img class="picture" src="./images/pp_profil.webp" alt="Valentin Barrère" />
+    </div>
+    <div class="profile-info">
+      <span id="name">Valentin Barrère</span>
+      <span class="profile-role">Game Developer</span>
+      <span id="age" data-fr="26 ans" data-en="26 years old">26 ans</span>
+    </div>
+    <div id="contact">
+      <a id="github" href="https://github.com/EtriZe" class="contact-link">
+        <span class="contact-icon"></span>
+        <div class="contact-text">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">EtriZe</span>
+        </div>
+      </a>
+      <a id="linkedin" href="https://www.linkedin.com/in/valentin-barrère-1784021a1" class="contact-link">
+        <span class="contact-icon"></span>
+        <div class="contact-text">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">valentin-barrère</span>
+        </div>
+      </a>
+      <a id="mail" href="mailto:valentin.barrerepro@gmail.com" class="contact-link">
+        <span class="contact-icon"></span>
+        <div class="contact-text">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">valentin.barrerepro@gmail.com</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="resume">
+    <div class="resume-header">
+      <span class="resume-label">// about_me.txt</span>
+    </div>
+    <span id="text">
+      <span class="lang-fr">
         Durant mon parcours académique et personnel, j'ai eu l'opportunité de travailler sur plusieurs
         projets utilisant <strong>Unreal Engine</strong>, <strong>Unity</strong> et sans frameworks en
         <strong>C++</strong>.<br><br>
@@ -105,323 +136,321 @@
         Je m'efforce de comprendre en profondeur les technologies que j'utilise afin de proposer des solutions
         pertinentes et créatives.
       </span>
+      <span class="lang-en" style="display:none;">
+        Throughout my academic and personal journey, I've had the opportunity to work on several
+        projects using <strong>Unreal Engine</strong>, <strong>Unity</strong>, and framework-free
+        <strong>C++</strong>.<br><br>
+        These experiences have allowed me to build a solid technical foundation
+        while exploring different aspects of game development.
+        <br><br>
+        In parallel, I've participated in <strong>game jams</strong> and personal projects,
+        which pushes me to learn new tools, experiment with new concepts, and become more versatile.
+        <br><br>
+        Curious, self-driven, and committed, I also integrate effectively within a team.
+        I have a strong ability to learn quickly, which allows me to progress rapidly.
+        I strive to deeply understand the technologies I use in order to propose relevant and creative solutions.
+      </span>
+    </span>
 
-      <div id="skills">
-        <span id="titleSkills">// skills</span>
-        <div id="skillsIco">
-          <div id="cpp" title="C++"></div>
-          <div id="csharp" title="C#"></div>
-          <div id="ue5" title="Unreal Engine"></div>
-          <div id="unity" title="Unity"></div>
-          <!-- <div id="cmake" title="CMake"></div> -->
-        </div>
+    <div id="skills">
+      <span id="titleSkills">// skills</span>
+      <div id="skillsIco">
+        <div id="cpp" title="C++"></div>
+        <div id="csharp" title="C#"></div>
+        <div id="ue5" title="Unreal Engine"></div>
+        <div id="unity" title="Unity"></div>
       </div>
     </div>
-  </aboutme>
+  </div>
+</aboutme>
 
-  <!-- ── SECTION TITLE ── -->
-  <title-bar>
-    <div class="title-bar-inner">
-      <span class="title-bar-line"></span>
-      <span class="title-bar-text">Projets</span>
-      <span class="title-bar-line"></span>
+<!-- ── SECTION TITLE ── -->
+<title-bar>
+  <div class="title-bar-inner">
+    <span class="title-bar-line"></span>
+    <span class="title-bar-text" data-fr="Projets" data-en="Projects">Projets</span>
+    <span class="title-bar-line"></span>
+  </div>
+</title-bar>
+
+<!-- ── FILTRES ── -->
+<filtres>
+  <button categorie="1" style="--tag-color:#FF6B6B;">Unreal Engine</button>
+  <button categorie="2" style="--tag-color:#FCAE7C;">Unity</button>
+  <button categorie="3" style="--tag-color:#FFE66D;">C++</button>
+  <button categorie="4" style="--tag-color:#A8E6CF;">C#</button>
+  <button categorie="5" style="--tag-color:#88D8B0;">Git</button>
+  <button categorie="6" style="--tag-color:#88CCF1;">SVN</button>
+  <button categorie="7" style="--tag-color:#C9A8F5;">OpenGL</button>
+</filtres>
+
+<!-- ── PROJECTS GRID ── -->
+<projects style="margin-top:1vh; padding-top: 5vh;">
+
+  <!-- LAST HOPE -->
+  <div class="projectCard" file="./projets/lasthope/lasthope.html">
+    <div class="categories">
+      <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
+      <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
     </div>
-  </title-bar>
-
-  <!-- ── FILTRES ── -->
-  <filtres>
-    <button categorie="1" style="--tag-color:#FF6B6B;">Unreal Engine</button>
-    <button categorie="2" style="--tag-color:#FCAE7C;">Unity</button>
-    <button categorie="3" style="--tag-color:#FFE66D;">C++</button>
-    <button categorie="4" style="--tag-color:#A8E6CF;">C#</button>
-    <button categorie="5" style="--tag-color:#88D8B0;">Git</button>
-    <button categorie="6" style="--tag-color:#88CCF1;">SVN</button>
-    <button categorie="7" style="--tag-color:#C9A8F5;">OpenGL</button>
-    <!-- <button categorie="8" style="--tag-color:#D1BDFF;">CMake</button> -->
-  </filtres>
-
-  <!-- ── PROJECTS GRID ── -->
-  <projects style="margin-top:1vh; padding-top: 5vh;">
-
-    <!-- LAST HOPE -->
-    <div class="projectCard" file="./projets/lasthope/lasthope.html">
-      <div class="categories">
-        <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/lasthope.png" alt="Last Hope" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Global Game Jam : Last Hope</span>
-        <span class="projectResume">
-          Une Game Jam réalisée pendant 48H sous le thème "Root". Ce jeu a été réalisé avec 6 personnes sous Unity.
-          En tant que programmer j'ai touché à tous les aspects du jeu (Gameplay, Intégration d'animations et d'assets…)
-        </span>
-      </div>
-
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/lasthope.png" alt="Last Hope" />
     </div>
-
-    <!-- EXPLOSIVE DAY -->
-    <div class="projectCard" file="./projets/explosiveday/explosiveday.html">
-      <div class="categories">
-        <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/explosiveday.png" alt="An Explosive Day" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Game Jam Ynov : An Explosive Day</span>
-        <span class="projectResume">
-          Game Jam académique de 48H sous le thème "Don't kill anything". Développé à 6 sous Unity.
-          UI, gestion de l'explosion, de la bombe, de la foule et optimisation des entités.
-        </span>
-      </div>
-
-    </div>
-
-    <!-- WHERE ARE YOU -->
-    <div class="projectCard" file="./projets/whereareyou.html">
-      <div class="categories">
-        <div categorie="1" style="--tag-color:#FF6B6B;" title="Unreal Engine"></div>
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="6" style="--tag-color:#88CCF1;" title="SVN"></div>
-      </div>
-      <div class="card-glow"></div>
-      <!-- <div class="presentationPicContainer">
-        <div class="presentationPic video-wrapper">
-          <lite-youtube videoid='RY6BBwUHWAg' params='controls=1'></lite-youtube>
-        </div>
-      </div> -->
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/whereareyou.png" alt="Project Sandboard" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Projet Final Ynov : Where Are You?</span>
-        <span class="projectResume">
-          Puzzle game multijoueur réalisé en 1 an, projet de fin de Mastère 5.
-          Développé sous UE4 avec artistes & game designer. Responsable du multijoueur et du gameplay.
-        </span>
-      </div>
-
-    </div>
-
-    <!-- PROJECT SANDBOARD -->
-    <div class="projectCard" file="./projets/projectsandboard.html">
-      <div class="categories">
-        <div categorie="1" style="--tag-color:#FF6B6B;" title="Unreal Engine"></div>
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/ProjectSandboard.png" alt="Project Sandboard" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Project Sandboard</span>
-        <span class="projectResume">
-          Projet personnel en équipe sous Unreal Engine. Jeu de déplacement en désert sur hoverboard.
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- GENERATION PROCEDURALE -->
-    <div class="projectCard" file="./projets/proceduralterrain/proceduralterrain.html">
-      <div class="categories">
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-        <div categorie="7" style="--tag-color:#C9A8F5;" title="OpenGL"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/procedural_terrain.png" alt="Génération procédurale" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Génération Procédurale</span>
-        <span class="projectResume">
-          Projet scolaire en groupe de 3. Génération d'une carte 3D via algorithme procédural et OpenGL.
-        </span>
-      </div>
-
-    </div>
-
-    <!-- NETPONG -->
-    <div class="projectCard" file="./projets/netpongprojet.html">
-      <div class="categories">
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/netpong.webp" alt="NetPong" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Projet NetPong</span>
-        <span class="projectResume">
-          Projet scolaire en groupe de 3. Développement d'un jeu réseau en ligne sans framework, en C++ pur.
-        </span>
-      </div>
-
-    </div>
-
-    <!-- PATHFINDING -->
-    <div class="projectCard" file="./projets/pathfinder.html">
-      <div class="categories">
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/pathfinderPLACEHOLDER.png" alt="Pathfinding" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Projet Pathfinder</span>
-        <span class="projectResume">
-          Projet scolaire en groupe de 3. Visualisation interactive de plusieurs algorithmes de pathfinding.
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- RAYCASTER -->
-    <div class="projectCard" file="./projets/raycaster/raycaster.html">
-      <div class="categories">
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/rasterizer.png" alt="Raycaster" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Raycaster</span>
-        <span class="projectResume">
-          Exercice scolaire : recréer un rendu 3D façon Doom, uniquement avec C++ et SFML. Aucun framework 3D.
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- WORMS -->
-    <div class="projectCard" file="./projets/worms.html">
-      <div class="categories">
-        <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
-        <!-- <div categorie="8" style="--tag-color:#D1BDFF;" title="CMake"></div> -->
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/dragons.png" alt="Worms" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Worms</span>
-        <span class="projectResume">
-          Projet scolaire en groupe de 3. Clone de Worms avec physique et système ECS maison, en C++/SFML.
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- INFINITY PLATFORMS -->
-    <div class="projectCard" file="./projets/infinityplateform/infinityplateform.html">
-      <div class="categories">
-        <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/infinityplateform.png" alt="Infinity Platforms" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Infinity Platform</span>
-        <span class="projectResume">
-          Exercice consistant à créer un runner avec des plateformes apparaissant à l'infini.
-          Réalisé sur Unity en C#.
-        </span>
-      </div>
-
-    </div>
-
-    <!-- SOKOBAN -->
-    <div class="projectCard" file="./projets/sokoban/sokoban.html">
-      <div class="categories">
-        <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
-        <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
-        <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
-      </div>
-      <div class="card-glow"></div>
-      <div class="presentationPicContainer">
-        <img class="presentationPic" src="./images/sokoban.png" alt="Sokoban" />
-      </div>
-      <div class="card-body">
-        <span class="projectTitle">Sokoban</span>
-        <span class="projectResume">
-          Exercice scolaire : développer un Sokoban complet pour apprendre les bases d'Unity et C#.
-        </span>
-      </div>
-
-    </div>
-
-
-    <div class="projectCard force-hide"></div>
-
-  </projects>
-
-  <!-- ── PROJECT MODAL ── -->
-  <project-page class="hide">
-    <leave>✕</leave>
-    <overlay>
-      <content></content>
-    </overlay>
-  </project-page>
-
-  <footer>
-    <span class="footer-text">Valentin Barrère · Game Developer · <a
-        href="mailto:valentin.barrerepro@gmail.com">valentin.barrerepro@gmail.com</a></span>
-  </footer>
-
-  <div class="more">En savoir plus →</div>
-
-  <!-- Modal PDF Viewer -->
-  <div id="cv-modal"
-    style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
-    <div style="width:90%; max-width:900px; height:90vh; display:flex; flex-direction:column; gap:8px;">
-      <div style="display:flex; justify-content:flex-end; gap:10px;">
-        <a href="./images/cv_barrere_valentin_game_dev.pdf" download="cv_barrere_valentin_game_dev"
-          style="padding:8px 16px; background:#4a9eff; color:#fff; border:none; border-radius:6px; cursor:pointer; text-decoration:none; font-size:14px;">
-          ⬇ Télécharger
-        </a>
-        <button onclick="closeCVModal()"
-          style="padding:8px 16px; background:#555; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
-          ✕ Fermer
-        </button>
-      </div>
-      <iframe src="./images/cv_barrere_valentin_game_dev.pdf" style="width:100%; height:100%; border:none; border-radius:8px;">
-      </iframe>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Global Game Jam : Last Hope" data-en="Global Game Jam: Last Hope">Global Game Jam : Last Hope</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Une Game Jam réalisée pendant 48H sous le thème "Root". Ce jeu a été réalisé avec 6 personnes sous Unity. En tant que programmer j'ai touché à tous les aspects du jeu (Gameplay, Intégration d'animations et d'assets…)</span>
+        <span class="lang-en" style="display:none;">A 48-hour Game Jam under the theme "Root". This game was made with 6 people in Unity. As a programmer, I worked on all aspects of the game (Gameplay, Animation and asset integration…)</span>
+      </span>
     </div>
   </div>
 
-  <!-- <script src="ball.js"></script>
-<script>
-  const H = window.innerHeight;
+  <!-- EXPLOSIVE DAY -->
+  <div class="projectCard" file="./projets/explosiveday/explosiveday.html">
+    <div class="categories">
+      <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
+      <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/explosiveday.png" alt="An Explosive Day" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Game Jam Ynov : An Explosive Day" data-en="Ynov Game Jam: An Explosive Day">Game Jam Ynov : An Explosive Day</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Game Jam académique de 48H sous le thème "Don't kill anything". Développé à 6 sous Unity. UI, gestion de l'explosion, de la bombe, de la foule et optimisation des entités.</span>
+        <span class="lang-en" style="display:none;">Academic 48-hour Game Jam under the theme "Don't kill anything". Built with 6 people in Unity. UI, explosion mechanics, bomb system, crowd management and entity optimization.</span>
+      </span>
+    </div>
+  </div>
 
-  BALL_ADD_SURFACE(300, H,       550, H - 130);  // rampe montante
-  BALL_ADD_SURFACE(550, H - 130, 800, H - 130);  // plateforme
-  BALL_ADD_SURFACE(800, H - 130, 800, H);        // mur qui redescend
-</script> -->
+  <!-- WHERE ARE YOU -->
+  <div class="projectCard" file="./projets/whereareyou.html">
+    <div class="categories">
+      <div categorie="1" style="--tag-color:#FF6B6B;" title="Unreal Engine"></div>
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="6" style="--tag-color:#88CCF1;" title="SVN"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/whereareyou.png" alt="Project Sandboard" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Projet Final Ynov : Where Are You?" data-en="Ynov Final Project: Where Are You?">Projet Final Ynov : Where Are You?</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Puzzle game multijoueur réalisé en 1 an, projet de fin de Mastère 5. Développé sous UE4 avec artistes &amp; game designer. Responsable du multijoueur et du gameplay.</span>
+        <span class="lang-en" style="display:none;">Multiplayer puzzle game developed over 1 year as a Master's degree final project. Built in UE4 with artists &amp; a game designer. In charge of multiplayer and gameplay systems.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- PROJECT SANDBOARD -->
+  <div class="projectCard" file="./projets/projectsandboard.html">
+    <div class="categories">
+      <div categorie="1" style="--tag-color:#FF6B6B;" title="Unreal Engine"></div>
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/ProjectSandboard.png" alt="Project Sandboard" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">Project Sandboard</span>
+      <span class="projectResume">
+        <span class="lang-fr">Projet personnel en équipe sous Unreal Engine. Jeu de déplacement en désert sur hoverboard.</span>
+        <span class="lang-en" style="display:none;">Personal team project in Unreal Engine. A desert hoverboard movement game.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- GENERATION PROCEDURALE -->
+  <div class="projectCard" file="./projets/proceduralterrain/proceduralterrain.html">
+    <div class="categories">
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+      <div categorie="7" style="--tag-color:#C9A8F5;" title="OpenGL"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/procedural_terrain.png" alt="Génération procédurale" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Génération Procédurale" data-en="Procedural Generation">Génération Procédurale</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Projet scolaire en groupe de 3. Génération d'une carte 3D via algorithme procédural et OpenGL.</span>
+        <span class="lang-en" style="display:none;">School project in a group of 3. Generation of a 3D map using a procedural algorithm and OpenGL.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- NETPONG -->
+  <div class="projectCard" file="./projets/netpongprojet.html">
+    <div class="categories">
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/netpong.webp" alt="NetPong" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Projet NetPong" data-en="NetPong Project">Projet NetPong</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Projet scolaire en groupe de 3. Développement d'un jeu réseau en ligne sans framework, en C++ pur.</span>
+        <span class="lang-en" style="display:none;">School project in a group of 3. Development of an online network game with no framework, in pure C++.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- PATHFINDING -->
+  <div class="projectCard" file="./projets/pathfinder.html">
+    <div class="categories">
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/pathfinderPLACEHOLDER.png" alt="Pathfinding" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">
+        <span data-fr="Projet Pathfinder" data-en="Pathfinder Project">Projet Pathfinder</span>
+      </span>
+      <span class="projectResume">
+        <span class="lang-fr">Projet scolaire en groupe de 3. Visualisation interactive de plusieurs algorithmes de pathfinding.</span>
+        <span class="lang-en" style="display:none;">School project in a group of 3. Interactive visualization of several pathfinding algorithms.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- RAYCASTER -->
+  <div class="projectCard" file="./projets/raycaster/raycaster.html">
+    <div class="categories">
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/rasterizer.png" alt="Raycaster" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">Raycaster</span>
+      <span class="projectResume">
+        <span class="lang-fr">Exercice scolaire : recréer un rendu 3D façon Doom, uniquement avec C++ et SFML. Aucun framework 3D.</span>
+        <span class="lang-en" style="display:none;">School exercise: recreate a Doom-style 3D renderer using only C++ and SFML. No 3D framework whatsoever.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- WORMS -->
+  <div class="projectCard" file="./projets/worms.html">
+    <div class="categories">
+      <div categorie="3" style="--tag-color:#FFE66D;" title="C++"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/dragons.png" alt="Worms" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">Worms</span>
+      <span class="projectResume">
+        <span class="lang-fr">Projet scolaire en groupe de 3. Clone de Worms avec physique et système ECS maison, en C++/SFML.</span>
+        <span class="lang-en" style="display:none;">School project in a group of 3. Worms clone with custom physics and ECS system, built in C++/SFML.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- INFINITY PLATFORMS -->
+  <div class="projectCard" file="./projets/infinityplateform/infinityplateform.html">
+    <div class="categories">
+      <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
+      <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/infinityplateform.png" alt="Infinity Platforms" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">Infinity Platform</span>
+      <span class="projectResume">
+        <span class="lang-fr">Exercice consistant à créer un runner avec des plateformes apparaissant à l'infini. Réalisé sur Unity en C#.</span>
+        <span class="lang-en" style="display:none;">Exercise to create an endless runner with infinitely spawning platforms. Built in Unity with C#.</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- SOKOBAN -->
+  <div class="projectCard" file="./projets/sokoban/sokoban.html">
+    <div class="categories">
+      <div categorie="2" style="--tag-color:#FCAE7C;" title="Unity"></div>
+      <div categorie="4" style="--tag-color:#A8E6CF;" title="C#"></div>
+      <div categorie="5" style="--tag-color:#88D8B0;" title="Git"></div>
+    </div>
+    <div class="card-glow"></div>
+    <div class="presentationPicContainer">
+      <img class="presentationPic" src="./images/sokoban.png" alt="Sokoban" />
+    </div>
+    <div class="card-body">
+      <span class="projectTitle">Sokoban</span>
+      <span class="projectResume">
+        <span class="lang-fr">Exercice scolaire : développer un Sokoban complet pour apprendre les bases d'Unity et C#.</span>
+        <span class="lang-en" style="display:none;">School exercise: develop a complete Sokoban to learn the basics of Unity and C#.</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="projectCard force-hide"></div>
+</projects>
+
+<!-- ── PROJECT MODAL ── -->
+<project-page class="hide">
+  <leave>✕</leave>
+  <overlay>
+    <content></content>
+  </overlay>
+</project-page>
+
+<footer>
+  <span class="footer-text">Valentin Barrère · Game Developer · <a href="mailto:valentin.barrerepro@gmail.com">valentin.barrerepro@gmail.com</a></span>
+</footer>
+
+<div class="more">
+  <span data-fr="En savoir plus →" data-en="Learn more →">En savoir plus →</span>
+</div>
+
+<!-- Modal PDF Viewer -->
+<div id="cv-modal"
+  style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
+  <div style="width:90%; max-width:900px; height:90vh; display:flex; flex-direction:column; gap:8px;">
+    <div style="display:flex; justify-content:flex-end; gap:10px;">
+      <a id="cv-download-link" href="./images/cv_barrere_valentin_game_dev.pdf" download="cv_barrere_valentin_game_dev"
+        style="padding:8px 16px; background:#4a9eff; color:#fff; border:none; border-radius:6px; cursor:pointer; text-decoration:none; font-size:14px;">
+        ⬇ <span data-fr="Télécharger" data-en="Download">Télécharger</span>
+      </a>
+      <button onclick="closeCVModal()"
+        style="padding:8px 16px; background:#555; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:14px;">
+        ✕ <span data-fr="Fermer" data-en="Close">Fermer</span>
+      </button>
+    </div>
+    <iframe id="cv-iframe" src="./images/cv_barrere_valentin_game_dev.pdf" style="width:100%; height:100%; border:none; border-radius:8px;">
+    </iframe>
+  </div>
+</div>
+
 </body>
-
 </html>

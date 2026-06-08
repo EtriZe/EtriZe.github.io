@@ -21,58 +21,76 @@
 </info>
 
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Jeu de combat au tour par tour inspiré de Worms, en C++ avec SFML. Deux dragons
+        <span class="lang-fr">Jeu de combat au tour par tour inspiré de Worms, en C++ avec SFML. Deux dragons
         s'affrontent en tirant des boules de feu sous l'effet de la gravité et d'un vent
-        aléatoire. Moteur maison avec ECS, physique et système de scènes.
+        aléatoire. Moteur maison avec ECS, physique et système de scènes.</span>
+        <span class="lang-en">Turn-based combat game inspired by Worms, built in C++ with SFML. Two dragons
+        battle by firing fireballs under the effect of gravity and random wind.
+        Custom engine with ECS, physics, and a scene system.</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            ECS from scratch : composants typés, stockage et vérification de présence rapide.
+            <span class="lang-fr">ECS from scratch : composants typés, stockage et vérification de présence rapide.</span>
+            <span class="lang-en">ECS from scratch: typed components, storage and fast presence checks.</span>
         </li>
         <li>
-            Moteur physique : gravité, vélocité, résolution de collisions par impulsion
-            (masse inverse, coefficient de restitution).
+            <span class="lang-fr">Moteur physique : gravité, vélocité, résolution de collisions par impulsion
+            (masse inverse, coefficient de restitution).</span>
+            <span class="lang-en">Physics engine: gravity, velocity, impulse-based collision resolution
+            (inverse mass, restitution coefficient).</span>
         </li>
         <li>
-            Détection de collisions multi-formes : boîte/boîte, sphère/polygone,
-            sphère/sphère, avec support de tuiles triangulaires pour les pentes.
+            <span class="lang-fr">Détection de collisions multi-formes : boîte/boîte, sphère/polygone,
+            sphère/sphère, avec support de tuiles triangulaires pour les pentes.</span>
+            <span class="lang-en">Multi-shape collision detection: box/box, sphere/polygon,
+            sphere/sphere, with triangular tile support for slopes.</span>
         </li>
         <li>
-            Gestion des tours : minuterie de 20s, alternance des joueurs, vent aléatoire
-            et indicateur de visée pour le joueur actif.
+            <span class="lang-fr">Gestion des tours : minuterie de 20s, alternance des joueurs, vent aléatoire
+            et indicateur de visée pour le joueur actif.</span>
+            <span class="lang-en">Turn management: 20s timer, player alternation, random wind
+            and aiming indicator for the active player.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Gérer les collisions entre formes hétérogènes en calculant correctement
-            la normale et le sens de séparation selon qu'un objet est statique ou non.
+            <span class="lang-fr">Gérer les collisions entre formes hétérogènes en calculant correctement
+            la normale et le sens de séparation selon qu'un objet est statique ou non.</span>
+            <span class="lang-en">Handling collisions between heterogeneous shapes by correctly computing
+            the normal and separation direction depending on whether an object is static or not.</span>
         </li>
         <li>
-            Ajouter et supprimer des entités en cours d'update sans invalider les
-            itérateurs, en travaillant sur une copie du vecteur à chaque frame.
+            <span class="lang-fr">Ajouter et supprimer des entités en cours d'update sans invalider les
+            itérateurs, en travaillant sur une copie du vecteur à chaque frame.</span>
+            <span class="lang-en">Adding and removing entities during update without invalidating
+            iterators, by working on a copy of the vector each frame.</span>
         </li>
         <li>
-            Synchroniser la fin de tour avec la destruction du projectile via un
-            callback déclenché au bon moment.
+            <span class="lang-fr">Synchroniser la fin de tour avec la destruction du projectile via un
+            callback déclenché au bon moment.</span>
+            <span class="lang-en">Synchronizing the end of a turn with projectile destruction via a
+            callback triggered at the right moment.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Concevoir un moteur de jeu C++ de zéro : ECS, collisions géométriques et physique
+        <span class="lang-fr">Concevoir un moteur de jeu C++ de zéro : ECS, collisions géométriques et physique
         par impulsion. Première expérience de collaboration avec une séparation claire
-        entre moteur, logique de jeu et gestion des entrées.
+        entre moteur, logique de jeu et gestion des entrées.</span>
+        <span class="lang-en">Designing a C++ game engine from scratch: ECS, geometric collisions and impulse physics.
+        First collaboration experience with a clear separation between engine, game logic and input handling.</span>
     </p>
 </section>

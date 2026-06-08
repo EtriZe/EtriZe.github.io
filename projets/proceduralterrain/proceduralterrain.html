@@ -16,7 +16,10 @@
 
 <title>Terrain procédural</title>
 
-<p class="centerme">Simulation du projet (La vrai version du projet disponible sur github)</p>
+<p class="centerme">
+    <span class="lang-fr">Simulation du projet (La vrai version du projet disponible sur github)</span>
+    <span class="lang-en">Project simulation (the real version is available on GitHub)</span>
+</p>
 
 <div class="game-wrapper">
     <iframe id="terrain-container" src="./projets/proceduralterrain/game/terrain-3d.html" width="900" height="600"
@@ -25,7 +28,8 @@
 </div>
 
 <p id="mobile-message">
-    [Simulation du projet jouable disponible sur la version PC du site]
+    <span class="lang-fr">[Simulation du projet jouable disponible sur la version PC du site]</span>
+    <span class="lang-en">[Playable project simulation available on the PC version of the site]</span>
 </p>
 
 <info>
@@ -33,50 +37,63 @@
 </info>
 
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Projet de mastère 2 de génération procédurale de terrain en temps réel en C++ et OpenGL.
+        <span class="lang-fr">Projet de mastère 2 de génération procédurale de terrain en temps réel en C++ et OpenGL.</span>
+        <span class="lang-en">Master's 2 project on real-time procedural terrain generation in C++ and OpenGL.</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j’ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Génération d’un maillage de terrain à partir d’une grille de sommets, avec déplacement vertical piloté par
-            une heightmap procédurale.
+            <span class="lang-fr">Génération d'un maillage de terrain à partir d'une grille de sommets, avec déplacement vertical piloté par
+            une heightmap procédurale.</span>
+            <span class="lang-en">Generation of a terrain mesh from a vertex grid, with vertical displacement driven by
+            a procedural heightmap.</span>
         </li>
         <li>
-            Construction de la heightmap via accumulation de bruit de Perlin fractal afin de produire des reliefs
-            cohérents à différentes échelles.
+            <span class="lang-fr">Construction de la heightmap via accumulation de bruit de Perlin fractal afin de produire des reliefs
+            cohérents à différentes échelles.</span>
+            <span class="lang-en">Heightmap construction via fractal Perlin noise accumulation to produce
+            coherent relief at different scales.</span>
         </li>
         <li>
-            Système de falloff permettant de contrôler la forme globale du terrain et de générer des îles ou des zones
-            de relief contenues.
+            <span class="lang-fr">Système de falloff permettant de contrôler la forme globale du terrain et de générer des îles ou des zones
+            de relief contenues.</span>
+            <span class="lang-en">Falloff system to control the overall terrain shape and generate islands or
+            contained relief zones.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Conserver une génération suffisamment flexible tout en gardant un temps de recalcul compatible avec
-            l’itération temps réel.
+            <span class="lang-fr">Conserver une génération suffisamment flexible tout en gardant un temps de recalcul compatible avec
+            l'itération temps réel.</span>
+            <span class="lang-en">Keeping generation flexible enough while maintaining a recalculation time compatible with
+            real-time iteration.</span>
         </li>
         <li>
-            Obtenir des reliefs crédibles sans bruit visuel excessif.
+            <span class="lang-fr">Obtenir des reliefs crédibles sans bruit visuel excessif.</span>
+            <span class="lang-en">Achieving credible relief without excessive visual noise.</span>
         </li>
         <li>
-            Organiser proprement les données CPU/GPU entre génération, transfert mémoire et rendu.
+            <span class="lang-fr">Organiser proprement les données CPU/GPU entre génération, transfert mémoire et rendu.</span>
+            <span class="lang-en">Cleanly organizing CPU/GPU data between generation, memory transfer and rendering.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j’ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Ce projet m’a permis d’apprendre la génération procédurale et de mieux comprendre le fonctionnement d’OpenGL.
-        Ainsi que l'importance de la gestion mémoire pour éviter les memory leaks ...
+        <span class="lang-fr">Ce projet m'a permis d'apprendre la génération procédurale et de mieux comprendre le fonctionnement d'OpenGL.
+        Ainsi que l'importance de la gestion mémoire pour éviter les memory leaks ...</span>
+        <span class="lang-en">This project allowed me to learn procedural generation and better understand how OpenGL works,
+        as well as the importance of memory management to avoid memory leaks...</span>
     </p>
 </section>

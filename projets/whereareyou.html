@@ -1,5 +1,5 @@
 <style>
-        h2 {
+    h2 {
         color: var(--text-primary);
         text-decoration: underline;
     }
@@ -26,59 +26,78 @@
     <a id="github" target="_blank" href="https://github.com/LesWherz/where-are-you"></a>
 </info>
 
-
 <section>
-    <h2>Résumé</h2>
+    <h2 data-fr="Résumé" data-en="Overview">Résumé</h2>
     <p>
-        Projet de mastère 2 de développement d'un jeu vidéo multijoueur en coopération à 2 joueurs sous Unreal Engine 4 et C++.
+        <span class="lang-fr">Projet de mastère 2 de développement d'un jeu vidéo multijoueur en coopération à 2 joueurs sous Unreal Engine 4 et C++.
         Le joueur incarne un personnage armé d'un gun aux pouvoirs physiques : rétrécir ou agrandir des objets et
-        des joueurs, et copier-coller des éléments du décor pour résoudre des puzzles en équipe.
+        des joueurs, et copier-coller des éléments du décor pour résoudre des puzzles en équipe.</span>
+        <span class="lang-en">Master's 2 project developing a 2-player cooperative multiplayer game in Unreal Engine 4 and C++.
+        The player controls a character armed with a physics gun: shrink or enlarge objects and
+        players, and copy-paste elements of the environment to solve puzzles as a team.</span>
     </p>
 </section>
 
 <section>
-    <h2>Ce que j'ai développé</h2>
+    <h2 data-fr="Ce que j'ai développé" data-en="What I developed">Ce que j'ai développé</h2>
     <ul>
         <li>
-            Architecture multijoueur reposant sur le modèle client-serveur d'Unreal Engine, avec
+            <span class="lang-fr">Architecture multijoueur reposant sur le modèle client-serveur d'Unreal Engine, avec
             réplication des états de jeu via le ReplicationGraph pour gérer efficacement un grand nombre
-            d'acteurs en réseau.
+            d'acteurs en réseau.</span>
+            <span class="lang-en">Multiplayer architecture based on Unreal Engine's client-server model, with
+            game state replication via the ReplicationGraph to efficiently manage a large number
+            of networked actors.</span>
         </li>
         <li>
-            Intégration de Steam via OnlineSubsystemSteam et les plugins AdvancedSessions pour la création,
-            la recherche et la gestion des sessions multijoueur.
+            <span class="lang-fr">Intégration de Steam via OnlineSubsystemSteam et les plugins AdvancedSessions pour la création,
+            la recherche et la gestion des sessions multijoueur.</span>
+            <span class="lang-en">Steam integration via OnlineSubsystemSteam and the AdvancedSessions plugins for creating,
+            searching and managing multiplayer sessions.</span>
         </li>
         <li>
-            Conception des puzzles exploitant les interactions entre les pouvoirs du gun et la physique des
-            objets, pour créer des situations de coopération nécessitant une coordination entre joueurs.
+            <span class="lang-fr">Conception des puzzles exploitant les interactions entre les pouvoirs du gun et la physique des
+            objets, pour créer des situations de coopération nécessitant une coordination entre joueurs.</span>
+            <span class="lang-en">Puzzle design leveraging interactions between the gun's powers and object physics,
+            to create cooperative situations requiring coordination between players.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Défis techniques</h2>
+    <h2 data-fr="Défis techniques" data-en="Technical challenges">Défis techniques</h2>
     <ul>
         <li>
-            Synchroniser correctement les transformations d'échelle et les duplications d'objets entre les
-            clients sans désynchronisation ni artefacts visuels.
+            <span class="lang-fr">Synchroniser correctement les transformations d'échelle et les duplications d'objets entre les
+            clients sans désynchronisation ni artefacts visuels.</span>
+            <span class="lang-en">Correctly synchronizing scale transformations and object duplications across
+            clients without desynchronization or visual artifacts.</span>
         </li>
         <li>
-            Gérer la cohérence physique des objets redimensionnés côté serveur tout en maintenant une
-            expérience fluide côté client.
+            <span class="lang-fr">Gérer la cohérence physique des objets redimensionnés côté serveur tout en maintenant une
+            expérience fluide côté client.</span>
+            <span class="lang-en">Managing the physical consistency of resized objects on the server side while maintaining a
+            smooth experience on the client side.</span>
         </li>
         <li>
-            Mettre en place un pipeline de sessions Steam fonctionnel et robuste, de la création d'un lobby
-            jusqu'à la connexion en jeu.
+            <span class="lang-fr">Mettre en place un pipeline de sessions Steam fonctionnel et robuste, de la création d'un lobby
+            jusqu'à la connexion en jeu.</span>
+            <span class="lang-en">Setting up a functional and robust Steam session pipeline, from lobby creation
+            through to in-game connection.</span>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Ce que j'ai appris</h2>
+    <h2 data-fr="Ce que j'ai appris" data-en="What I learned">Ce que j'ai appris</h2>
     <p>
-        Ce projet m'a permis de plonger dans le développement réseau sous Unreal Engine, notamment la
+        <span class="lang-fr">Ce projet m'a permis de plonger dans le développement réseau sous Unreal Engine, notamment la
         réplication d'acteurs, la logique serveur-client et l'intégration de services en ligne comme Steam
         et EOS. Il m'a aussi confronté aux défis propres à la synchronisation d'interactions physiques dans
-        un contexte multijoueur, et à l'importance d'une architecture réseau pensée dès le début du projet.
+        un contexte multijoueur, et à l'importance d'une architecture réseau pensée dès le début du projet.</span>
+        <span class="lang-en">This project let me dive into network development in Unreal Engine, particularly actor
+        replication, client-server logic and integration of online services like Steam and EOS.
+        It also confronted me with the challenges of synchronizing physical interactions in a multiplayer
+        context, and the importance of designing the network architecture from the very start of a project.</span>
     </p>
 </section>
