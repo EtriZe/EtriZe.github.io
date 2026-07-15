@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion — Le Cabinet des Oiseaux</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="index.html">
+        <p class="brand__eyebrow">Espace de gestion</p>
+        <h1 class="brand__title" id="siteTitle">Le Cabinet des Oiseaux</h1>
+      </a>
+      <div class="masthead__meta">
+        <div id="who"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Écran de connexion -->
+    <section id="loginView" style="display:none;">
+      <div class="panel" style="max-width:440px;">
+        <p class="admin-note">Accès réservé</p>
+        <h2 class="section-title" style="margin-top:6px;">Connexion</h2>
+        <div class="form-row">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" autocomplete="username" />
+        </div>
+        <div class="form-row">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" autocomplete="current-password" />
+        </div>
+        <div class="actions-bar">
+          <button class="btn" id="loginBtn">Se connecter</button>
+        </div>
+        <div class="msg msg--err" id="loginMsg"></div>
+      </div>
+    </section>
+
+    <!-- Écran de gestion -->
+    <section id="adminView" style="display:none;">
+      <div class="actions-bar" style="margin:24px 0;">
+        <button class="btn" id="newBtn">+ Nouvel oiseau</button>
+        <a class="btn btn--ghost" href="index.html">Voir le site public</a>
+        <button class="btn btn--ghost" id="logoutBtn">Déconnexion</button>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="panel" id="formPanel" style="display:none;">
+        <h2 class="section-title" id="formTitle" style="margin-top:0;">Nouvel oiseau</h2>
+
+        <div class="form-row">
+          <label for="fName">Nom *</label>
+          <input type="text" id="fName" placeholder="Ex. Rouge-gorge familier" />
+        </div>
+
+        <div class="form-row">
+          <label>Médias — en haut de la fiche (images ou intégrations Instagram)</label>
+          <div class="media-editor" id="mediaEditor"></div>
+          <div class="actions-bar" style="margin-top:10px;">
+            <button class="btn btn--ghost btn--sm" id="addImage">+ Image (URL)</button>
+            <button class="btn btn--ghost btn--sm" id="addInsta">+ Publication Instagram</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="fDescription">Description</label>
+          <textarea id="fDescription" placeholder="Présentation générale de l'espèce…"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="fDiet">Alimentation</label>
+          <textarea id="fDiet" placeholder="Régime alimentaire, ce qu'il mange…"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="fBehavior">Comportement</label>
+          <textarea id="fBehavior" placeholder="Mœurs, chant, nidification, migration…"></textarea>
+        </div>
+
+        <div class="actions-bar">
+          <button class="btn" id="saveBtn">Enregistrer</button>
+          <button class="btn btn--ghost" id="cancelBtn">Annuler</button>
+          <span class="msg" id="formMsg"></span>
+        </div>
+      </div>
+
+      <!-- Liste existante -->
+      <h2 class="section-title">Collection</h2>
+      <div class="panel">
+        <ul class="admin-list" id="adminList"></ul>
+        <div id="adminEmpty"></div>
+      </div>
+    </section>
+
+    <!-- Erreur de configuration -->
+    <section id="configView" style="display:none;">
+      <div class="notice">
+        <h2>Configuration requise</h2>
+        <div>Renseigne Supabase dans <code>assets/config.js</code> avant d'utiliser la gestion. Voir le <code>README.md</code>.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <span id="footTitle">Le Cabinet des Oiseaux</span>
+    <span><a href="index.html">Site public</a></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/config.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

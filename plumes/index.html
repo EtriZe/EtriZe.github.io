@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Cabinet des Oiseaux</title>
+  <meta name="description" content="Répertoire ornithologique personnel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="index.html">
+        <p class="brand__eyebrow" id="eyebrow">Répertoire ornithologique</p>
+        <h1 class="brand__title" id="siteTitle">Le Cabinet des Oiseaux</h1>
+      </a>
+      <div class="masthead__meta">
+        <div id="siteCount">—</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="toolbar">
+      <div class="search">
+        <input type="text" id="search" placeholder="Rechercher un oiseau…" autocomplete="off" aria-label="Rechercher un oiseau" />
+      </div>
+      <div class="count" id="visibleCount"></div>
+    </div>
+
+    <ul class="collection" id="grid"></ul>
+    <div id="state"></div>
+  </main>
+
+  <footer class="foot wrap">
+    <span id="footTitle">Le Cabinet des Oiseaux</span>
+    <span><a href="admin.html">Espace de gestion</a></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/config.js"></script>
+  <script src="assets/list.js"></script>
+</body>
+</html>
