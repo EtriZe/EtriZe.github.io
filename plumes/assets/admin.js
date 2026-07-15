@@ -51,6 +51,7 @@
     row.innerHTML =
       '<select>' +
       '<option value="image">Image (URL)</option>' +
+      '<option value="youtube">YouTube (Short / vidéo)</option>' +
       '<option value="instagram">Instagram</option>' +
       "</select>" +
       '<input type="text" placeholder="https://…" />' +
@@ -71,6 +72,9 @@
 
   document.getElementById("addImage").addEventListener("click", () =>
     addMediaRow({ type: "image", url: "" })
+  );
+  document.getElementById("addYoutube").addEventListener("click", () =>
+    addMediaRow({ type: "youtube", url: "" })
   );
   document.getElementById("addInsta").addEventListener("click", () =>
     addMediaRow({ type: "instagram", url: "" })

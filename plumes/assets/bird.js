@@ -26,6 +26,21 @@
             "</div>"
           );
         }
+        if (m.type === "youtube") {
+          const yt = youtubeInfo(m.url);
+          if (!yt) {
+            return '<div class="slide"><div class="yt-fallback">Lien YouTube non reconnu</div></div>';
+          }
+          const cls = yt.isShort ? "yt yt--short" : "yt yt--wide";
+          return (
+            '<div class="slide slide--yt">' +
+            '<div class="' + cls + '">' +
+            '<iframe src="' + escapeHtml(youtubeEmbedUrl(yt.id)) +
+            '" title="Vidéo YouTube" loading="lazy" allowfullscreen ' +
+            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>' +
+            "</div></div>"
+          );
+        }
         return '<div class="slide"><img src="' + escapeHtml(m.url) + '" alt="" loading="lazy"></div>';
       })
       .join("");
