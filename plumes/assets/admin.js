@@ -70,15 +70,13 @@
       .filter((m) => m.url);
   }
 
-  document.getElementById("addImage").addEventListener("click", () =>
-    addMediaRow({ type: "image", url: "" })
-  );
-  document.getElementById("addYoutube").addEventListener("click", () =>
-    addMediaRow({ type: "youtube", url: "" })
-  );
-  document.getElementById("addInsta").addEventListener("click", () =>
-    addMediaRow({ type: "instagram", url: "" })
-  );
+  const onClick = (id, fn) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", fn);
+  };
+  onClick("addImage", () => addMediaRow({ type: "image", url: "" }));
+  onClick("addYoutube", () => addMediaRow({ type: "youtube", url: "" }));
+  onClick("addInsta", () => addMediaRow({ type: "instagram", url: "" }));
 
   // ---------- Formulaire ----------
   function openForm(bird) {
