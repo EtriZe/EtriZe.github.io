@@ -13,7 +13,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 /* Personnalise le titre du site ici */
 const SITE = {
-  title: "Le Cabinet des Oiseaux",
+  title: "Le Cabinet des Plumes",
   tagline: "Répertoire ornithologique personnel",
 };
 

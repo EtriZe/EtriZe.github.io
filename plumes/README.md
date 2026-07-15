@@ -62,6 +62,12 @@ Toutes les fiches utilisent le même gabarit et sont numérotées dans l'ordre a
 
 > La première image d'une fiche sert de vignette dans la collection.
 
+## Ajouter une vidéo YouTube (Short ou classique)
+1. Sur YouTube, copie le lien de la vidéo ou du Short — tous les formats marchent :
+   `https://www.youtube.com/shorts/XXXX`, `https://youtu.be/XXXX`, ou `https://www.youtube.com/watch?v=XXXX`.
+2. Dans la gestion, ajoute un média de type **YouTube** et colle le lien.
+   La vidéo se lit **directement sur la fiche** (les Shorts s'affichent en vertical, les vidéos classiques en 16:9). Aucune redirection vers YouTube.
+
 ## Ajouter une publication Instagram
 1. Sur Instagram, ouvre la publication et copie son lien
    (ex. `https://www.instagram.com/p/ABCDEF123/`).

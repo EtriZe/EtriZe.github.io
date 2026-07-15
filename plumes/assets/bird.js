@@ -12,6 +12,33 @@
       '<div class="notice"><h2>' + title + "</h2><div>" + html + "</div></div>";
   }
 
+  function youtubeInfo(url) {
+    if (!url) return null;
+    try {
+      const u = new URL(url.trim());
+      const host = u.hostname.replace(/^www\./, "");
+      let id = null;
+      let isShort = false;
+      if (host === "youtu.be") {
+        id = u.pathname.split("/").filter(Boolean)[0];
+      } else if (host.endsWith("youtube.com") || host.endsWith("youtube-nocookie.com")) {
+        const parts = u.pathname.split("/").filter(Boolean);
+        if (parts[0] === "shorts") { id = parts[1]; isShort = true; }
+        else if (parts[0] === "embed") { id = parts[1]; }
+        else if (parts[0] === "v") { id = parts[1]; }
+        else if (u.pathname === "/watch" || parts[0] === "watch") { id = u.searchParams.get("v"); }
+      }
+      if (!id) return null;
+      id = id.replace(/[^A-Za-z0-9_-].*$/, "");
+      return id ? { id: id, isShort: isShort } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function youtubeEmbedUrl(id) {
+    return "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
+  }
+
   function renderMedia(media) {
     const items = (media || []).filter((m) => m && m.url);
     if (!items.length) return "";
