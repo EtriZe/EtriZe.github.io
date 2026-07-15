@@ -13,25 +13,108 @@
   }
 
   function renderMedia(media) {
-    if (!media || !media.length) return "";
-    const items = media
+    const items = (media || []).filter((m) => m && m.url);
+    if (!items.length) return "";
+
+    const slides = items
       .map((m) => {
-        if (!m || !m.url) return "";
         if (m.type === "instagram") {
           return (
-            '<div class="media media--ig">' +
+            '<div class="slide slide--ig">' +
             '<iframe src="' + escapeHtml(instagramEmbedUrl(m.url)) +
-            '" loading="lazy" allowtransparency="true" scrolling="no" allow="encrypted-media"></iframe>' +
+            '" loading="lazy" allowtransparency="true" allow="encrypted-media"></iframe>' +
             "</div>"
           );
         }
-        return (
-          '<div class="media"><img src="' + escapeHtml(m.url) +
-          '" alt="" loading="lazy"></div>'
-        );
+        return '<div class="slide"><img src="' + escapeHtml(m.url) + '" alt="" loading="lazy"></div>';
       })
       .join("");
-    return '<div class="gallery">' + items + "</div>";
+
+    const single = items.length === 1;
+    const nav = single
+      ? ""
+      : '<button class="carousel__nav carousel__nav--prev" type="button" aria-label="Média précédent">\u2039</button>' +
+        '<button class="carousel__nav carousel__nav--next" type="button" aria-label="Média suivant">\u203A</button>';
+    const dots = single
+      ? ""
+      : '<div class="carousel__dots">' +
+        items
+          .map((_, i) => '<button class="dot' + (i === 0 ? " is-active" : "") + '" type="button" data-i="' + i + '" aria-label="Aller au média ' + (i + 1) + '"></button>')
+          .join("") +
+        "</div>";
+
+    return (
+      '<div class="carousel"' + (single ? ' data-single="1"' : "") + ">" +
+      '<div class="carousel__viewport">' +
+      '<div class="carousel__track">' + slides + "</div>" +
+      nav +
+      "</div>" +
+      dots +
+      "</div>"
+    );
+  }
+
+  function setupCarousel(car) {
+    const viewport = car.querySelector(".carousel__viewport");
+    const track = car.querySelector(".carousel__track");
+    const slides = Array.prototype.slice.call(car.querySelectorAll(".slide"));
+    const dots = Array.prototype.slice.call(car.querySelectorAll(".dot"));
+    let index = 0;
+
+    function setHeight() {
+      const active = slides[index];
+      if (!active) return;
+      const h = active.offsetHeight;
+      if (h) viewport.style.height = h + "px";
+    }
+    function go(i) {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      track.style.transform = "translateX(" + (-index * 100) + "%)";
+      dots.forEach((d, k) => d.classList.toggle("is-active", k === index));
+      setHeight();
+    }
+
+    // Les images arrivent de façon asynchrone : on recadre à leur chargement
+    slides.forEach((s) => {
+      const img = s.querySelector("img");
+      if (img) img.addEventListener("load", () => { if (slides[index] === s) setHeight(); });
+    });
+    // Toute variation de taille d'un média (iframe Insta qui se déploie…) recadre
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => setHeight());
+      slides.forEach((s) => ro.observe(s));
+    }
+
+    const prev = car.querySelector(".carousel__nav--prev");
+    const next = car.querySelector(".carousel__nav--next");
+    if (prev) prev.addEventListener("click", () => go(index - 1));
+    if (next) next.addEventListener("click", () => go(index + 1));
+    dots.forEach((d) => d.addEventListener("click", () => go(parseInt(d.dataset.i, 10))));
+
+    // Navigation clavier
+    car.tabIndex = 0;
+    car.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(index - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(index + 1); }
+    });
+
+    // Swipe tactile
+    let x0 = null;
+    viewport.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    viewport.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(dx < 0 ? index + 1 : index - 1);
+      x0 = null;
+    });
+
+    window.addEventListener("resize", setHeight);
+    requestAnimationFrame(setHeight);
+    setTimeout(setHeight, 1000); // filet de sécurité pour l'iframe Instagram
+  }
+
+  function initCarousels(root) {
+    root.querySelectorAll(".carousel").forEach(setupCarousel);
   }
 
   function field(label, value) {
@@ -100,6 +183,8 @@
       field("Alimentation", data.diet) +
       field("Comportement", data.behavior) +
       "</div>";
+
+    initCarousels(content);
   }
 
   load();
