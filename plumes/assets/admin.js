@@ -83,6 +83,7 @@
     editingId = bird ? bird.id : null;
     formTitle.textContent = bird ? "Modifier : " + bird.name : "Nouvel oiseau";
     F.name.value = bird ? bird.name : "";
+    document.getElementById("f-nomsci").value = bird ? bird.nom_scientifique || "" : "";
     F.description.value = bird ? bird.description || "" : "";
     F.diet.value = bird ? bird.diet || "" : "";
     F.behavior.value = bird ? bird.behavior || "" : "";
@@ -132,6 +133,7 @@
     const payload = {
       name,
       slug,
+      nom_scientifique: document.getElementById("f-nomsci").value.trim() || null,
       description: F.description.value.trim() || null,
       diet: F.diet.value.trim() || null,
       behavior: F.behavior.value.trim() || null,
