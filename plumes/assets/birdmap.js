@@ -2,32 +2,28 @@
    birdmap.js — Carte de répartition (données GBIF)
    -------------------------------------------------------------------------
    Ajoute une carte du monde en bas de chaque fiche oiseau, sous les
-   sections description / alimentation / comportement.
+   sections description / alimentation / comportement — dans le MÊME groupe
+   de fields (bien alignée, pas en dehors).
 
    INSTALLATION
-   1. Dépose ce fichier dans le dossier  assets/
-   2. Dans bird.html, ajoute cette ligne À LA FIN, juste après bird.js :
+   1. Dépose ce fichier dans le dossier  assets/  (remplace l'ancien)
+   2. Dans bird.html, à la fin, juste après bird.js :
         <script src="assets/birdmap.js"></script>
-   3. Dans Supabase (SQL Editor), ajoute la colonne du nom latin :
+   3. Dans Supabase (SQL Editor) :
         alter table birds add column if not exists nom_scientifique text;
-   4. Renseigne le nom scientifique de chaque oiseau (ex. "Erithacus rubecula")
-      via l'admin ou directement dans le Table Editor de Supabase.
+   4. Renseigne le nom scientifique de chaque oiseau (ex. "Erithacus rubecula").
 
-   Aucune autre modification n'est nécessaire. Si un oiseau n'a pas de nom
-   scientifique, aucune carte n'est affichée (pas de bloc cassé).
+   Si un oiseau n'a pas de nom scientifique, aucune carte n'est affichée.
    ========================================================================= */
 (function () {
   "use strict";
 
-  // --- Style de la couche GBIF -------------------------------------------
-  // "poly"  = hexagones remplis, effet "zones" facon oiseaux.fr (par défaut)
-  // Pour des points facon Merlin, remplace la ligne GBIF_STYLE par :
-  //   const GBIF_STYLE = "&style=scaled.circles";
+  // "poly" = hexagones remplis, effet "zones" (par défaut).
+  // Pour des points facon Merlin :  const GBIF_STYLE = "&style=scaled.circles";
   const GBIF_STYLE = "&bin=hex&hexPerTile=32&style=classic.poly";
 
   const PALETTE = { line: "#26362c", muted: "#8ca394", accent: "#6fbf73", mapbg: "#0b120e" };
 
-  // Charge une feuille de style / un script externe et attend qu'il soit prêt
   function loadCss(href) {
     return new Promise((res) => {
       if (document.querySelector('link[href="' + href + '"]')) return res();
@@ -45,7 +41,6 @@
     });
   }
 
-  // Injecte le peu de CSS nécessaire (pas besoin de toucher style.css)
   function injectStyles() {
     if (document.getElementById("birdmap-css")) return;
     const css = `
@@ -65,7 +60,6 @@
     document.head.appendChild(tag);
   }
 
-  // Va chercher le nom scientifique de l'oiseau courant dans Supabase
   async function fetchScientificName() {
     if (typeof configOk !== "function" || !configOk()) return null;
     const slug = new URLSearchParams(location.search).get("slug");
@@ -77,12 +71,10 @@
         .eq("slug", slug)
         .maybeSingle();
       if (error || !data) return null;
-      const n = (data.nom_scientifique || "").trim();
-      return n || null;
+      return (data.nom_scientifique || "").trim() || null;
     } catch (e) { return null; }
   }
 
-  // Nom latin -> identifiant GBIF (taxonKey)
   async function matchTaxonKey(name) {
     try {
       const r = await fetch("https://api.gbif.org/v1/species/match?name=" + encodeURIComponent(name));
@@ -91,12 +83,23 @@
     } catch (e) { return null; }
   }
 
-  // Construit le bloc "Répartition" (mêmes classes que les autres sections)
-  function buildSection() {
-    const main = document.querySelector("main.specimen") || document.querySelector("main");
-    const fields = document.getElementById("fields");
-    if (!main) return null;
+  // Attend que bird.js ait fini de rendre les fields dans #content
+  function waitForFields(timeout) {
+    return new Promise((resolve) => {
+      const content = document.getElementById("content");
+      if (!content) return resolve(null);
+      if (content.querySelector(".field")) return resolve(content);
+      const obs = new MutationObserver(() => {
+        if (content.querySelector(".field")) { obs.disconnect(); resolve(content); }
+      });
+      obs.observe(content, { childList: true, subtree: true });
+      setTimeout(() => { obs.disconnect(); resolve(content); }, timeout || 4000);
+    });
+  }
 
+  // Construit le bloc "Répartition" et le place APRÈS le dernier field,
+  // à l'intérieur du même groupe (pas en dehors de #content).
+  function buildSection(content) {
     const section = document.createElement("section");
     section.className = "field bird-range";
     section.innerHTML =
@@ -109,11 +112,12 @@
           '<a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF.org</a></p>' +
       "</div>";
 
-    // On place le bloc juste après le contenu de la fiche
-    if (fields && fields.parentNode === main) {
-      fields.insertAdjacentElement("afterend", section);
+    const fields = content.querySelectorAll(".field");
+    const last = fields[fields.length - 1];
+    if (last) {
+      last.insertAdjacentElement("afterend", section);   // juste après comportement
     } else {
-      main.appendChild(section);
+      content.appendChild(section);                      // repli : dans #content
     }
     return section;
   }
@@ -130,21 +134,22 @@
       + "?srs=EPSG:3857" + GBIF_STYLE + "&taxonKey=" + taxonKey;
     L.tileLayer(url, { opacity: 0.9, maxZoom: 12 }).addTo(map);
 
-    // Recalcule la taille une fois le conteneur bien peint
     setTimeout(() => map.invalidateSize(), 200);
   }
 
   async function run() {
     const name = await fetchScientificName();
-    if (!name) return;                 // pas de nom latin -> pas de carte
+    if (!name) return;
     const taxonKey = await matchTaxonKey(name);
-    if (!taxonKey) return;             // espèce absente de GBIF -> pas de carte
+    if (!taxonKey) return;
 
     injectStyles();
     await loadCss("https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css");
     await loadJs("https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js");
 
-    if (!buildSection()) return;
+    const content = await waitForFields();
+    if (!content) return;
+    buildSection(content);
     initMap(taxonKey);
   }
 
