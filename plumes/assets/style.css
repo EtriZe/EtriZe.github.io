@@ -399,7 +399,7 @@ a:hover { color: var(--accent-br); }
   flex-direction: column;
   gap: 22px;
   margin-top: 36px;
-  max-width: 72ch;      /* largeur de lecture confortable */
+  max-width: 100%;      /* largeur de lecture confortable */
 }
 .field {
   background: var(--surface);
@@ -412,11 +412,11 @@ a:hover { color: var(--accent-br); }
   font-variant: small-caps;
   letter-spacing: 0.05em;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 25px;
   color: var(--accent);
   margin: 0 0 12px;
 }
-.field__body { font-size: 17px; color: var(--text); }
+.field__body { font-size: 21px; color: var(--text); }
 .field__body p { margin: 0 0 0.9em; }
 .field__body p:last-child { margin-bottom: 0; }
 
