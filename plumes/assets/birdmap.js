@@ -94,7 +94,7 @@
   // Construit le bloc "Répartition" (mêmes classes que les autres sections)
   function buildSection() {
     const main = document.querySelector("main.specimen") || document.querySelector("main");
-    const content = document.getElementById("content");
+    const fields = document.getElementById("fields");
     if (!main) return null;
 
     const section = document.createElement("section");
@@ -110,8 +110,8 @@
       "</div>";
 
     // On place le bloc juste après le contenu de la fiche
-    if (content && content.parentNode === main) {
-      content.insertAdjacentElement("afterend", section);
+    if (fields && fields.parentNode === main) {
+      fields.insertAdjacentElement("afterend", section);
     } else {
       main.appendChild(section);
     }
