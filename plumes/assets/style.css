@@ -390,7 +390,7 @@ a:hover { color: var(--accent-br); }
   line-height: 1.62;
   color: var(--text);
   margin: 28px 0;
-  max-width: 68ch;
+  max-width: 100%;
 }
 .lede p { margin: 0 0 1em; }
 
