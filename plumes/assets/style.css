@@ -412,11 +412,11 @@ a:hover { color: var(--accent-br); }
   font-variant: small-caps;
   letter-spacing: 0.05em;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 22px;
   color: var(--accent);
   margin: 0 0 12px;
 }
-.field__body { font-size: 21px; color: var(--text); }
+.field__body { font-size: 19px; color: var(--text); }
 .field__body p { margin: 0 0 0.9em; }
 .field__body p:last-child { margin-bottom: 0; }
 
