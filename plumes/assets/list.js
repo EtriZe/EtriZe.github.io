@@ -13,6 +13,19 @@
 
   const FEATHER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>';
 
+  // Génère une vignette légère via le service gratuit wsrv.nl (redimensionne + compresse).
+  // L'image d'origine (pleine qualité) reste utilisée sur la fiche de l'oiseau.
+  function thumbUrl(url) {
+    if (!url) return url;
+    let abs;
+    try { abs = new URL(url, location.href).href; } catch (e) { return url; }
+    if (abs.indexOf("data:") === 0 || abs.indexOf("wsrv.nl") !== -1) return url;
+    return (
+      "https://wsrv.nl/?url=" + encodeURIComponent(abs) +
+      "&w=500&h=375&fit=cover&output=webp&q=71"
+    );
+  }
+
   let birds = [];
 
   function notice(title, html) {
@@ -42,7 +55,7 @@
         '<div class="card__thumb ' + (img ? "" : "card__thumb--empty") + '">' +
         '<span class="card__num">N° ' + padNum(globalIndex) + "</span>" +
         (img
-          ? '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(bird.name) + '" loading="lazy">'
+          ? '<img src="' + escapeHtml(thumbUrl(img)) + '" data-full="' + escapeHtml(img) + '" alt="' + escapeHtml(bird.name) + '" loading="lazy" decoding="async">'
           : FEATHER) +
         "</div>" +
         '<div class="card__body">' +
@@ -52,6 +65,13 @@
       frag.appendChild(a);
     });
     grid.appendChild(frag);
+    grid.querySelectorAll("img[data-full]").forEach((im) => {
+      im.addEventListener("error", function onerr() {
+        im.removeEventListener("error", onerr);
+        const full = im.getAttribute("data-full");
+        if (full && im.src !== full) im.src = full;
+      });
+    });
     visibleCount.textContent = list.length + (list.length > 1 ? " fiches" : " fiche");
   }
 
