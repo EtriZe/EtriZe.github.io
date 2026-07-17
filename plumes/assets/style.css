@@ -56,6 +56,23 @@ a:hover { color: var(--accent-br); }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
+/* ---- Barres de défilement (accordées au thème) ------------------------- */
+* {
+  scrollbar-width: thin;                              /* Firefox */
+  scrollbar-color: var(--accent-deep) transparent;
+}
+::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-deep);
+  border: 3px solid transparent;    /* marge -> pouce plus fin, arrondi */
+  background-clip: padding-box;
+  border-radius: 100px;
+  min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-corner { background: transparent; }
+
 /* Petites capitales pour les libellés (remplace le monospace) */
 .label {
   font-family: var(--font-body);
@@ -412,11 +429,11 @@ a:hover { color: var(--accent-br); }
   font-variant: small-caps;
   letter-spacing: 0.05em;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 16px;
   color: var(--accent);
   margin: 0 0 12px;
 }
-.field__body { font-size: 19px; color: var(--text); }
+.field__body { font-size: 17px; color: var(--text); }
 .field__body p { margin: 0 0 0.9em; }
 .field__body p:last-child { margin-bottom: 0; }
 
