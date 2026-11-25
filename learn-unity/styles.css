@@ -1228,7 +1228,7 @@ pre code {
 .lead {
   font-size: 18px;
   line-height: 1.7;
-  margin: 0 0 26px !important;
+  margin-bottom: 26px;
   max-width: 78ch;
 }
 .ctoc {
@@ -1319,7 +1319,7 @@ pre code {
   border-radius: 6px;
   border: 1.5px solid;
 }
-.call b {
+.call > b {
   display: block;
   font:
     500 12.5px "Fira Code",
@@ -1334,21 +1334,21 @@ pre code {
   background: var(--accent-soft);
   border-color: var(--tip-line);
 }
-.call.tip b {
+.call.tip > b {
   color: var(--accent-ink);
 }
 .call.warn {
   background: var(--warn-bg);
   border-color: var(--warn-line);
 }
-.call.warn b {
+.call.warn > b {
   color: var(--warn-ink);
 }
 .call.unity {
   background: var(--hl-soft);
   border-color: var(--hl-line);
 }
-.call.unity b {
+.call.unity > b {
   color: var(--hl-ink);
 }
 .scroll {
@@ -1383,7 +1383,7 @@ pre code {
   border: 1.5px solid var(--line);
   border-left: 4px solid #e0602a;
 }
-.err b {
+.err > b {
   display: block;
   margin-bottom: 4px;
 }
@@ -1508,4 +1508,66 @@ pre code {
   .hl {
     background-size: 100% 40%;
   }
+}
+
+/* lecture centrée : le texte tient dans une colonne centrée, le code et les tableaux prennent toute la largeur */
+.main {
+  --read: 880px;
+}
+.main > .crumb,
+.main > .ttl,
+.main > .sum,
+.main > .keep {
+  max-width: var(--read);
+  margin-left: auto;
+  margin-right: auto;
+}
+.cols {
+  display: block;
+}
+.prose > :not(section),
+.prose > section > :not(.pre):not(.scroll):not(.cap) {
+  width: 100%;
+  max-width: var(--read);
+  margin-left: auto;
+  margin-right: auto;
+}
+.prose p,
+.chap {
+  max-width: none;
+}
+.chap > .pre,
+.chap > .scroll,
+.prose > section > .pre {
+  width: 100%;
+}
+.aside {
+  max-width: var(--read);
+  margin: 48px auto 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+}
+.ex > h2,
+.ex > p,
+.ex > .hintbtn,
+.ex > .hint {
+  max-width: var(--read);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.ex > .hintbtn {
+  width: 100%;
+  text-align: left;
+}
+.ex > .done,
+.ex > .defis {
+  display: flex;
+  max-width: var(--read);
+  margin-left: auto;
+  margin-right: auto;
+}
+.ex > .defis {
+  display: block;
 }
