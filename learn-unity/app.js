@@ -379,6 +379,20 @@ navbtn.addEventListener('click', () => {
   const on = document.body.classList.toggle('nav');
   navbtn.setAttribute('aria-expanded', String(on));
 });
+const modeBtn = document.getElementById('mode');
+function applyMode(dark) {
+  if (dark) document.documentElement.dataset.mode = 'dark';
+  else delete document.documentElement.dataset.mode;
+  modeBtn.setAttribute('aria-pressed', String(dark));
+  document.getElementById('modelab').textContent = dark ? 'Clair' : 'Sombre';
+  modeBtn.setAttribute('aria-label', dark ? 'Passer en mode clair' : 'Passer en mode sombre');
+}
+applyMode(document.documentElement.dataset.mode === 'dark');
+modeBtn.addEventListener('click', () => {
+  const dark = document.documentElement.dataset.mode !== 'dark';
+  applyMode(dark);
+  try { localStorage.setItem('cs-mode', dark ? 'dark' : 'light'); } catch (e) {}
+});
 window.addEventListener('hashchange', route);
 route();
 }
