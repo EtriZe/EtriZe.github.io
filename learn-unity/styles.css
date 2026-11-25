@@ -1718,7 +1718,7 @@ pre code {
   }
   /* tableaux : texte et cellules plus compacts */
   .ct {
-    font-size: 10.5px;
+    font-size: 11.5px;
     line-height: 1.45;
   }
   .ct th,
@@ -1779,6 +1779,49 @@ pre code {
     font-size: 12.5px;
     min-height: 38px;
     padding: 0 10px;
+  }
+
+  /* erreurs fréquentes : cartes plus serrées */
+  .errs {
+    gap: 8px;
+  }
+  .err {
+    padding: 10px 12px;
+    border-left-width: 3px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .err > b {
+    margin-bottom: 2px;
+  }
+  .err p {
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  /* quiz : questions et réponses plus compactes */
+  .qscore {
+    font-size: 11.5px;
+    margin-bottom: 10px;
+  }
+  .q {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .qq {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .qo {
+    gap: 6px;
+  }
+  .qo button {
+    min-height: 38px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  .qe {
+    font-size: 12.5px;
   }
 
   /* la zone d'exercice disparaît, seule la case « Leçon terminée » reste */
