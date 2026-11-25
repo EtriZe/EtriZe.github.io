@@ -134,6 +134,128 @@ function courseHtml(co) {
   return h;
 }
 
+/* ---------- éditeur façon IDE ---------- */
+function setupIde(ed, layer, pos, onChange) {
+  const IND = '    ';
+  const PAIRS = { '(': ')', '[': ']', '{': '}', '"': '"', "'": "'" };
+  let curLine = -1;
+
+  function render() {
+    const lines = ed.value.split('\n');
+    const caretLine = ed.value.slice(0, ed.selectionStart).split('\n').length - 1;
+    let inBlock = false;
+    layer.innerHTML = lines.map((ln, i) => {
+      let html;
+      if (inBlock) {
+        const end = ln.indexOf('*/');
+        if (end < 0) html = '<span class="k5">' + esc(ln) + '</span>';
+        else { inBlock = false; html = '<span class="k5">' + esc(ln.slice(0, end + 2)) + '</span>' + hl(ln.slice(end + 2)); }
+      } else {
+        const start = ln.indexOf('/*');
+        if (start >= 0 && ln.slice(0, start).indexOf('//') < 0) {
+          const end = ln.indexOf('*/', start + 2);
+          if (end < 0) { inBlock = true; html = hl(ln.slice(0, start)) + '<span class="k5">' + esc(ln.slice(start)) + '</span>'; }
+          else html = hl(ln.slice(0, start)) + '<span class="k5">' + esc(ln.slice(start, end + 2)) + '</span>' + hl(ln.slice(end + 2));
+        } else html = hl(ln);
+      }
+      return '<div class="il' + (i === caretLine && document.activeElement === ed ? ' cur' : '') + '">' + (html || ' ') + '</div>';
+    }).join('');
+    curLine = caretLine;
+    updatePos();
+  }
+  function updatePos() {
+    const before = ed.value.slice(0, ed.selectionStart).split('\n');
+    const line = before.length - 1;
+    pos.textContent = 'Ln ' + (line + 1) + ', Col ' + (before[line].length + 1) + (ed.selectionEnd > ed.selectionStart ? ' (' + (ed.selectionEnd - ed.selectionStart) + ' sélectionnés)' : '');
+    if (line !== curLine) {
+      const rows = layer.children;
+      if (rows[curLine]) rows[curLine].classList.remove('cur');
+      if (rows[line] && document.activeElement === ed) rows[line].classList.add('cur');
+      curLine = line;
+    }
+  }
+  // remplace une plage en gardant l'historique Ctrl+Z quand le navigateur le permet
+  function replace(start, end, text, selStart, selEnd) {
+    ed.focus();
+    ed.setSelectionRange(start, end);
+    let ok = false;
+    try { ok = text ? document.execCommand('insertText', false, text) : document.execCommand('delete'); } catch (e) { ok = false; }
+    if (!ok) { ed.setRangeText(text, start, end, 'end'); ed.dispatchEvent(new Event('input')); }
+    ed.setSelectionRange(selStart, selEnd === undefined ? selStart : selEnd);
+    render();
+  }
+  const lineStart = i => ed.value.lastIndexOf('\n', i - 1) + 1;
+  function selectedLines() {
+    const s = lineStart(ed.selectionStart);
+    let e = ed.selectionEnd;
+    if (e > ed.selectionStart && ed.value[e - 1] === '\n') e--;
+    const nl = ed.value.indexOf('\n', e);
+    return { s, e: nl < 0 ? ed.value.length : nl };
+  }
+  function mapLines(fn) {
+    const { s, e } = selectedLines();
+    const block = ed.value.slice(s, e);
+    const out = block.split('\n').map(fn).join('\n');
+    replace(s, e, out, s, s + out.length);
+  }
+
+  ed.addEventListener('keydown', e => {
+    const v = ed.value, a = ed.selectionStart, b = ed.selectionEnd;
+    const ls = lineStart(a), line = v.slice(ls, a), indent = line.match(/^\s*/)[0];
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      if (e.shiftKey) { mapLines(t => t.startsWith(IND) ? t.slice(4) : t.replace(/^ {1,3}/, '')); return; }
+      if (v.slice(a, b).includes('\n')) { mapLines(t => IND + t); return; }
+      replace(a, b, IND, a + 4);
+      return;
+    }
+    if (e.key === 'Enter' && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      const prev = v[a - 1], next = v[b];
+      if (prev === '{' && next === '}') {
+        const ins = '\n' + indent + IND + '\n' + indent;
+        replace(a, b, ins, a + 1 + indent.length + 4);
+      } else {
+        const extra = /[{(\[]\s*$/.test(line) ? IND : '';
+        const ins = '\n' + indent + extra;
+        replace(a, b, ins, a + ins.length);
+      }
+      return;
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+      e.preventDefault();
+      const { s, e: en } = selectedLines();
+      const rows = v.slice(s, en).split('\n');
+      const allCommented = rows.filter(r => r.trim()).every(r => /^\s*\/\//.test(r));
+      mapLines(r => allCommented ? r.replace(/^(\s*)\/\/ ?/, '$1') : (r.trim() ? r.replace(/^(\s*)/, '$1// ') : r));
+      return;
+    }
+    if (e.key === 'Backspace' && a === b && a > 0) {
+      const p = v[a - 1], n = v[a];
+      if (PAIRS[p] && PAIRS[p] === n) { e.preventDefault(); replace(a - 1, a + 1, '', a - 1); return; }
+      if (line.length && /^ +$/.test(line) && line.length % 4 === 0) { e.preventDefault(); replace(a - 4, a, '', a - 4); return; }
+      return;
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (')]}"\''.includes(e.key) && a === b && v[a] === e.key) { e.preventDefault(); ed.setSelectionRange(a + 1, a + 1); updatePos(); return; }
+    if (e.key === '}' && a === b && /^\s+$/.test(line) && line.length >= 4) { e.preventDefault(); replace(a - 4, a, '}', a - 3); return; }
+    if (PAIRS[e.key]) {
+      const isQuote = e.key === '"' || e.key === "'";
+      if (a !== b) { e.preventDefault(); const sel = v.slice(a, b); replace(a, b, e.key + sel + PAIRS[e.key], a + 1, b + 1); return; }
+      const next = v[a] || '';
+      if (isQuote && /\w/.test(v[a - 1] || '')) return;     // apostrophe dans un mot
+      if (next && !/[\s)\]};,]/.test(next)) return;           // pas de fermeture devant un mot
+      e.preventDefault();
+      replace(a, b, e.key + PAIRS[e.key], a + 1);
+    }
+  });
+  ed.addEventListener('input', () => { render(); onChange(); });
+  ['keyup', 'click', 'select'].forEach(t => ed.addEventListener(t, updatePos));
+  ed.addEventListener('focus', render);
+  ed.addEventListener('blur', render);
+  render();
+}
+
 /* ---------- page de leçon ---------- */
 function viewLesson(l) {
   document.title = l.title + ' · Carnet C# Unity';
@@ -168,8 +290,9 @@ function viewLesson(l) {
         '<button class="hintbtn" id="hintbtn" aria-expanded="false">Besoin d’un indice ?</button><p class="hint" id="hint" hidden>' + md(l.hint) + '</p>' +
         '<div class="tabs" role="tablist" aria-label="Code"><button role="tab" data-tab="code" aria-selected="true">Ton code</button><button role="tab" data-tab="sol" aria-selected="false">Solution</button></div>' +
         '<div class="work">' +
-          '<div class="pane cur" id="p-code"><div class="ph"><b>TonCode.cs</b><span class="sp"></span><span id="saved"></span><button class="small" id="clear">Effacer</button></div>' +
-          '<label class="sr" for="ed">Ton code</label><textarea id="ed" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="// Écris ta solution ici. Tab insère 4 espaces.\n// Ton brouillon est gardé sur cet appareil."></textarea></div>' +
+          '<div class="pane cur" id="p-code"><div class="ph"><b>TonCode.cs</b><span class="sp"></span><button class="small" id="clear">Effacer</button></div>' +
+          '<div class="ide"><pre class="ide-hl" id="ide-hl" aria-hidden="true"></pre><label class="sr" for="ed">Ton code</label><textarea id="ed" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="soft" placeholder="// Écris ta solution ici.\n// Tab indente, Ctrl+/ commente, les parenthèses se ferment toutes seules."></textarea></div>' +
+          '<div class="ide-bar"><span id="ide-pos">Ln 1, Col 1</span><span>C#</span><span>4 espaces</span><span id="saved"></span></div></div>' +
           '<div class="pane" id="p-sol"><div class="ph"><b>Solution.cs</b><span class="sp"></span><span class="st">● verrouillée</span></div><div class="lock"><span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><p>La solution reste cachée tant que tu n’as pas essayé.</p><button class="cta" id="reveal">Afficher la solution</button></div></div>' +
         '</div>' +
         (x.d ? '<div class="defis"><h3>Défis supplémentaires</h3><ol>' + x.d.map(d => '<li><p>' + md(d[0]) + '</p>' + (d[1] ? '<details><summary>Indice</summary><p>' + md(d[1]) + '</p></details>' : '') + '</li>').join('') + '</ol></div>' : '') +
@@ -180,16 +303,8 @@ function viewLesson(l) {
 
   const ed = document.getElementById('ed'), saved = document.getElementById('saved');
   ed.value = store.get('cs-note-' + l.id, '');
-  ed.addEventListener('input', () => { store.set('cs-note-' + l.id, ed.value); saved.textContent = '● gardé'; });
-  ed.addEventListener('keydown', e => {
-    if (e.key !== 'Tab' || e.shiftKey) return;
-    e.preventDefault();
-    const a = ed.selectionStart, b = ed.selectionEnd;
-    ed.value = ed.value.slice(0, a) + '    ' + ed.value.slice(b);
-    ed.selectionStart = ed.selectionEnd = a + 4;
-    ed.dispatchEvent(new Event('input'));
-  });
-  document.getElementById('clear').addEventListener('click', () => { ed.value = ''; store.set('cs-note-' + l.id, ''); saved.textContent = ''; });
+  setupIde(ed, document.getElementById('ide-hl'), document.getElementById('ide-pos'), () => { store.set('cs-note-' + l.id, ed.value); saved.textContent = '● gardé'; });
+  document.getElementById('clear').addEventListener('click', () => { ed.value = ''; ed.dispatchEvent(new Event('input')); store.set('cs-note-' + l.id, ''); saved.textContent = ''; });
   document.getElementById('reveal').addEventListener('click', () => revealSolution(l));
   const hb = document.getElementById('hintbtn'), hint = document.getElementById('hint');
   hb.addEventListener('click', () => { const open = hint.hidden; hint.hidden = !open; hb.setAttribute('aria-expanded', String(open)); hb.textContent = open ? 'Masquer l’indice' : 'Besoin d’un indice ?'; });

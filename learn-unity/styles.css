@@ -1023,26 +1023,119 @@ pre code {
 .small:hover {
   border-color: #aebbe0;
 }
-.pane textarea {
+.ide {
+  --gut: 44px;
+  position: relative;
   flex: 1;
-  width: 100%;
   min-height: 460px;
-  border: 0;
-  border-radius: 4px;
-  resize: vertical;
-  padding: 16px 18px;
+  overflow: auto;
+  border-radius: 4px 4px 0 0;
   background: var(--card);
+}
+.ide-hl,
+.ide textarea {
+  margin: 0;
+  padding: 16px 18px 16px calc(var(--gut) + 14px);
   font:
     14px/1.75 "Fira Code",
+    ui-monospace,
     monospace;
+  font-variant-ligatures: none;
   tab-size: 4;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  overflow: auto;
+  word-break: normal;
+  letter-spacing: 0;
+}
+.ide-hl {
+  min-height: 100%;
+  color: var(--ink);
+  counter-reset: ln;
+  pointer-events: none;
+}
+.il {
+  position: relative;
+  counter-increment: ln;
+}
+.il::before {
+  content: counter(ln);
+  position: absolute;
+  left: calc(-1 * var(--gut) - 14px);
+  width: var(--gut);
+  text-align: right;
+  color: var(--mute);
+  opacity: 0.7;
+  font-size: 12.5px;
+}
+.il.cur {
+  background: var(--accent-soft);
+  box-shadow: -64px 0 0 var(--accent-soft), 18px 0 0 var(--accent-soft);
+}
+.il.cur::before {
+  color: var(--accent);
+  opacity: 1;
+}
+.ide textarea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--ink);
   outline: none;
 }
-.pane textarea::placeholder {
+.ide textarea::selection {
+  background: rgba(47, 91, 255, 0.28);
+  color: transparent;
+}
+.ide textarea::placeholder {
   color: var(--mute);
+}
+.ide::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: calc(var(--gut) + 4px);
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  pointer-events: none;
+}
+.ide-bar {
+  display: flex;
+  gap: 16px;
+  padding: 6px 10px 2px;
+  font:
+    500 12px "Fira Code",
+    monospace;
+  color: #aebbe0;
+}
+.ide-bar span:last-child {
+  margin-left: auto;
+  color: var(--hl);
+}
+.pane .ln {
+  counter-increment: sl;
+  padding-left: 46px;
+  position: relative;
+}
+.pane .ln::before {
+  content: counter(sl);
+  position: absolute;
+  left: 0;
+  width: 30px;
+  text-align: right;
+  color: var(--mute);
+  opacity: 0.7;
+  font-size: 12.5px;
+}
+.pane pre code {
+  counter-reset: sl;
 }
 .pane .pre {
   margin: 0;
@@ -1512,7 +1605,7 @@ pre code {
 
 /* lecture centrée : le texte tient dans une colonne centrée, le code et les tableaux prennent toute la largeur */
 .main {
-  --read: 1000px;
+  --read: 880px;
 }
 .main > .crumb,
 .main > .ttl,
