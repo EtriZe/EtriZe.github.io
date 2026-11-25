@@ -14,7 +14,9 @@ const CATS = [
   {id:'editor', name:'Outils éditeur et CI', color:'#14b8a6', d:'Étendre l’éditeur et automatiser : menus, inspecteurs, tests, builds.',
    order:['menuitem-contextmenu','custom-inspector','property-drawer','editor-window','handles-scene','batch-assets','validation-assets','assembly-definitions','tests-unitaires','build-ligne-commande','build-hooks']},
   {id:'perf', name:'Performance', color:'#ec4899', d:'Garder le jeu fluide : mesurer, éviter les allocations, paralléliser.',
-   order:['profiler-markers','cache-references','allocations-gc','object-pooling','update-manager','partition-spatiale','jobs-burst']}
+   order:['profiler-markers','cache-references','allocations-gc','object-pooling','update-manager','partition-spatiale','jobs-burst']},
+  {id:'design', name:'Game design', color:'#f43f5e', d:'Les règles qui rendent un jeu agréable, juste et lisible, tirées de jeux réels et appliquées en C#.',
+   order:['mda','choix-interessants','enseigner-sans-texte','accessibilite','game-feel','tolerance-controles','telegraphie','flow-difficulte','hasard-equitable','boucles-retroaction','camera-plateforme','economie-jeu','directeur-ia']}
 ];
 const LV = ['Tous','Débutant','Intermédiaire','Avancé'];
 
