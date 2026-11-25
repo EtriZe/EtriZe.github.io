@@ -87,18 +87,19 @@ function viewHome() {
   const resume = byId[lastId] || LESSONS.find(l => !done.has(l.id)) || LESSONS[0];
   const total = LESSONS.filter(match).length;
   view.innerHTML =
-    '<section class="hero"><div class="txt"><h1>Apprendre le C# de Unity, une notion à la fois</h1>' +
+    '<section class="hero"><div class="txt"><h1>Apprendre le C# de Unity, <span class="hl">une notion à la fois</span></h1>' +
     '<p>' + LESSONS.length + ' leçons en ' + CATS.length + ' thèmes. Lis l’explication, écris ta réponse à côté, puis compare avec la solution. Chaque notion renvoie vers celles dont elle a besoin.</p></div>' +
-    '<div class="progcard"><div class="row"><span>Ta progression</span><b>' + pct + ' %</b></div><div class="track"><i style="width:' + pct + '%"></i></div>' +
-    '<a class="resume" href="#' + resume.id + '"><span>' + (lastId && byId[lastId] ? 'Reprendre : ' : 'Commencer : ') + esc(resume.title) + '</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>' +
+    '<div class="progcard"><div class="row"><span>Ta progression</span><b>' + pct + ' %</b></div><div class="cells" role="img" aria-label="' + pct + ' % terminé">' + Array.from({length:30}, (_, i) => i < Math.round(pct * 30 / 100) ? '<i class="on" style="animation-delay:' + (0.3 + i * 0.04).toFixed(2) + 's"></i>' : '<i></i>').join('') + '</div>' +
+    '<a class="resume pulse" href="#' + resume.id + '"><span>' + (lastId && byId[lastId] ? 'Reprendre : ' : 'Commencer : ') + esc(resume.title) + '</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>' +
     '<div class="bar"><span class="lab">Niveau</span>' + LV.map((n, i) => '<button class="pill" data-lv="' + i + '" aria-pressed="' + (i === lvlFilter) + '">' + n + '</button>').join('') +
     '<span class="lab" style="margin-left:auto">' + total + ' leçon' + (total > 1 ? 's' : '') + '</span></div>' +
     '<div class="bar cats"><span class="lab">Aller à</span>' + CATS.map(c => '<button class="pill" data-jump="' + c.id + '"><span class="dot" style="background:' + c.color + '"></span>' + c.name + '</button>').join('') + '</div>' +
-    '<div class="grid">' + CATS.map(c => {
+    '<div class="grid">' + CATS.map((c, ci) => {
       const ls = LESSONS.filter(l => l.cat === c.id && match(l));
-      return '<section class="cat" id="cat-' + c.id + '"><div class="hd"><span class="dot" style="background:' + c.color + '"></span><h2>' + c.name + '</h2><span class="n">' + ls.length + ' leçon' + (ls.length > 1 ? 's' : '') + '</span></div>' +
+      const all = LESSONS.filter(l => l.cat === c.id);
+      return '<section class="cat rise" style="animation-delay:' + (ci * 0.06).toFixed(2) + 's" id="cat-' + c.id + '"><div class="hd"><span class="dot" style="background:' + c.color + '"></span><h2>' + c.name + '</h2><span class="n">' + ls.length + ' leçon' + (ls.length > 1 ? 's' : '') + '</span></div>' +
         '<p>' + esc(c.d) + '</p>' +
-        (ls.length ? ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="t">' + esc(l.title) + '</span>' + badge(l.lvl) + '</a>').join('') : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
+        (ls.length ? ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="num">' + String(all.indexOf(l) + 1).padStart(2, '0') + '</span><span class="t">' + esc(l.title) + '</span>' + badge(l.lvl) + '</a>').join('') : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
         '</section>';
     }).join('') + '</div>';
 }
@@ -122,8 +123,8 @@ function viewLesson(l) {
       '<div class="other"><h4>Autres thèmes</h4>' + CATS.filter(c => c.id !== l.cat).map(c => { const f = LESSONS.find(x => x.cat === c.id); return '<a href="#' + f.id + '"><span class="dot" style="width:7px;height:7px;background:' + c.color + '"></span>' + c.name + '</a>'; }).join('') +
       '<a href="#">← Toutes les leçons</a></div></div></aside>' +
     '<div class="main">' +
-      '<div class="crumb"><a href="#">Sommaire</a> / ' + cat.name + '</div>' +
-      '<div class="ttl"><h1>' + esc(l.title) + '</h1>' + badge(l.lvl) + '</div>' +
+      '<div class="crumb"><a href="#">Sommaire</a> / ' + cat.name + ' · ' + String(siblings.indexOf(l) + 1).padStart(2, '0') + '</div>' +
+      '<div class="ttl"><h1><span class="hl">' + esc(l.title) + '</span></h1>' + badge(l.lvl) + '</div>' +
       '<p class="sum">' + esc(l.sum) + '</p>' +
       (x.r ? '<section class="keep"><h3>À retenir</h3><ul>' + x.r.map(t => '<li>' + md(t) + '</li>').join('') + '</ul></section>' : '') +
       (l.diag ? '<section class="diag"><div class="fig"><svg role="img" aria-label="Schéma interactif : fais glisser les points"></svg></div><div class="readout"></div></section>' : '') +
@@ -136,9 +137,9 @@ function viewLesson(l) {
         '<button class="hintbtn" id="hintbtn" aria-expanded="false">Besoin d’un indice ?</button><p class="hint" id="hint" hidden>' + md(l.hint) + '</p>' +
         '<div class="tabs" role="tablist" aria-label="Code"><button role="tab" data-tab="code" aria-selected="true">Ton code</button><button role="tab" data-tab="sol" aria-selected="false">Solution</button></div>' +
         '<div class="work">' +
-          '<div class="pane cur" id="p-code"><div class="ph"><b>Ton code</b><span class="sp"></span><span id="saved"></span><button class="small" id="clear">Effacer</button></div>' +
+          '<div class="pane cur" id="p-code"><div class="ph"><b>TonCode.cs</b><span class="sp"></span><span id="saved"></span><button class="small" id="clear">Effacer</button></div>' +
           '<label class="sr" for="ed">Ton code</label><textarea id="ed" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="// Écris ta solution ici. Tab insère 4 espaces.\n// Ton brouillon est gardé sur cet appareil."></textarea></div>' +
-          '<div class="pane" id="p-sol"><div class="ph"><b>Solution</b><span class="sp"></span></div><div class="lock"><span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><p>La solution reste cachée tant que tu n’as pas essayé.</p><button class="cta" id="reveal">Afficher la solution</button></div></div>' +
+          '<div class="pane" id="p-sol"><div class="ph"><b>Solution.cs</b><span class="sp"></span><span class="st">● verrouillée</span></div><div class="lock"><span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><p>La solution reste cachée tant que tu n’as pas essayé.</p><button class="cta" id="reveal">Afficher la solution</button></div></div>' +
         '</div>' +
         (x.d ? '<div class="defis"><h3>Défis supplémentaires</h3><ol>' + x.d.map(d => '<li><p>' + md(d[0]) + '</p>' + (d[1] ? '<details><summary>Indice</summary><p>' + md(d[1]) + '</p></details>' : '') + '</li>').join('') + '</ol></div>' : '') +
         '<label class="done"><input type="checkbox" id="donebox"' + (done.has(l.id) ? ' checked' : '') + '> Leçon terminée</label>' +
@@ -148,7 +149,7 @@ function viewLesson(l) {
 
   const ed = document.getElementById('ed'), saved = document.getElementById('saved');
   ed.value = store.get('cs-note-' + l.id, '');
-  ed.addEventListener('input', () => { store.set('cs-note-' + l.id, ed.value); saved.textContent = 'Brouillon gardé'; });
+  ed.addEventListener('input', () => { store.set('cs-note-' + l.id, ed.value); saved.textContent = '● gardé'; });
   ed.addEventListener('keydown', e => {
     if (e.key !== 'Tab' || e.shiftKey) return;
     e.preventDefault();
@@ -173,7 +174,8 @@ function viewLesson(l) {
 }
 function revealSolution(l) {
   const p = document.getElementById('p-sol');
-  p.innerHTML = '<div class="ph"><b>Solution</b><span class="sp"></span><button class="small" id="copy">Copier</button></div>' + codeBlock(l.sol);
+  p.innerHTML = '<div class="ph"><b>Solution.cs</b><span class="st on">● déverrouillée</span><span class="sp"></span><button class="small" id="copy">Copier</button></div>' +
+    '<div class="pre"><pre><code>' + l.sol.split('\n').map((ln, i) => '<span class="ln" style="animation-delay:' + Math.min(i * 0.04, 1.2).toFixed(2) + 's">' + (hl(ln) || ' ') + '</span>').join('') + '</code></pre></div>';
   document.getElementById('copy').addEventListener('click', e => {
     const b = e.currentTarget;
     const done = t => { b.textContent = t; setTimeout(() => { b.textContent = 'Copier'; }, 1600); };

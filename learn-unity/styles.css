@@ -1,44 +1,42 @@
-/* VOICE everyday learning: airy, light, modern, the code is the star
-   IDEA a clean study notebook: lessons as cards, the answer hidden under a lock until you try
-   PICTURE live vector diagrams on the maths pages, the editor and solution pair on every page
-   COLOUR white ground, soft grey panels, deep ink, indigo accent, orange for vectors and alerts
-   TYPE Space Grotesk titles, Inter text, JetBrains Mono code
-   LAYOUT header + content; lesson pages add a side index above 1000px; tabs replace the two code panes on phones */
+/* VOICE everyday learning, technical and energetic: an engineer's notebook
+   IDEA squared paper, navy ink, electric blue for actions, a yellow highlighter for what matters
+   PICTURE live vector diagrams on the maths pages, the editor and the Solution.cs panel on every page
+   COLOUR white on a faint blue grid, ink #0E1B3D, blue #2F5BFF, highlighter #FFE45C, orange for vectors
+   TYPE Sora for titles and text, Fira Code (with ligatures) for code
+   LAYOUT full-width header + content; side index above 1000px; tabs replace the two code panes on phones */
 :root {
   color-scheme: light;
-  --bg: light-dark(#ffffff, #0f1115);
-  --panel: light-dark(#f7f8fb, #161920);
-  --card: light-dark(#ffffff, #13161c);
-  --line: light-dark(#eef0f4, #242833);
-  --line2: light-dark(#e4e7ee, #2e3340);
-  --ink: light-dark(#15171c, #eceef3);
-  --soft: light-dark(#5c6270, #a6acb9);
-  --mute: light-dark(#757b8a, #8a90a0);
-  --accent: light-dark(#4f46e5, #8f8cf7);
-  --accent-ink: light-dark(#3730a3, #b9b7ff);
-  --accent-soft: light-dark(#eef0ff, #22234a);
-  --orange: light-dark(#ea6a10, #ff9a4d);
-  --teal: light-dark(#0d9488, #4fd1c5);
-  --ok: light-dark(#15803d, #5fd39a);
-  --code: light-dark(#f2f3f8, #1b1f28);
-  --btn: light-dark(#15171c, #eceef3);
-  --btn-ink: light-dark(#ffffff, #15171c);
-  --k1: light-dark(#7c3aed, #c4a5ff);
-  --k2: light-dark(#0e7490, #67d4e8);
-  --k3: light-dark(#b45309, #f5b56a);
-  --k4: light-dark(#2563eb, #8ab4ff);
-  --k5: light-dark(#8a90a0, #7d8494);
-  --b1bg: light-dark(#ecfdf3, #12301f);
-  --b1: light-dark(#15803d, #6fdc9d);
-  --b2bg: light-dark(#eef0ff, #22234a);
-  --b2: light-dark(#4338ca, #b0adff);
-  --b3bg: light-dark(#fff1eb, #3a2216);
-  --b3: light-dark(#c2410c, #ffab7a);
-}
-:root,
-:root[data-theme="light"],
-:root[data-theme="dark"] {
-  color-scheme: light;
+  --bg: #ffffff;
+  --gridline: #edf1fb;
+  --panel: #f6f8fe;
+  --card: #ffffff;
+  --line: #c9d3ec;
+  --line2: #c9d3ec;
+  --ink: #0e1b3d;
+  --soft: #4a5676;
+  --mute: #6b7592;
+  --accent: #2f5bff;
+  --accent-ink: #1e3fd1;
+  --accent-soft: #e6ecff;
+  --hl: #ffe45c;
+  --hl-soft: #fff9d6;
+  --orange: #ea6a10;
+  --teal: #0f766e;
+  --ok: #146c3a;
+  --code: #ffffff;
+  --btn: #2f5bff;
+  --btn-ink: #ffffff;
+  --k1: #2f5bff;
+  --k2: #0f766e;
+  --k3: #a15c00;
+  --k4: #c2410c;
+  --k5: #7d86a3;
+  --b1bg: #e2f6e9;
+  --b1: #146c3a;
+  --b2bg: #e6ecff;
+  --b2: #2440b8;
+  --b3bg: #fff0d6;
+  --b3: #8a5300;
 }
 * {
   box-sizing: border-box;
@@ -49,14 +47,19 @@ html {
 }
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--gridline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gridline) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--ink);
   font:
-    16px/1.65 Inter,
+    15.5px/1.65 Sora,
     system-ui,
     sans-serif;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  animation: grid 1s ease-out both;
 }
 a {
   color: var(--accent);
@@ -68,19 +71,20 @@ a:hover {
 h1,
 h2,
 h3 {
-  font-family: "Space Grotesk", Inter, sans-serif;
-  font-weight: 600;
+  font-family: Sora, system-ui, sans-serif;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.08;
+  line-height: 1.12;
   margin: 0;
   text-wrap: balance;
 }
 code {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Fira Code", ui-monospace, monospace;
   font-size: 0.86em;
-  background: var(--code);
+  background: var(--accent-soft);
+  color: var(--ink);
   padding: 2px 6px;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow-wrap: anywhere;
 }
 button,
@@ -95,7 +99,7 @@ button {
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 .sr {
   position: absolute;
@@ -105,14 +109,77 @@ button {
   clip: rect(0 0 0 0);
 }
 
+/* animations */
+@keyframes grid {
+  from {
+    background-size: 12px 12px;
+  }
+  to {
+    background-size: 28px 28px;
+  }
+}
+@keyframes sweep {
+  from {
+    background-size: 0% 40%;
+  }
+  to {
+    background-size: 100% 40%;
+  }
+}
+@keyframes line {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 91, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 9px rgba(47, 91, 255, 0);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hl {
+  background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 88%;
+  background-size: 100% 40%;
+  animation: sweep 0.7s 0.35s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.ln {
+  display: block;
+  animation: line 0.35s ease-out both;
+}
+.pulse {
+  animation: pulse 2s 1.2s ease-in-out 2;
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 /* header */
 .top {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  background: #fff;
+  border-bottom: 1.5px solid var(--ink);
 }
 .top .in {
   padding: 14px clamp(16px, 2vw, 32px);
@@ -127,22 +194,21 @@ button {
   gap: 12px;
   color: var(--ink);
   font:
-    600 18px "Space Grotesk",
+    700 17px Sora,
     sans-serif;
 }
 .brand:hover {
   color: var(--ink);
 }
 .logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--accent-soft);
-  color: var(--accent);
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1.5px solid var(--ink);
   display: grid;
   place-items: center;
   font:
-    500 14px "JetBrains Mono",
+    500 13px "Fira Code",
     monospace;
 }
 .search {
@@ -153,7 +219,7 @@ button {
 .search label {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
 }
 .search svg {
   position: absolute;
@@ -165,16 +231,22 @@ button {
   width: 100%;
   height: 44px;
   padding: 0 16px 0 42px;
-  border-radius: 12px;
-  border: 1px solid var(--line2);
-  background: var(--panel);
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: #fff;
   font-size: 16px;
+}
+#q:focus {
+  border-color: var(--accent);
+  outline: none;
 }
 #q::placeholder {
   color: var(--mute);
 }
 .prog {
-  font-size: 14px;
+  font:
+    500 13px "Fira Code",
+    monospace;
   color: var(--soft);
   white-space: nowrap;
 }
@@ -182,10 +254,11 @@ button {
   display: none;
   min-height: 44px;
   padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid var(--line2);
-  background: var(--card);
+  border-radius: 6px;
+  border: 1.5px solid var(--ink);
+  background: #fff;
   font-size: 14px;
+  font-weight: 600;
 }
 
 /* page shell */
@@ -193,7 +266,8 @@ button {
   padding: clamp(24px, 3.5vw, 56px) clamp(16px, 2vw, 32px) 96px;
 }
 .foot {
-  border-top: 1px solid var(--line);
+  border-top: 1.5px solid var(--ink);
+  background: #fff;
   color: var(--mute);
   font-size: 14px;
 }
@@ -208,26 +282,27 @@ button {
   align-items: flex-end;
   justify-content: space-between;
   gap: 32px 48px;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 .hero .txt {
   flex: 1 1 520px;
 }
 .hero h1 {
-  font-size: clamp(36px, 5.4vw, 52px);
-  max-width: 15ch;
+  font-size: clamp(34px, 5vw, 52px);
+  max-width: 17ch;
 }
 .hero p {
-  margin: 20px 0 0;
-  font-size: 18px;
+  margin: 18px 0 0;
+  font-size: 17px;
   color: var(--soft);
-  max-width: 56ch;
+  max-width: 58ch;
 }
 .progcard {
-  flex: 0 1 320px;
-  padding: 24px;
-  border-radius: 20px;
-  background: var(--panel);
+  flex: 0 1 400px;
+  padding: 20px 22px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
 }
 .progcard .row {
   display: flex;
@@ -241,22 +316,23 @@ button {
 }
 .progcard .row b {
   font:
-    600 32px "Space Grotesk",
+    700 30px Sora,
     sans-serif;
 }
-.track {
-  height: 8px;
-  border-radius: 99px;
-  background: var(--line2);
+.cells {
+  display: grid;
+  grid-template-columns: repeat(30, minmax(0, 1fr));
+  gap: 3px;
   margin-top: 14px;
-  overflow: hidden;
 }
-.track i {
-  display: block;
-  height: 100%;
-  border-radius: 99px;
+.cells i {
+  height: 14px;
+  border-radius: 2px;
+  background: #e3e9f8;
+}
+.cells i.on {
   background: var(--accent);
-  transition: width 0.5s ease;
+  animation: line 0.3s ease-out both;
 }
 .resume {
   margin-top: 18px;
@@ -266,15 +342,15 @@ button {
   gap: 12px;
   min-height: 46px;
   padding: 0 16px;
-  border-radius: 12px;
+  border-radius: 6px;
   background: var(--btn);
   color: var(--btn-ink);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
 }
 .resume:hover {
   color: var(--btn-ink);
-  opacity: 0.92;
+  background: var(--accent-ink);
 }
 .resume span {
   overflow: hidden;
@@ -286,33 +362,42 @@ button {
   /* display: flex; */
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 14px;
 }
 .bar .lab {
-  font-size: 14px;
+  font:
+    500 13px "Fira Code",
+    monospace;
   color: var(--soft);
-  margin-right: 4px;
+  margin-right: 6px;
 }
 .pill {
   min-height: 40px;
-  padding: 0 16px;
-  border-radius: 99px;
-  border: 1px solid var(--line2);
-  background: var(--card);
-  font-size: 14.5px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.pill:hover {
+  border-color: var(--accent);
 }
 .pill[aria-pressed="true"] {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--ink);
+  border-color: var(--ink);
   color: #fff;
 }
 .pill .dot {
   width: 8px;
   height: 8px;
+  border-radius: 2px;
 }
 .bar.cats {
   margin-bottom: 32px;
@@ -320,14 +405,20 @@ button {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-  gap: 24px;
+  gap: 20px;
   align-items: start;
 }
 .cat {
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 26px 22px 14px;
-  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 20px 12px;
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.cat:hover {
+  border-color: var(--ink);
 }
 .cat .hd {
   display: flex;
@@ -336,51 +427,65 @@ button {
   margin-bottom: 6px;
 }
 .cat h2 {
-  font-size: 21px;
+  font-size: 20px;
   letter-spacing: -0.01em;
 }
 .cat .n {
   margin-left: auto;
-  font-size: 13px;
+  font:
+    500 12.5px "Fira Code",
+    monospace;
   color: var(--mute);
   white-space: nowrap;
 }
 .cat p {
-  margin: 0 0 12px;
-  font-size: 15px;
+  margin: 0 0 10px;
+  font-size: 14.5px;
   color: var(--soft);
 }
 .dot {
   width: 10px;
   height: 10px;
-  border-radius: 99px;
+  border-radius: 2px;
   flex: none;
 }
 .item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 11px 10px;
+  gap: 12px;
+  padding: 10px 10px;
   margin: 0 -10px;
-  border-radius: 12px;
+  border-radius: 6px;
   color: var(--ink);
+  transition:
+    background 0.15s,
+    transform 0.15s;
 }
 .item:hover {
-  background: var(--panel);
+  background: var(--accent-soft);
   color: var(--ink);
+  transform: translateX(3px);
+}
+.item .num {
+  flex: none;
+  width: 22px;
+  font:
+    500 12px "Fira Code",
+    monospace;
+  color: var(--accent);
 }
 .item .t {
   flex: 1;
-  font-weight: 500;
-  font-size: 15.5px;
+  font-weight: 600;
+  font-size: 15px;
   line-height: 1.35;
 }
 .check {
   flex: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 99px;
-  border: 1.5px solid var(--line2);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--line);
   display: grid;
   place-items: center;
 }
@@ -390,10 +495,10 @@ button {
 }
 .badge {
   flex: none;
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
   white-space: nowrap;
 }
 .l1 {
@@ -419,63 +524,74 @@ button {
 .lesson {
   display: flex;
   flex-wrap: wrap;
-  gap: 48px;
+  gap: 40px;
 }
 .side {
-  flex: 0 0 260px;
-  font-size: 14.5px;
+  flex: 0 0 270px;
+  font-size: 14px;
 }
 .side .stick {
   position: sticky;
   top: 96px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
-  padding-right: 4px;
+  padding: 16px 12px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
 }
 .side h4 {
   margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--mute);
+  padding: 0 6px;
+  font:
+    500 12.5px "Fira Code",
+    monospace;
+  color: var(--accent);
 }
 .side nav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 .side a {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 12px;
-  border-radius: 10px;
+  padding: 7px 8px;
+  border-radius: 4px;
   color: var(--ink);
   line-height: 1.35;
 }
 .side a:hover {
-  background: var(--panel);
+  background: var(--accent-soft);
   color: var(--ink);
 }
 .side a[aria-current="page"] {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
+  background: var(--ink);
+  color: #fff;
   font-weight: 600;
 }
 .side a .mini {
-  width: 7px;
-  height: 7px;
-  border-radius: 99px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
   flex: none;
-  background: var(--line2);
+  border: 1.5px solid var(--line);
 }
 .side a .mini.on {
   background: var(--accent);
+  border-color: var(--accent);
+}
+.side a[aria-current="page"] .mini {
+  border-color: #fff;
 }
 .side .other {
-  margin-top: 22px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 .side .other a {
   color: var(--soft);
@@ -484,7 +600,9 @@ button {
   flex: 1 1 560px;
 }
 .crumb {
-  font-size: 14px;
+  font:
+    500 13px "Fira Code",
+    monospace;
   color: var(--mute);
   margin-bottom: 14px;
 }
@@ -498,28 +616,55 @@ button {
   gap: 12px 16px;
 }
 .ttl h1 {
-  font-size: clamp(34px, 4.6vw, 48px);
+  font-size: clamp(32px, 4.4vw, 48px);
 }
 .sum {
-  margin: 14px 0 36px;
-  font-size: 19px;
+  margin: 14px 0 32px;
+  font-size: 18px;
   color: var(--soft);
-  max-width: 60ch;
+  max-width: 66ch;
+}
+.keep {
+  margin: 0 0 40px;
+  padding: 18px 22px;
+  border-radius: 8px;
+  background: var(--hl-soft);
+  border: 1.5px solid #f0d64a;
+  max-width: 110ch;
+}
+.keep h3 {
+  font:
+    500 13px "Fira Code",
+    monospace;
+  letter-spacing: 0;
+  color: #7a5f00;
+  margin-bottom: 8px;
+}
+.keep ul {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+.keep li::marker {
+  color: #c9a400;
 }
 .diag {
   display: flex;
   flex-wrap: wrap;
-  border-radius: 24px;
-  background: var(--panel);
+  border-radius: 8px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
   overflow: hidden;
-  margin-bottom: 56px;
+  margin-bottom: 52px;
 }
 .fig {
   flex: 999 1 420px;
   position: relative;
-  min-height: 360px;
+  min-height: 380px;
   touch-action: none;
   cursor: grab;
+  background: var(--panel);
 }
 .fig:active {
   cursor: grabbing;
@@ -532,7 +677,7 @@ button {
 }
 .fig svg text {
   font:
-    500 14px "JetBrains Mono",
+    500 14px "Fira Code",
     monospace;
   paint-order: stroke;
   stroke: var(--panel);
@@ -540,9 +685,9 @@ button {
 }
 .readout {
   flex: 1 1 250px;
-  padding: 26px;
-  background: var(--card);
-  border-left: 1px solid var(--line);
+  padding: 24px;
+  background: #fff;
+  border-left: 1.5px solid var(--ink);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -550,29 +695,30 @@ button {
 }
 .readout .k {
   color: var(--soft);
-  font-size: 13px;
+  font-size: 12.5px;
+  font-family: "Fira Code", monospace;
 }
 .readout .v {
   font:
-    500 15px "JetBrains Mono",
+    500 15px "Fira Code",
     monospace;
   white-space: nowrap;
 }
 .readout .big {
   font:
-    600 40px "Space Grotesk",
+    700 40px Sora,
     sans-serif;
   line-height: 1.1;
 }
 .readout .note {
   margin-top: auto;
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--mute);
   line-height: 1.5;
 }
 .readout input[type="range"] {
   width: 100%;
-  accent-color: var(--orange);
+  accent-color: var(--accent);
   min-height: 32px;
 }
 .cols {
@@ -584,15 +730,24 @@ button {
   flex: 999 1 440px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 28px;
 }
 .prose h2 {
-  font-size: 22px;
+  font-size: 21px;
   margin-bottom: 8px;
 }
 .prose p {
   margin: 0;
-  max-width: 80ch;
+  max-width: 82ch;
+}
+.deeper {
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1.5px dashed var(--line);
+  font:
+    500 13px "Fira Code",
+    monospace;
+  color: var(--accent);
 }
 .aside {
   flex: 1 1 220px;
@@ -602,10 +757,10 @@ button {
 }
 .aside h3 {
   font:
-    600 13px Inter,
-    sans-serif;
+    500 12.5px "Fira Code",
+    monospace;
   letter-spacing: 0;
-  color: var(--mute);
+  color: var(--accent);
   margin-bottom: 10px;
 }
 .chips {
@@ -614,37 +769,44 @@ button {
   gap: 8px;
 }
 .chip {
-  padding: 7px 14px;
-  border-radius: 99px;
-  border: 1px solid var(--line2);
-  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-size: 13.5px;
   color: var(--ink);
   line-height: 1.3;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
 }
 .chip:hover {
   border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-2px);
 }
 .chip.soft {
+  background: var(--accent-soft);
   border-color: transparent;
-  background: var(--panel);
 }
 .pre {
   position: relative;
-  border-radius: 14px;
-  background: var(--code);
+  border-radius: 6px;
+  background: #fff;
+  border: 1.5px solid var(--line);
   margin: 12px 0 0;
 }
 pre {
   margin: 0;
-  padding: 18px 20px;
+  padding: 16px 18px;
   overflow-x: auto;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font:
-    14.5px/1.7 "JetBrains Mono",
+    14px/1.75 "Fira Code",
     ui-monospace,
     monospace;
+  font-variant-ligatures: contextual;
   tab-size: 4;
 }
 pre code {
@@ -652,6 +814,7 @@ pre code {
   padding: 0;
   border-radius: 0;
   font-size: inherit;
+  color: inherit;
 }
 .k1 {
   color: var(--k1);
@@ -672,23 +835,19 @@ pre code {
 
 /* exercise */
 .ex {
-  margin-top: 64px;
+  margin-top: 60px;
   padding: clamp(20px, 3vw, 32px);
-  border-radius: 28px;
-  background: var(--panel);
+  border-radius: 8px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
 }
 .ex h2 {
-  font-size: 28px;
-  letter-spacing: -0.015em;
+  font-size: 26px;
   margin-bottom: 10px;
 }
 .ex > p {
   margin: 0 0 8px;
-  max-width: 90ch;
-}
-.ex .pre {
-  background: var(--card);
-  border: 1px solid var(--line);
+  max-width: 92ch;
 }
 .hintbtn {
   margin: 6px 0 16px;
@@ -696,40 +855,41 @@ pre code {
   padding: 0;
   border: 0;
   background: none;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent);
 }
 .hint {
   margin: -6px 0 20px;
   padding: 14px 18px;
-  border-radius: 14px;
-  background: var(--card);
+  border-radius: 6px;
+  background: var(--hl-soft);
+  border: 1.5px solid #f0d64a;
   font-size: 15px;
-  color: var(--soft);
-  max-width: 70ch;
+  color: var(--ink);
+  max-width: 90ch;
 }
 .tabs {
   display: none;
   gap: 4px;
   padding: 4px;
-  border-radius: 14px;
-  background: var(--code);
+  border-radius: 8px;
+  background: var(--accent-soft);
   margin-bottom: 12px;
 }
 .tabs button {
   flex: 1;
   min-height: 42px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 6px;
   background: transparent;
   color: var(--soft);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
 }
 .tabs button[aria-selected="true"] {
-  background: var(--card);
+  background: #fff;
   color: var(--ink);
-  box-shadow: 0 1px 2px rgb(0 0 0/0.08);
+  box-shadow: 0 0 0 1.5px var(--ink);
 }
 .work {
   display: grid;
@@ -739,47 +899,60 @@ pre code {
 .pane {
   display: flex;
   flex-direction: column;
-  border-radius: 18px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  overflow: hidden;
+  border-radius: 8px;
+  background: var(--ink);
+  padding: 6px;
   min-height: 520px;
 }
 .pane .ph {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px 10px 18px;
-  border-bottom: 1px solid var(--line);
-  font-size: 14px;
-  color: var(--soft);
-  min-height: 52px;
+  padding: 6px 8px 10px 10px;
+  font:
+    500 12.5px "Fira Code",
+    monospace;
+  color: #aebbe0;
+  min-height: 44px;
 }
 .pane .ph b {
   font-weight: 500;
-  color: var(--ink);
+  color: #fff;
 }
 .pane .ph .sp {
   flex: 1;
 }
+.pane .ph .st {
+  color: #7d8bb6;
+}
+.pane .ph .st.on {
+  color: var(--hl);
+}
 .small {
-  min-height: 34px;
+  min-height: 32px;
   padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid var(--line2);
-  background: var(--card);
-  font-size: 13px;
+  border-radius: 4px;
+  border: 1.5px solid #3a4870;
+  background: transparent;
+  color: #dfe6fb;
+  font:
+    500 12px "Fira Code",
+    monospace;
+}
+.small:hover {
+  border-color: #aebbe0;
 }
 .pane textarea {
   flex: 1;
   width: 100%;
-  min-height: 470px;
+  min-height: 460px;
   border: 0;
+  border-radius: 4px;
   resize: vertical;
-  padding: 18px 20px;
-  background: var(--card);
+  padding: 16px 18px;
+  background: #fff;
   font:
-    14.5px/1.7 "JetBrains Mono",
+    14px/1.75 "Fira Code",
     monospace;
   tab-size: 4;
   white-space: pre-wrap;
@@ -793,9 +966,9 @@ pre code {
 .pane .pre {
   margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   flex: 1;
-  background: var(--card);
+  background: #fff;
 }
 .lock {
   flex: 1;
@@ -806,15 +979,17 @@ pre code {
   gap: 16px;
   padding: 32px;
   text-align: center;
+  border-radius: 4px;
+  background: #fff;
 }
 .lock .ic {
   width: 52px;
   height: 52px;
-  border-radius: 16px;
-  background: var(--accent-soft);
-  color: var(--accent);
+  border-radius: 8px;
+  border: 1.5px solid var(--ink);
   display: grid;
   place-items: center;
+  color: var(--ink);
 }
 .lock p {
   margin: 0;
@@ -824,94 +999,20 @@ pre code {
 .cta {
   min-height: 46px;
   padding: 0 22px;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 0;
   background: var(--btn);
   color: var(--btn-ink);
-  font-weight: 500;
+  font-weight: 600;
 }
 .cta:hover {
-  opacity: 0.92;
-}
-.done {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  min-height: 44px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.done input {
-  width: 22px;
-  height: 22px;
-  accent-color: var(--accent);
-}
-.pager {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 16px;
-  margin-top: 40px;
-}
-.pager a {
-  padding: 18px 22px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  color: var(--ink);
-}
-.pager a:hover {
-  border-color: var(--accent);
-  color: var(--ink);
-}
-.pager span {
-  display: block;
-  font-size: 13px;
-  color: var(--mute);
-}
-.pager b {
-  font-weight: 500;
-}
-.pager .n {
-  text-align: right;
-}
-
-/* approfondissements */
-.keep {
-  margin: -12px 0 40px;
-  padding: 20px 24px;
-  border-radius: 18px;
-  background: var(--accent-soft);
-  max-width: 110ch;
-}
-.keep h3 {
-  font-size: 15px;
-  letter-spacing: 0;
-  color: var(--accent-ink);
-  margin-bottom: 8px;
-}
-.keep ul {
-  margin: 0;
-  padding-left: 20px;
-  display: grid;
-  gap: 6px;
-}
-.keep li::marker {
-  color: var(--accent);
-}
-.deeper {
-  margin-top: 12px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-  font:
-    600 13px Inter,
-    sans-serif;
-  color: var(--mute);
+  background: var(--accent-ink);
 }
 .defis {
   margin-top: 28px;
 }
 .defis h3 {
-  font-size: 20px;
+  font-size: 19px;
   margin-bottom: 12px;
 }
 .defis ol {
@@ -920,31 +1021,29 @@ pre code {
   list-style: none;
   counter-reset: d;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 .defis li {
   counter-increment: d;
   position: relative;
-  padding: 16px 20px 16px 60px;
-  border-radius: 16px;
-  background: var(--card);
-  border: 1px solid var(--line);
+  padding: 14px 18px 14px 58px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  transition: border-color 0.2s;
+}
+.defis li:hover {
+  border-color: var(--accent);
 }
 .defis li::before {
-  content: counter(d);
+  content: "0" counter(d);
   position: absolute;
   left: 18px;
-  top: 15px;
-  width: 28px;
-  height: 28px;
-  border-radius: 99px;
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-  display: grid;
-  place-items: center;
+  top: 14px;
   font:
-    600 14px "Space Grotesk",
-    sans-serif;
+    500 13px "Fira Code",
+    monospace;
+  color: var(--accent);
 }
 .defis li p {
   margin: 0;
@@ -956,13 +1055,62 @@ pre code {
   min-height: 36px;
   display: inline-flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent);
 }
 .defis details p {
   color: var(--soft);
   font-size: 15px;
 }
+.done {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.done input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+}
+.pager {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+.pager a {
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.pager a:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+  transform: translateY(-3px);
+}
+.pager span {
+  display: block;
+  font:
+    500 12.5px "Fira Code",
+    monospace;
+  color: var(--accent);
+}
+.pager b {
+  font-weight: 600;
+}
+.pager .n {
+  text-align: right;
+}
+
 @media (max-width: 1000px) {
   .side {
     display: none;
@@ -975,7 +1123,7 @@ pre code {
     z-index: 25;
     max-width: none;
     background: var(--bg);
-    padding: 20px max(3vw, 16px);
+    padding: 16px;
     overflow-y: auto;
   }
   body.nav .side .stick {
@@ -1001,7 +1149,7 @@ pre code {
   }
   .readout {
     border-left: 0;
-    border-top: 1px solid var(--line);
+    border-top: 1.5px solid var(--ink);
   }
   .prog {
     display: none;
@@ -1011,7 +1159,13 @@ pre code {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .track i {
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hl {
+    background-size: 100% 40%;
   }
 }
