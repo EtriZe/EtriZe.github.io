@@ -510,6 +510,12 @@ modeBtn.addEventListener('click', () => {
   applyMode(dark);
   try { localStorage.setItem('cs-mode', dark ? 'dark' : 'light'); } catch (e) {}
 });
+document.getElementById('rand').addEventListener('click', () => {
+  const cur = location.hash.slice(1);
+  const pool = LESSONS.filter(l => l.id !== cur);
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  if (pick) location.hash = pick.id;
+});
 window.addEventListener('hashchange', route);
 route();
 }

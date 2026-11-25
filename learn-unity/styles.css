@@ -1658,3 +1658,13 @@ pre code {
 .ex > .defis {
   display: block;
 }
+
+/* bouton leçon au hasard */
+#rand svg { transition: transform 0.35s ease; }
+#rand:hover svg { transform: rotate(90deg); }
+@media (max-width: 760px) {
+  .randlab { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #rand:hover svg { transform: none; }
+}
