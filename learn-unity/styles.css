@@ -1716,8 +1716,20 @@ pre code {
   .prose code {
     font-size: 0.82em;
   }
+  /* tableaux : texte et cellules plus compacts */
   .ct {
-    font-size: 12.5px;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+  .ct th,
+  .ct td {
+    padding: 6px 8px;
+  }
+  .ct code {
+    font-size: 0.9em;
+    padding: 1px 4px;
+    white-space: nowrap;
+    overflow-wrap: normal;
   }
   .call p,
   .err p {
