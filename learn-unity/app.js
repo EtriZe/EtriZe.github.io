@@ -99,9 +99,39 @@ function viewHome() {
       const all = LESSONS.filter(l => l.cat === c.id);
       return '<section class="cat rise" style="animation-delay:' + (ci * 0.06).toFixed(2) + 's" id="cat-' + c.id + '"><div class="hd"><span class="dot" style="background:' + c.color + '"></span><h2>' + c.name + '</h2><span class="n">' + ls.length + ' leçon' + (ls.length > 1 ? 's' : '') + '</span></div>' +
         '<p>' + esc(c.d) + '</p>' +
-        (ls.length ? ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="num">' + String(all.indexOf(l) + 1).padStart(2, '0') + '</span><span class="t">' + esc(l.title) + '</span>' + badge(l.lvl) + '</a>').join('') : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
+        (ls.length ? ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="num">' + String(all.indexOf(l) + 1).padStart(2, '0') + '</span><span class="t">' + esc(l.title) + '</span>' + ((window.COURSES || {})[l.id] ? '<span class="ctag">cours</span>' : '') + badge(l.lvl) + '</a>').join('') : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
         '</section>';
     }).join('') + '</div>';
+}
+
+/* ---------- cours ---------- */
+function blockHtml(b) {
+  if (typeof b === 'string') return '<p>' + md(b) + '</p>';
+  if (b.c) return (b.t ? '<div class="cap">' + md(b.t) + '</div>' : '') + codeBlock(b.c);
+  if (b.n) return '<div class="call tip"><b>Astuce</b><p>' + md(b.n) + '</p></div>';
+  if (b.w) return '<div class="call warn"><b>Attention</b><p>' + md(b.w) + '</p></div>';
+  if (b.u) return '<div class="call unity"><b>Dans Unity</b><p>' + md(b.u) + '</p></div>';
+  if (b.l) return '<ul class="cl">' + b.l.map(x => '<li>' + md(x) + '</li>').join('') + '</ul>';
+  if (b.tab) return '<div class="scroll"><table class="ct"><thead><tr>' + b.tab[0].map(h => '<th>' + md(h) + '</th>').join('') + '</tr></thead><tbody>' + b.tab.slice(1).map(r => '<tr>' + r.map(c => '<td>' + md(c) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+  return '';
+}
+function courseWords(co) {
+  const t = JSON.stringify(co);
+  return t.split(/\s+/).length;
+}
+function courseHtml(co) {
+  const mins = Math.max(5, Math.round(courseWords(co) / 180));
+  let h = '<div class="cmeta"><span>Cours</span><span>' + mins + ' min de lecture</span><span>' + co.ch.length + ' chapitres</span></div>';
+  if (co.lead) h += '<p class="lead">' + md(co.lead) + '</p>';
+  h += '<nav class="ctoc" aria-label="Sommaire du cours"><h3>Sommaire</h3><ol>' + co.ch.map((c, i) => '<li><button data-goto="ch-' + i + '">' + esc(c[0]) + '</button></li>').join('') +
+    (co.err ? '<li><button data-goto="ch-err">Erreurs fréquentes</button></li>' : '') + (co.quiz ? '<li><button data-goto="ch-quiz">Quiz</button></li>' : '') + '</ol></nav>';
+  h += co.ch.map((c, i) => '<section class="chap" id="ch-' + i + '"><h2><span class="cn">' + String(i + 1).padStart(2, '0') + '</span>' + esc(c[0]) + '</h2>' + c.slice(1).map(blockHtml).join('') + '</section>').join('');
+  if (co.err) h += '<section class="chap" id="ch-err"><h2><span class="cn">!</span>Erreurs fréquentes</h2><div class="errs">' + co.err.map(e => '<div class="err"><b>' + md(e[0]) + '</b><p>' + md(e[1]) + '</p></div>').join('') + '</div></section>';
+  if (co.res) h += '<section class="chap"><h2><span class="cn">=</span>Résumé</h2><ul class="cl">' + co.res.map(x => '<li>' + md(x) + '</li>').join('') + '</ul></section>';
+  if (co.quiz) h += '<section class="chap" id="ch-quiz"><h2><span class="cn">?</span>Quiz</h2><p class="qscore" id="qscore">' + co.quiz.length + ' questions. Choisis une réponse pour voir l’explication.</p>' +
+    co.quiz.map((q, qi) => '<div class="q" data-q="' + qi + '"><p class="qq">' + md(q[0]) + '</p><div class="qo">' + q[1].map((o, oi) => '<button data-qi="' + qi + '" data-oi="' + oi + '">' + md(o) + '</button>').join('') + '</div><p class="qe" hidden></p></div>').join('') + '</section>';
+  if (co.src) h += '<section class="chap src"><h2><span class="cn">↗</span>Sources et pour aller plus loin</h2><ul>' + co.src.map(s => '<li><a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + esc(s[0]) + '</a></li>').join('') + '</ul></section>';
+  return h;
 }
 
 /* ---------- page de leçon ---------- */
@@ -111,6 +141,7 @@ function viewLesson(l) {
   navbtn.classList.add('show');
   tab = 'code';
   const x = (window.EXTRA || {})[l.id] || {};
+  const co = (window.COURSES || {})[l.id];
   const cat = CATS.find(c => c.id === l.cat);
   const prev = LESSONS[l.i - 1], next = LESSONS[l.i + 1];
   const siblings = LESSONS.filter(x => x.cat === l.cat);
@@ -128,8 +159,8 @@ function viewLesson(l) {
       '<p class="sum">' + esc(l.sum) + '</p>' +
       (x.r ? '<section class="keep"><h3>À retenir</h3><ul>' + x.r.map(t => '<li>' + md(t) + '</li>').join('') + '</ul></section>' : '') +
       (l.diag ? '<section class="diag"><div class="fig"><svg role="img" aria-label="Schéma interactif : fais glisser les points"></svg></div><div class="readout"></div></section>' : '') +
-      '<div class="cols"><article class="prose">' + l.body.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') +
-        (x.m ? '<div class="deeper">Pour aller plus loin</div>' + x.m.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') : '') + '</article>' +
+      '<div class="cols"><article class="prose' + (co ? ' course' : '') + '">' + (co ? courseHtml(co) : l.body.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') +
+        (x.m ? '<div class="deeper">Pour aller plus loin</div>' + x.m.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') : '')) + '</article>' +
       '<div class="aside">' + (refs ? '<div><h3>Notions utilisées</h3><div class="chips">' + refs + '</div></div>' : '') +
         (back ? '<div><h3>Réutilisée dans</h3><div class="chips">' + back + '</div></div>' : '') +
         (!refs && !back ? '<div><h3>Notions liées</h3><p style="margin:0;color:var(--mute);font-size:14px">Cette leçon se suffit à elle-même.</p></div>' : '') + '</div></div>' +
@@ -302,6 +333,21 @@ function mountDiag(box, mode) {
   draw();
 }
 
+function answerQuiz(btn) {
+  const l = byId[location.hash.slice(1)], co = l && (window.COURSES || {})[l.id];
+  if (!co) return;
+  const qi = +btn.dataset.qi, oi = +btn.dataset.oi, q = co.quiz[qi];
+  const box = btn.closest('.q');
+  if (box.dataset.done) return;
+  box.dataset.done = oi === q[2] ? 'ok' : 'ko';
+  box.querySelectorAll('button').forEach((b, i) => { b.disabled = true; if (i === q[2]) b.classList.add('good'); else if (i === oi) b.classList.add('bad'); });
+  const ex = box.querySelector('.qe');
+  ex.innerHTML = '<b>' + (oi === q[2] ? 'Exact.' : 'Pas tout à fait.') + '</b> ' + md(q[3]);
+  ex.hidden = false;
+  const all = view.querySelectorAll('.q'), answered = [...all].filter(x => x.dataset.done), ok = answered.filter(x => x.dataset.done === 'ok').length;
+  document.getElementById('qscore').textContent = answered.length === all.length ? 'Score : ' + ok + ' / ' + all.length + (ok === all.length ? ' — parfait !' : '. Relis les chapitres concernés puis recharge la page pour réessayer.') : answered.length + ' / ' + all.length + ' répondues';
+}
+
 /* ---------- navigation ---------- */
 function route() {
   const id = location.hash.slice(1);
@@ -317,6 +363,10 @@ document.addEventListener('click', e => {
   if (lv) { lvlFilter = +lv.dataset.lv; viewHome(); return; }
   const jump = e.target.closest('[data-jump]');
   if (jump) { const el = document.getElementById('cat-' + jump.dataset.jump); if (el) el.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); return; }
+  const g = e.target.closest('[data-goto]');
+  if (g) { const el = document.getElementById(g.dataset.goto); if (el) el.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}); return; }
+  const qb = e.target.closest('[data-qi]');
+  if (qb) { answerQuiz(qb); return; }
   const t = e.target.closest('[data-tab]');
   if (t) { setTab(t.dataset.tab); return; }
 });
