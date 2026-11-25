@@ -1668,3 +1668,38 @@ pre code {
 @media (prefers-reduced-motion: reduce) {
   #rand:hover svg { transform: none; }
 }
+
+/* téléphone : texte un peu plus petit, et lecture seule (pas d'exercice) */
+@media (max-width: 760px) {
+  body { font-size: 13.5px; line-height: 1.6; }
+  .hero h1 { font-size: 26px; }
+  .hero p { font-size: 14.5px; }
+  .ttl h1 { font-size: 24px; }
+  .sum, .lead { font-size: 14.5px; }
+  .prose h2 { font-size: 17px; }
+  .chap h2 { font-size: 19px; }
+  .pre, .chap .pre { font-size: 12px; padding: 12px 14px; }
+  .ct { font-size: 12.5px; }
+  .call p, .err p { font-size: 13.5px; }
+
+  /* en-tête compact : logo + boutons icônes sur une ligne, recherche dessous */
+  .top .in { padding: 10px 14px; gap: 8px; }
+  .brand { flex: 1 1 auto; font-size: 15px; gap: 10px; }
+  .logo { width: 30px; height: 30px; }
+  #rand, #mode { order: 1; min-height: 36px; padding: 0 9px; }
+  #modelab { display: none; }
+  .search { order: 2; flex: 1 1 170px; min-width: 0; }
+  .search label { min-width: 0; }
+  #q { height: 38px; min-width: 0; }
+  .search svg { top: 10px; }
+  .navbtn { order: 3; font-size: 12.5px; min-height: 38px; padding: 0 10px; }
+
+  /* la zone d'exercice disparaît, seule la case « Leçon terminée » reste */
+  .ex {
+    margin-top: 32px;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .ex > :not(.done) { display: none !important; }
+}
