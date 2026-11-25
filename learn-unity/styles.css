@@ -1512,7 +1512,7 @@ pre code {
 
 /* lecture centrée : le texte tient dans une colonne centrée, le code et les tableaux prennent toute la largeur */
 .main {
-  --read: 1000px;
+  --read: 880px;
 }
 .main > .crumb,
 .main > .ttl,
@@ -1525,8 +1525,8 @@ pre code {
 .cols {
   display: block;
 }
-.prose > :not(section),
-.prose > section > * {
+.main .prose > :not(section),
+.main .prose > section > * {
   width: 100%;
   max-width: var(--read);
   margin-left: auto;
