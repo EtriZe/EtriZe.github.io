@@ -13,7 +13,7 @@ d:[[`Écris ~bool NearlyEqual(float a, float b, float epsilon = 1e-5f)~ qui fonc
 'conditions-boucles':{
 r:[`~for~ avec un indice, ~foreach~ pour parcourir, ~while~ quand on ne connaît pas le nombre de tours.`,`~break~ sort, ~continue~ passe au tour suivant.`,`Toute boucle ~while~ doit avoir une limite de sécurité.`],
 m:[
-['Sortir tôt',`Plutôt que des ~if~ imbriqués sur quatre niveaux, on traite les cas d'exclusion en premier et on sort (~return~, ~continue~). Le code principal reste à gauche, lisible. C'est la « clause de garde », utilisée partout dans ce carnet.`,`foreach (var e in enemies)
+['Sortir tôt',`Plutôt que des ~if~ imbriqués sur quatre niveaux, on traite les cas d'exclusion en premier et on sort (~return~, ~continue~). Le code principal reste à gauche, lisible. C'est la « clause de garde », utilisée partout dans ces cours.`,`foreach (var e in enemies)
 {
     if (e == null) continue;
     if (!e.IsAlive) continue;

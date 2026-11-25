@@ -69,7 +69,7 @@ private void Update()
     Vector2 v = move.action.ReadValue<Vector2>();
 }`],
 ['Les événements',`On peut aussi s'abonner : ~jump.action.performed += OnJump~. Utile pour les appuis ponctuels, avec les mêmes règles d'abonnement que tout [[delegues-evenements|événement]].`],
-['L\'ancien système',`~Input.GetAxis~ et ~Input.GetKeyDown~ existent toujours et apparaissent dans beaucoup d'exemples, dont certains de ce carnet. Ils restent pratiques pour un prototype. Le nouveau système est recommandé pour un vrai projet : multi-appareils, remappage des touches, joueurs multiples.`]],
+['L\'ancien système',`~Input.GetAxis~ et ~Input.GetKeyDown~ existent toujours et apparaissent dans beaucoup d'exemples, dont certains de ces cours. Ils restent pratiques pour un prototype. Le nouveau système est recommandé pour un vrai projet : multi-appareils, remappage des touches, joueurs multiples.`]],
 ex:`Écris un ~PlayerInputReader~ qui expose ~Vector2 Move~ et un événement ~Jumped~, à partir de deux ~InputActionReference~, en activant et désactivant proprement les actions, et en corrigeant la diagonale trop rapide.`,
 hint:`Active dans OnEnable, désactive dans OnDisable, et abonne/désabonne performed au même endroit. ClampMagnitude pour la diagonale.`,
 sol:`public class PlayerInputReader : MonoBehaviour

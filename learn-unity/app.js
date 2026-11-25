@@ -82,7 +82,7 @@ function updateProg() { prog.textContent = done.size + ' / ' + LESSONS.length + 
 
 /* ---------- accueil ---------- */
 function viewHome() {
-  document.title = 'Carnet C# Unity';
+  document.title = 'Cours C# Unity';
   navbtn.classList.remove('show');
   const pct = Math.round(done.size / LESSONS.length * 100);
   const lastId = store.get('cs-last', null);
@@ -260,7 +260,7 @@ function setupIde(ed, layer, pos, onChange) {
 
 /* ---------- page de leçon ---------- */
 function viewLesson(l) {
-  document.title = l.title + ' · Carnet C# Unity';
+  document.title = l.title + ' · Cours C# Unity';
   store.set('cs-last', l.id);
   navbtn.classList.add('show');
   tab = 'code';

@@ -115,7 +115,9 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   animation: grid 1s ease-out both;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 a {
   color: var(--accent);
@@ -1069,7 +1071,9 @@ pre code {
 }
 .il.cur {
   background: var(--accent-soft);
-  box-shadow: -64px 0 0 var(--accent-soft), 18px 0 0 var(--accent-soft);
+  box-shadow:
+    -64px 0 0 var(--accent-soft),
+    18px 0 0 var(--accent-soft);
 }
 .il.cur::before {
   color: var(--accent);
@@ -1660,39 +1664,105 @@ pre code {
 }
 
 /* bouton leçon au hasard */
-#rand svg { transition: transform 0.35s ease; }
-#rand:hover svg { transform: rotate(90deg); }
+#rand svg {
+  transition: transform 0.35s ease;
+}
+#rand:hover svg {
+  transform: rotate(90deg);
+}
 @media (max-width: 760px) {
-  .randlab { display: none; }
+  .randlab {
+    display: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  #rand:hover svg { transform: none; }
+  #rand:hover svg {
+    transform: none;
+  }
 }
 
 /* téléphone : texte un peu plus petit, et lecture seule (pas d'exercice) */
 @media (max-width: 760px) {
-  body { font-size: 13.5px; line-height: 1.6; }
-  .hero h1 { font-size: 26px; }
-  .hero p { font-size: 14.5px; }
-  .ttl h1 { font-size: 24px; }
-  .sum, .lead { font-size: 14.5px; }
-  .prose h2 { font-size: 17px; }
-  .chap h2 { font-size: 19px; }
-  .pre, .chap .pre { font-size: 12px; padding: 12px 14px; }
-  .ct { font-size: 12.5px; }
-  .call p, .err p { font-size: 13.5px; }
+  body {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .hero h1 {
+    font-size: 26px;
+  }
+  .hero p {
+    font-size: 14.5px;
+  }
+  .ttl h1 {
+    font-size: 24px;
+  }
+  .sum,
+  .lead {
+    font-size: 14.5px;
+  }
+  .prose h2 {
+    font-size: 17px;
+  }
+  .chap h2 {
+    font-size: 19px;
+  }
+  .pre,
+  .chap .pre {
+    font-size: 12px;
+    padding: 12px 14px;
+  }
+  .ct {
+    font-size: 12.5px;
+  }
+  .call p,
+  .err p {
+    font-size: 13.5px;
+  }
 
   /* en-tête compact : logo + boutons icônes sur une ligne, recherche dessous */
-  .top .in { padding: 10px 14px; gap: 8px; }
-  .brand { flex: 1 1 auto; font-size: 15px; gap: 10px; }
-  .logo { width: 30px; height: 30px; }
-  #rand, #mode { order: 1; min-height: 36px; padding: 0 9px; }
-  #modelab { display: none; }
-  .search { order: 2; flex: 1 1 170px; min-width: 0; }
-  .search label { min-width: 0; }
-  #q { height: 38px; min-width: 0; }
-  .search svg { top: 10px; }
-  .navbtn { order: 3; font-size: 12.5px; min-height: 38px; padding: 0 10px; }
+  .top .in {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .brand {
+    flex: 1 1 auto;
+    font-size: 15px;
+    gap: 10px;
+  }
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
+  #rand,
+  #mode {
+    order: 1;
+    min-height: 36px;
+    padding: 0 9px;
+  }
+  #modelab {
+    display: none;
+  }
+  .search {
+    order: 2;
+    flex: 1 1 170px;
+    min-width: 0;
+  }
+  .search label {
+    min-width: 0;
+  }
+  #q {
+    height: 38px;
+    min-width: 0;
+  }
+  .search svg {
+    top: 10px;
+  }
+  .navbtn {
+    order: 3;
+    font-size: 12.5px;
+    min-height: 38px;
+    padding: 0 10px;
+  }
 
   /* la zone d'exercice disparaît, seule la case « Leçon terminée » reste */
   .ex {
@@ -1701,5 +1771,11 @@ pre code {
     border: 0;
     background: none;
   }
-  .ex > :not(.done) { display: none !important; }
+  .ex > :not(.done) {
+    display: none !important;
+  }
+
+  .ctag, .badge {
+    display:none;
+  }
 }
