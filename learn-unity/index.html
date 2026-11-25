@@ -6,6 +6,14 @@
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("cs-mode")==="dark")document.documentElement.dataset.mode="dark"}catch(e){}</script>
 <title>Cours C# Unity</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cours C#">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="description" content="Leçons de C# pour Unity, classées par thème et par niveau, avec exercices et solutions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +32,10 @@
       </label>
     </div>
     <span class="prog" id="prog"></span>
+    <button class="mode" id="install" hidden title="Installer l’application" aria-label="Installer l’application">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span class="installab">Installer</span>
+    </button>
     <button class="mode" id="rand" title="Ouvrir une leçon au hasard" aria-label="Ouvrir une leçon au hasard">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="16" cy="8" r="1.2" fill="currentColor"/><circle cx="8" cy="16" r="1.2" fill="currentColor"/></svg>
       <span class="randlab">Au hasard</span>
@@ -61,5 +73,6 @@
 <script src="lessons/c-design-1.js"></script>
 <script src="lessons/c-design-2.js"></script>
 <script src="app.js"></script>
+<script src="pwa.js"></script>
 </body>
 </html>
