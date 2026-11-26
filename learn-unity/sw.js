@@ -2,7 +2,7 @@
    Stratégie : le réseau d'abord (les mises à jour apparaissent tout de suite),
    le cache en secours quand il n'y a pas de connexion.
    Après avoir ajouté ou renommé un fichier, ajoute-le à FILES et change VERSION. */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = 'cours-csharp-' + VERSION;
 const FONTS = 'cours-csharp-fonts';
 const FILES = [
@@ -26,6 +26,10 @@ const FILES = [
   "lessons/06-editor.js",
   "lessons/07-perf.js",
   "lessons/08-design.js",
+  "lessons/09-exos-1.js",
+  "lessons/09-exos-2.js",
+  "lessons/09-exos-3.js",
+  "lessons/09-exos-4.js",
   "lessons/c-csharp-1.js",
   "lessons/c-csharp-2.js",
   "lessons/c-csharp-3.js",

@@ -1895,3 +1895,59 @@ pre code {
     display: none;
   }
 }
+
+/* page « exercice seul » et carte des exercices à l'accueil */
+.exsrc {
+  max-width: var(--read);
+  margin: -20px auto 24px;
+  font-size: 14px;
+  color: var(--mute);
+}
+.ex.only {
+  margin-top: 8px;
+}
+.cat.wide {
+  grid-column: 1 / -1;
+}
+.cat.wide .items {
+  columns: 3 300px;
+  column-gap: 36px;
+}
+.cat.wide .item {
+  break-inside: avoid;
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .exsrc {
+    margin-top: -16px;
+    font-size: 12.5px;
+  }
+  /* sur téléphone, les exercices seuls gardent l'énoncé, l'indice et la solution (sans l'éditeur) */
+  .ex.only > h2,
+  .ex.only > p:not([hidden]),
+  .ex.only > .pre,
+  .ex.only > .hintbtn {
+    display: block !important;
+  }
+  .ex.only > .work {
+    display: block !important;
+  }
+  .ex.only > h2 {
+    font-size: 19px;
+  }
+  .ex.only #p-code {
+    display: none !important;
+  }
+  .ex.only #p-sol {
+    display: flex !important;
+    min-height: 0;
+  }
+  .ex.only .lock {
+    padding: 20px;
+  }
+}
+@media (max-width: 760px) {
+  .ex.only .pane .ph .st {
+    display: none;
+  }
+}

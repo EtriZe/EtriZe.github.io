@@ -1,4 +1,4 @@
-# Carnet C# pour Unity
+# Cours C# pour Unity
 
 Un site statique de 99 leçons de C# pour Unity, classées en 7 thèmes et 3 niveaux. Chaque leçon contient des explications, un exercice, un indice et une solution cachée. Il n'y a ni serveur, ni base de données, ni étape de compilation.
 
@@ -17,6 +17,8 @@ lessons/
   05-unity.js       Unity
   06-editor.js      Outils éditeur et CI
   07-perf.js        Performance
+  08-design.js      Game design
+  09-exos-1..4.js   Exercices (100 exercices seuls : énoncé, indice, solution, source)
   x-*.js            approfondissements par thème (À retenir, Pour aller plus loin, défis)
   c-*.js            cours complets (chapitres, erreurs fréquentes, résumé, quiz, sources)
 ```
@@ -70,7 +72,8 @@ Chaque fichier de `lessons/` ajoute des leçons à une liste commune. Une leçon
 ```
 
 - `id` : lettres minuscules, chiffres et tirets. Il sert d'adresse (`index.html#mon-identifiant`) et de cible pour les liens `[[...]]`.
-- `cat` : `csharp`, `poo`, `algo`, `maths`, `unity`, `editor` ou `perf`.
+- `cat` : `csharp`, `poo`, `algo`, `maths`, `unity`, `editor`, `perf`, `design` ou `exos`.
+- Pour un exercice seul (`cat:'exos'`), `body` est inutile ; ajoute si tu veux `src:['Nom de la source', 'https://...']`, affiché sous le résumé.
 - `lvl` : 1 (débutant), 2 (intermédiaire) ou 3 (avancé).
 - Les textes sont entre accents graves `` ` ``. N'utilise pas d'accent grave ni la suite `${` à l'intérieur.
 - L'ordre d'affichage d'un thème est défini dans `app.js` (listes `order` de `CATS`). Une nouvelle leçon absente de la liste s'affiche à la fin de son thème.
@@ -110,3 +113,17 @@ Pour un nouveau fichier de leçons, ajoute sa ligne `<script src="lessons/....js
 - Le brouillon de chaque exercice et les leçons cochées sont enregistrés dans le navigateur (`localStorage`). Ils ne sont partagés ni entre appareils, ni avec d'autres personnes.
 - Les solutions visent Unity 6 (par exemple `linearVelocity`, `Awaitable`, `FindObjectsByType`). Certaines leçons demandent des paquets : Input System, AI Navigation, Addressables, Burst et Collections, Unity Test Framework, TextMeshPro.
 - Les extraits supposent les `using` habituels (`UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, etc.), qui ne sont pas répétés dans chaque solution.
+
+
+## Application installable (PWA)
+
+Le site peut s'installer comme une application sur téléphone et ordinateur, et fonctionne hors ligne après la première visite.
+
+- `manifest.webmanifest` : nom, couleurs et icônes de l'application.
+- `icons/` : icônes PNG (192, 512, version « maskable » pour Android, 180 pour iPhone).
+- `sw.js` : le service worker. Il charge toujours la dernière version quand il y a du réseau, et utilise le cache hors connexion.
+- `pwa.js` : enregistre le service worker, affiche le bouton « Installer » (Android, Chrome, Edge) et l'aide pour iPhone.
+
+**Quand tu ajoutes ou renommes un fichier du site**, ajoute-le à la liste `FILES` en haut de `sw.js` et augmente `VERSION` (v1 → v2). Sinon il ne sera pas disponible hors ligne. Modifier un fichier existant ne demande rien : la nouvelle version est récupérée automatiquement.
+
+Le service worker ne fonctionne qu'en HTTPS (GitHub Pages) ou sur `localhost`. En ouvrant `index.html` par double-clic, le site marche toujours, mais sans le mode hors ligne.

@@ -16,7 +16,9 @@ const CATS = [
   {id:'perf', name:'Performance', color:'#ec4899', d:'Garder le jeu fluide : mesurer, éviter les allocations, paralléliser.',
    order:['profiler-markers','cache-references','allocations-gc','object-pooling','update-manager','partition-spatiale','jobs-burst']},
   {id:'design', name:'Game design', color:'#f43f5e', d:'Les règles qui rendent un jeu agréable, juste et lisible, tirées de jeux réels et appliquées en C#.',
-   order:['mda','choix-interessants','enseigner-sans-texte','accessibilite','game-feel','tolerance-controles','telegraphie','flow-difficulte','hasard-equitable','boucles-retroaction','camera-plateforme','economie-jeu','directeur-ia']}
+   order:['mda','choix-interessants','enseigner-sans-texte','accessibilite','game-feel','tolerance-controles','telegraphie','flow-difficulte','hasard-equitable','boucles-retroaction','camera-plateforme','economie-jeu','directeur-ia']},
+  {id:'exos', name:'Exercices', color:'#65a30d', only:true, d:'Uniquement de la pratique : katas célèbres, règles de jeux connus, maths et systèmes de jeu. Énoncé, indice, solution.',
+   order:[]}
 ];
 const LV = ['Tous','Débutant','Intermédiaire','Avancé'];
 
@@ -33,7 +35,7 @@ CATS.forEach(c => {
 LESSONS.forEach((l, i) => { l.i = i; });
 const usedBy = {};
 LESSONS.forEach(l => {
-  const txt = l.body.map(b => b[1]).join(' ') + ' ' + l.ex;
+  const txt = (l.body || []).map(b => b[1]).join(' ') + ' ' + l.ex;
   const refs = new Set();
   txt.replace(/\[\[([a-z0-9-]+)/g, (m, id) => { refs.add(id); return m; });
   l.refs = [...refs].filter(r => byId[r] && r !== l.id);
@@ -99,9 +101,9 @@ function viewHome() {
     '<div class="grid">' + CATS.map((c, ci) => {
       const ls = LESSONS.filter(l => l.cat === c.id && match(l));
       const all = LESSONS.filter(l => l.cat === c.id);
-      return '<section class="cat rise" style="animation-delay:' + (ci * 0.06).toFixed(2) + 's" id="cat-' + c.id + '"><div class="hd"><span class="dot" style="background:' + c.color + '"></span><h2>' + c.name + '</h2><span class="n">' + ls.length + ' leçon' + (ls.length > 1 ? 's' : '') + '</span></div>' +
+      return '<section class="cat rise' + (c.only ? ' wide' : '') + '" style="animation-delay:' + (ci * 0.06).toFixed(2) + 's" id="cat-' + c.id + '"><div class="hd"><span class="dot" style="background:' + c.color + '"></span><h2>' + c.name + '</h2><span class="n">' + ls.length + ' leçon' + (ls.length > 1 ? 's' : '') + '</span></div>' +
         '<p>' + esc(c.d) + '</p>' +
-        (ls.length ? ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="num">' + String(all.indexOf(l) + 1).padStart(2, '0') + '</span><span class="t">' + esc(l.title) + '</span>' + ((window.COURSES || {})[l.id] ? '<span class="ctag">cours</span>' : '') + badge(l.lvl) + '</a>').join('') : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
+        (ls.length ? '<div class="items">' + ls.map(l => '<a class="item" href="#' + l.id + '"><span class="check' + (done.has(l.id) ? ' on' : '') + '" aria-label="' + (done.has(l.id) ? 'Terminée' : 'À faire') + '">' + (done.has(l.id) ? checkSvg : '') + '</span><span class="num">' + String(all.indexOf(l) + 1).padStart(2, '0') + '</span><span class="t">' + esc(l.title) + '</span>' + ((window.COURSES || {})[l.id] ? '<span class="ctag">cours</span>' : '') + badge(l.lvl) + '</a>').join('') + '</div>' : '<p class="empty">Aucune leçon pour ce filtre.</p>') +
         '</section>';
     }).join('') + '</div>';
 }
@@ -267,6 +269,7 @@ function viewLesson(l) {
   const x = (window.EXTRA || {})[l.id] || {};
   const co = (window.COURSES || {})[l.id];
   const cat = CATS.find(c => c.id === l.cat);
+  const only = !!cat.only;
   const prev = LESSONS[l.i - 1], next = LESSONS[l.i + 1];
   const siblings = LESSONS.filter(x => x.cat === l.cat);
   const refs = l.refs.map(r => '<a class="chip" href="#' + r + '">' + esc(byId[r].title) + '</a>').join('');
@@ -281,21 +284,22 @@ function viewLesson(l) {
       '<div class="crumb"><a href="#">Sommaire</a> / ' + cat.name + ' · ' + String(siblings.indexOf(l) + 1).padStart(2, '0') + '</div>' +
       '<div class="ttl"><h1><span class="hl">' + esc(l.title) + '</span></h1>' + badge(l.lvl) + '</div>' +
       '<p class="sum">' + esc(l.sum) + '</p>' +
-      (x.r ? '<section class="keep"><h3>À retenir</h3><ul>' + x.r.map(t => '<li>' + md(t) + '</li>').join('') + '</ul></section>' : '') +
-      (l.diag ? '<section class="diag"><div class="fig"><svg role="img" aria-label="Schéma interactif : fais glisser les points"></svg></div><div class="readout"></div></section>' : '') +
-      '<div class="cols"><article class="prose' + (co ? ' course' : '') + '">' + (co ? courseHtml(co) : l.body.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') +
+      (only && l.src ? '<p class="exsrc">Inspiré de : <a href="' + esc(l.src[1]) + '" target="_blank" rel="noopener">' + esc(l.src[0]) + '</a></p>' : '') +
+      (!only && x.r ? '<section class="keep"><h3>À retenir</h3><ul>' + x.r.map(t => '<li>' + md(t) + '</li>').join('') + '</ul></section>' : '') +
+      (!only && l.diag ? '<section class="diag"><div class="fig"><svg role="img" aria-label="Schéma interactif : fais glisser les points"></svg></div><div class="readout"></div></section>' : '') +
+      (only ? '' : '<div class="cols"><article class="prose' + (co ? ' course' : '') + '">' + (co ? courseHtml(co) : l.body.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') +
         (x.m ? '<div class="deeper">Pour aller plus loin</div>' + x.m.map(b => '<section><h2>' + esc(b[0]) + '</h2><p>' + md(b[1]) + '</p>' + (b[2] ? codeBlock(b[2]) : '') + '</section>').join('') : '')) + '</article>' +
       '<div class="aside">' + (refs ? '<div><h3>Notions utilisées</h3><div class="chips">' + refs + '</div></div>' : '') +
         (back ? '<div><h3>Réutilisée dans</h3><div class="chips">' + back + '</div></div>' : '') +
-        (!refs && !back ? '<div><h3>Notions liées</h3><p style="margin:0;color:var(--mute);font-size:14px">Cette leçon se suffit à elle-même.</p></div>' : '') + '</div></div>' +
-      '<section class="ex"><h2>À toi de coder</h2><p>' + md(l.ex) + '</p>' + (l.exCode ? codeBlock(l.exCode) : '') +
+        (!refs && !back ? '<div><h3>Notions liées</h3><p style="margin:0;color:var(--mute);font-size:14px">Cette leçon se suffit à elle-même.</p></div>' : '') + '</div></div>') +
+      '<section class="ex' + (only ? ' only' : '') + '"><h2>' + (only ? 'Énoncé' : 'À toi de coder') + '</h2><p>' + md(l.ex) + '</p>' + (l.exCode ? codeBlock(l.exCode) : '') +
         '<button class="hintbtn" id="hintbtn" aria-expanded="false">Besoin d’un indice ?</button><p class="hint" id="hint" hidden>' + md(l.hint) + '</p>' +
         '<div class="tabs" role="tablist" aria-label="Code"><button role="tab" data-tab="code" aria-selected="true">Ton code</button><button role="tab" data-tab="sol" aria-selected="false">Solution</button></div>' +
         '<div class="work">' +
           '<div class="pane cur" id="p-code"><div class="ph"><b>TonCode.cs</b><span class="sp"></span><button class="small" id="clear">Effacer</button></div>' +
           '<div class="ide"><pre class="ide-hl" id="ide-hl" aria-hidden="true"></pre><label class="sr" for="ed">Ton code</label><textarea id="ed" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="soft" placeholder="// Écris ta solution ici.\n// Tab indente, Ctrl+/ commente, les parenthèses se ferment toutes seules."></textarea></div>' +
           '<div class="ide-bar"><span id="ide-pos">Ln 1, Col 1</span><span>C#</span><span>4 espaces</span><span id="saved"></span></div></div>' +
-          '<div class="pane" id="p-sol"><div class="ph"><b>Solution.cs</b><span class="sp"></span><span class="st">● verrouillée</span></div><div class="lock"><span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><p>La solution reste cachée tant que tu n’as pas essayé.</p><button class="cta" id="reveal">Afficher la solution</button></div></div>' +
+          '<div class="pane" id="p-sol">' + lockedSol() + '</div>' +
         '</div>' +
         (x.d ? '<div class="defis"><h3>Défis supplémentaires</h3><ol>' + x.d.map(d => '<li><p>' + md(d[0]) + '</p>' + (d[1] ? '<details><summary>Indice</summary><p>' + md(d[1]) + '</p></details>' : '') + '</li>').join('') + '</ol></div>' : '') +
         '<label class="done"><input type="checkbox" id="donebox"' + (done.has(l.id) ? ' checked' : '') + '> Leçon terminée</label>' +
@@ -320,10 +324,19 @@ function viewLesson(l) {
   const d = view.querySelector('.diag');
   if (d) mountDiag(d, l.diag);
 }
+function lockedSol() {
+  return '<div class="ph"><b>Solution.cs</b><span class="sp"></span><span class="st">● verrouillée</span></div><div class="lock"><span class="ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><p>La solution reste cachée tant que tu n’as pas essayé.</p><button class="cta" id="reveal">Afficher la solution</button></div>';
+}
+function hideSolution(l) {
+  document.getElementById('p-sol').innerHTML = lockedSol();
+  document.getElementById('reveal').addEventListener('click', () => revealSolution(l));
+  setTab('code');
+}
 function revealSolution(l) {
   const p = document.getElementById('p-sol');
-  p.innerHTML = '<div class="ph"><b>Solution.cs</b><span class="st on">● déverrouillée</span><span class="sp"></span><button class="small" id="copy">Copier</button></div>' +
+  p.innerHTML = '<div class="ph"><b>Solution.cs</b><span class="st on">● déverrouillée</span><span class="sp"></span><button class="small" id="hidesol">Masquer</button><button class="small" id="copy">Copier</button></div>' +
     '<div class="pre"><pre><code>' + l.sol.split('\n').map((ln, i) => '<span class="ln" style="animation-delay:' + Math.min(i * 0.04, 1.2).toFixed(2) + 's">' + (hl(ln) || ' ') + '</span>').join('') + '</code></pre></div>';
+  document.getElementById('hidesol').addEventListener('click', () => hideSolution(l));
   document.getElementById('copy').addEventListener('click', e => {
     const b = e.currentTarget;
     const done = t => { b.textContent = t; setTimeout(() => { b.textContent = 'Copier'; }, 1600); };
